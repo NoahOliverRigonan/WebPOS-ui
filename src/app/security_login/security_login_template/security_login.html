@@ -12,7 +12,7 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input id="password" type="date" class="form-control" name="password">
+                                    <input id="date" type="date" class="form-control" name="date">
                                 </div>
                             </div>
                         </div>
@@ -20,7 +20,8 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="Email">
+                                    <input id="username" type="text" class="form-control" name="username" placeholder="Username" [(ngModel)]="login_model.username"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -28,14 +29,15 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="login_model.password"
+                                    />
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="panel-footer">
-                    <button class="btn btn-primary btn-lg btn-block"><i class="fa fa-key"></i> Login</button>
+                    <button (click)="security_login()" type="submit" class="btn btn-primary btn-lg btn-block"><i class="fa fa-key"></i> Login</button>
                 </div>
             </div>
         </div>

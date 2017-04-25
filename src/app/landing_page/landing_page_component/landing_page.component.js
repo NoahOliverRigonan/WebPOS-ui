@@ -9,6 +9,12 @@ var core_1 = require("@angular/core");
 var Landing_Page_Component = (function () {
     function Landing_Page_Component() {
     }
+    Landing_Page_Component.prototype.ngOnInit = function () {
+        console.log(localStorage.getItem('access_token'));
+        console.log(localStorage.getItem('expires_in'));
+        console.log(localStorage.getItem('token_type'));
+        console.log(localStorage.getItem('userName'));
+    };
     return Landing_Page_Component;
 }());
 Landing_Page_Component = __decorate([

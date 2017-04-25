@@ -18,6 +18,7 @@
   <!--fonts - font-awesome-->
   <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link href="node_modules/ng2-toastr/bundles/ng2-toastr.min.css" rel="stylesheet" />
 
   <!-- Polyfill(s) for older browsers -->
   <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -27,6 +28,8 @@
   <!--bootstrap scripts-->
   <script src="scripts/bootstrap.min.js"></script>
   <script src="systemjs.config.js"></script>
+  <script src="node_modules/ng2-toastr/bundles/ng2-toastr.min.js"></script>
+
   <script>
     System.import('main.js').catch(function (err) { console.error(err); });
   </script>
@@ -35,4 +38,5 @@
 <body>
   <my-app>Loading AppComponent content here ...</my-app>
 </body>
+
 </html>
