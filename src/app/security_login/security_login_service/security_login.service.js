@@ -6,16 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
+var Security_Login_Service = (function () {
+    function Security_Login_Service() {
     }
-    return AppComponent;
+    return Security_Login_Service;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'my-app',
-        templateUrl: 'app/shared_header/shared_header_template/shared_header.html'
-    })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+Security_Login_Service = __decorate([
+    core_1.Injectable()
+], Security_Login_Service);
+exports.Security_Login_Service = Security_Login_Service;
+//# sourceMappingURL=security_login.service.js.map

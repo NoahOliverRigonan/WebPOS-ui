@@ -6,16 +6,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
+var Shared_Footer_Component = (function () {
+    function Shared_Footer_Component() {
     }
-    return AppComponent;
+    return Shared_Footer_Component;
 }());
-AppComponent = __decorate([
+Shared_Footer_Component = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        templateUrl: 'app/shared_header/shared_header_template/shared_header.html'
+        selector: 'shared-footer',
+        templateUrl: 'app/shared_footer/shared_footer_template/shared_footer.html'
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], Shared_Footer_Component);
+exports.Shared_Footer_Component = Shared_Footer_Component;
+//# sourceMappingURL=shared_footer.component.js.map

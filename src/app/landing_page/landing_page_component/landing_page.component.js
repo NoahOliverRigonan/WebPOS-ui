@@ -6,16 +6,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
+var Landing_Page_Component = (function () {
+    function Landing_Page_Component() {
     }
-    return AppComponent;
+    return Landing_Page_Component;
 }());
-AppComponent = __decorate([
+Landing_Page_Component = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        templateUrl: 'app/shared_header/shared_header_template/shared_header.html'
+        selector: 'landing_page',
+        templateUrl: 'app/landing_page/landing_page_template/landing_page.html'
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], Landing_Page_Component);
+exports.Landing_Page_Component = Landing_Page_Component;
+//# sourceMappingURL=landing_page.component.js.map

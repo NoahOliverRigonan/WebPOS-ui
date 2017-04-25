@@ -6,16 +6,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
+var Shared_Header_Component = (function () {
+    function Shared_Header_Component() {
     }
-    return AppComponent;
+    return Shared_Header_Component;
 }());
-AppComponent = __decorate([
+Shared_Header_Component = __decorate([
     core_1.Component({
-        selector: 'my-app',
+        selector: 'shared-header',
         templateUrl: 'app/shared_header/shared_header_template/shared_header.html'
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], Shared_Header_Component);
+exports.Shared_Header_Component = Shared_Header_Component;
+//# sourceMappingURL=shared_header.component.js.map
