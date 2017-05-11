@@ -1,0 +1,110 @@
+<div class="section-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postouch-header">
+                    <h1 class="software-h1"><i class="fa fa-hand-pointer-o"></i> POS Touch</h1>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+</div>
+<div class="section-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postouch-table-list">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel-heading">
+                                <table class="postouch-table">
+                                    <tr>
+                                        <td>
+                                            <div *ngIf="isLoading" align="center">
+                                                
+                                            </div>
+                                            <div *ngIf="isFinishLoading">
+                                                <wj-combo-box [itemsSource]="tableGroupList" [placeholder]="'Select...'" [displayMemberPath]="'TableGroup'" [selectedValuePath]="'Id'"
+                                                    [(selectedValue)]="filterTableGroupSelectedValue" [isEditable]="false"
+                                                    [isRequired]="true" (selectedIndexChanged)="filterTableGroupSelectedIndexChanged()"
+                                                    style="width: 100%; ">
+                                                </wj-combo-box>
+                                            </div>
+                                        </td>
+                                        <!--<td>
+                                            <button type="button" class="btn btn-default">
+                                                <span class="fa fa-fast-backward">First</span> 
+                                            </button>
+                                            <button type="button" class="btn btn-default">
+                                                <span class="fa fa-step-backward">Previous</span> 
+                                            </button>
+                                            <button type="button" class="btn btn-default" disabled style="width:70px">
+                                                1
+                                            </button>
+                                            <button type="button" class="btn btn-default">
+                                                <span class="fa fa-step-forward">Next</span> 
+                                            </button>
+                                            <button type="button" class="btn btn-default">
+                                                <span class="fa fa-fast-forward">Last</span> 
+                                            </button>
+                                        </td>-->
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="panel-body">
+                                <wj-flex-grid [itemsSource]="reportSummaryCollectionView" [selectionMode]="3">
+                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
+                                    </wj-flex-grid-column>
+                                </wj-flex-grid>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/><br/>
+            </div>
+            <div class="col-md-4">
+                <div class="postouch-table-bill">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home">Open</a></li>
+                        <li><a data-toggle="tab" href="#menu1">Billed Out</a></li>
+                        <li><a data-toggle="tab" href="#menu2">Collected</a></li>
+                        <!--<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
+                    </ul>
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <h3>Open</h3>
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <h3>Billed Out</h3>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <h3>Collected</h3>
+                        </div>
+                        <!--<div id="menu3" class="tab-pane fade">
+                            <h3>Menu 3</h3>
+                            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button id="set-table-group-selectedValue" (click)="setTableGroupSelectedValue()" [hidden]="true"></button>
+<button id="load-table-group-data" (click)="loadTableGroupData()" [hidden]="true"></button>
+<shared-footer></shared-footer>

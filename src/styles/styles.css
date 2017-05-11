@@ -1,6 +1,19 @@
 body{
   background-color: #17365d;
-  margin-top: 70px;
+  margin-top: 50px;
+}
+.software-h1{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  color:black;
+  padding:10px;
+}
+.footer-section{
+  position: relative;
+  margin-top: auto; /* negative value of footer height */
+  height: 150px;
+  clear:both;
+  padding-top:20px;
 }
 h1 {
   color: #369;
@@ -23,3 +36,218 @@ h5{
   font-size:auto;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+/*
+
+  For POSTOUCH STYLE
+
+*/
+.postouch-section{
+  margin-top:150px;
+}
+.postouch-table-list{
+  background-color:white;
+  height: 700px;
+  max-height:auto;
+  width:100%;
+}
+.postouch-table-bill{
+  background-color:whitesmoke;
+  height: 700px;
+  max-height:auto;
+  width:100%;
+}
+.section-heading{
+  width:100%;
+  background-color:#0086cf;
+  height:100px;
+}
+.section-body{
+  padding:25px 0px 25px 0px;
+}
+.postouch-table{
+  width:100%;
+}
+
+.postouch-table , tr , td:first-child{
+  width:40%;
+}
+
+.postouch-table , tr , td:nth-child(2){
+  width:60%;
+}
+
+.postouch-table , tr , td > button
+{
+  width:auto;
+}
+
+
+
+
+.wj-dropdown {
+    color: #000;
+    padding-left: 3px;
+    display: block;
+    height: 30px;
+    font-size: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.wj-control[disabled] {
+    color: #000;
+    opacity: 10;
+}
+
+.wj-input-group .wj-form-control {
+    position: relative;
+    float: left;
+    padding: 0 8px;
+    min-height: 2.3em;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    color: inherit;
+}
+
+.wj-flexgrid{
+    width:100%;
+    height:600px;
+    max-height:600px;
+}
+
+
+/*.postouch-table-bill > .ULbill-detail{
+  padding:10px;
+  width:100%;
+  list-style-type: none;  
+}
+.postouch-table-bill > .ULbill-detail > li {
+  padding:10px;
+  display:inline-block;
+  font-weight: bolder;
+  border-right:1px solid black;
+}
+.postouch-table-bill > .ULbill-detail > li:hover{
+  background-color: #17365d;
+  color:white;
+}
+.postouch-table-bill > .ULbill-detail > li:first-child{
+  width:20%;
+}
+.postouch-table-bill > .ULbill-detail > li:nth-child(2){
+  width:15%;
+}
+.postouch-table-bill > .ULbill-detail > li:nth-child(3){
+  width:20%;
+}
+.postouch-table-bill > .ULbill-detail > li:last-child{
+  width:40%;
+}
+
+.
+
+.walk-in-take-out{
+  width:100%;
+  height:340px;
+  margin:6px 0px 6px -6px;
+  background-color:#1d676d;
+  color:white;
+}
+.walk-in-take-out > .fa-wheelchair-alt{
+  margin: 25% 5% 25% 45%;
+}
+.delivery{
+  width:100%;
+  height:340px;
+  margin:6px 0px 6px -6px;
+  background-color:#1d676d;
+  color:white;
+}
+.delivery > .fa-motorcycle{
+  margin: 25% 5% 25% 45%;
+}*/
+
+@media screen and (max-width :1366px) and (min-width:150px){
+    .software-h1{
+      font-size: 25px;
+      padding:15px;
+    }
+      .postouch-table{
+        width:auto;
+      }
+
+      .postouch-table , tr , td:first-child{
+        width:auto;
+      }
+
+      .postouch-table , tr , td:nth-child(2){
+        width:auto;
+      }
+
+      .postouch-table , tr , td > button
+      {
+        width:auto;
+      }
+       .postouch-table , tr , td > button > span
+      {
+        width:auto;
+        font-size: auto;
+      }
+    
+    .wj-dropdown {
+    color: #000;
+    padding-left: 3px;
+    display: block;
+    height: 30px;
+    font-size: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+
+    .wj-control[disabled] {
+        color: #000;
+        opacity: 10;
+    }
+
+    .wj-input-group .wj-form-control {
+        position: relative;
+        float: left;
+        padding: 0 8px;
+        min-height: 2.3em;
+        vertical-align: middle;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 0;
+        background-color: transparent;
+        color: inherit;
+    }
+
+    .wj-flexgrid{
+        width:100%;
+        height:600px;
+        max-height:600px;
+    }
+}
+
+

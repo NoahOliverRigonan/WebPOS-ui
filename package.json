@@ -38,7 +38,8 @@
     "ng2-toastr": "^4.0.1",
     "rxjs": "5.0.1",
     "systemjs": "0.19.40",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+     "wijmo": "./wijmo/NpmImages/wijmo-amd-min"
   },
   "devDependencies": {
     "concurrently": "^3.2.0",
