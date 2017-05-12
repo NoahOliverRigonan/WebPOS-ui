@@ -18,58 +18,59 @@
                 <div class="postouch-table-list">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="panel-heading">
-                                <table class="postouch-table">
-                                    <tr>
-                                        <td>
-                                            <div *ngIf="isLoading" align="center">
-                                                
-                                            </div>
-                                            <div *ngIf="isFinishLoading">
-                                                <wj-combo-box [itemsSource]="tableGroupList" [placeholder]="'Select...'" [displayMemberPath]="'TableGroup'" [selectedValuePath]="'Id'"
-                                                    [(selectedValue)]="filterTableGroupSelectedValue" [isEditable]="false"
-                                                    [isRequired]="true" (selectedIndexChanged)="filterTableGroupSelectedIndexChanged()"
-                                                    style="width: 100%; ">
-                                                </wj-combo-box>
-                                            </div>
-                                        </td>
-                                        <!--<td>
-                                            <button type="button" class="btn btn-default">
-                                                <span class="fa fa-fast-backward">First</span> 
-                                            </button>
-                                            <button type="button" class="btn btn-default">
-                                                <span class="fa fa-step-backward">Previous</span> 
-                                            </button>
-                                            <button type="button" class="btn btn-default" disabled style="width:70px">
-                                                1
-                                            </button>
-                                            <button type="button" class="btn btn-default">
-                                                <span class="fa fa-step-forward">Next</span> 
-                                            </button>
-                                            <button type="button" class="btn btn-default">
-                                                <span class="fa fa-fast-forward">Last</span> 
-                                            </button>
-                                        </td>-->
-                                    </tr>
-                                </table>
+                            <div *ngIf="isLoading" align="center">
+
                             </div>
-                            <div class="panel-body">
-                                <wj-flex-grid [itemsSource]="reportSummaryCollectionView" [selectionMode]="3">
-                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
-                                    </wj-flex-grid-column>
-                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
-                                    </wj-flex-grid-column>
-                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
-                                    </wj-flex-grid-column>
-                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
-                                    </wj-flex-grid-column>
-                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
-                                    </wj-flex-grid-column>
-                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
-                                    </wj-flex-grid-column>
-                                    <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="'1*'">
-                                    </wj-flex-grid-column>
-                                </wj-flex-grid>
+                            <div *ngIf="isFinishLoading">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <table class="postouch-table">
+                                            <tr>
+                                                <td>
+                                                    <wj-combo-box [itemsSource]="tableGroupList" [placeholder]="'Select...'" [displayMemberPath]="'TableGroup'" [selectedValuePath]="'Id'"
+                                                        [(selectedValue)]="filterTableGroupSelectedValue" [isEditable]="false"
+                                                        [isRequired]="true" (selectedIndexChanged)="filterTableGroupSelectedIndexChanged()"
+                                                        style="width: 100%; ">
+                                                    </wj-combo-box>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="panel-body">
+                                        <wj-flex-grid [itemsSource]="tableGroupCollectionView" [selectionMode]="3" [headersVisibility]="1">
+                                            <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="200">
+                                                <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                    <button class="btn btn-primary btn-md btn-block" (click)="btnEditLead()">
+                                                    <i class="fa fa-edit fa-fw"></i> Detail
+                                                </button>
+                                                </template>
+                                            </wj-flex-grid-column>
+                                            <wj-flex-grid-column [header]="'Table Code'" [binding]="'TableCode'" [isReadOnly]="true" [width]="400">
+                                            </wj-flex-grid-column>
+                                        </wj-flex-grid>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="row">
+                                            <div class="col-sm-12 btn-group group-button" id="">
+                                                <button type="button" class="btn btn-default" (click)="tableMoveToFirstPage()">
+                                                    <span class="fa fa-fast-backward"></span> 
+                                                </button>
+                                                <button type="button" class="btn btn-default" (click)="tableMoveToPreviousPage()">
+                                                    <span class="fa fa-step-backward"></span> 
+                                                </button>
+                                                <button type="button" class="btn btn-default" disabled style="width:100px">
+                                                    {{ tableIndex }}
+                                                </button>
+                                                <button type="button" class="btn btn-default" (click)="tableMoveToNextPage()">
+                                                     <span class="fa fa-step-forward"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default" (click)="tableMoveToLastPage()">
+                                                     <span class="fa fa-fast-forward"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -107,4 +108,5 @@
 
 <button id="set-table-group-selectedValue" (click)="setTableGroupSelectedValue()" [hidden]="true"></button>
 <button id="load-table-group-data" (click)="loadTableGroupData()" [hidden]="true"></button>
+<button id="load-table-data" (click)="getTable()" [hidden]="true"></button>
 <shared-footer></shared-footer>

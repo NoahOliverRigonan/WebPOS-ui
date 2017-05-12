@@ -28,7 +28,7 @@ var Security_Login_Service = (function () {
             localStorage.setItem('expires_in', response.json().expires_in);
             localStorage.setItem('token_type', response.json().token_type);
             localStorage.setItem('userName', response.json().userName);
-            _this.router.navigate(['/dashboard']);
+            _this.router.navigate(['/postouch']);
             console.log("success");
         }, function (error) {
             // this.toastr.error('Please try again.', 'Login Failed');

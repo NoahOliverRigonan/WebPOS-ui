@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
-var TableGroupService = (function () {
-    function TableGroupService(router, http) {
+var Software_Postouch_Service = (function () {
+    function Software_Postouch_Service(router, http) {
         this.router = router;
         this.http = http;
         //  Global Variables
@@ -22,7 +22,7 @@ var TableGroupService = (function () {
         });
         this.options = new http_1.RequestOptions({ headers: this.headers });
     }
-    TableGroupService.prototype.getListTableGroup = function () {
+    Software_Postouch_Service.prototype.getListTableGroup = function () {
         var tableGroupObsevableArray = new wijmo.collections.ObservableArray();
         var url = "http://localhost:2558/api/tableGroup/list";
         this.http.get(url, this.options).subscribe(function (response) {
@@ -42,16 +42,37 @@ var TableGroupService = (function () {
             document.getElementById("set-table-group-selectedValue").click();
             setTimeout(function () {
                 document.getElementById("load-table-group-data").click();
+                document.getElementById("load-table-data").click();
             }, 200);
         });
         return tableGroupObsevableArray;
     };
-    return TableGroupService;
+    //MSTTABLE
+    Software_Postouch_Service.prototype.getListTable = function (tableId) {
+        var tableObsevableArray = new wijmo.collections.ObservableArray();
+        var url = "http://localhost:2558/api/table/list/" + tableId;
+        this.http.get(url, this.options).subscribe(function (response) {
+            var results = response.json();
+            if (results.length > 0) {
+                for (var i = 0; i <= results.length - 1; i++) {
+                    tableObsevableArray.push({
+                        Id: results[i].Id,
+                        TableCode: results[i].TableCode,
+                        TableGroupId: results[i].TableGroupId,
+                        TopLocation: results[i].TopLocation,
+                        LeftLocation: results[i].LeftLocation
+                    });
+                }
+            }
+        });
+        return tableObsevableArray;
+    };
+    return Software_Postouch_Service;
 }());
-TableGroupService = __decorate([
+Software_Postouch_Service = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [router_1.Router,
         http_1.Http])
-], TableGroupService);
-exports.TableGroupService = TableGroupService;
+], Software_Postouch_Service);
+exports.Software_Postouch_Service = Software_Postouch_Service;
 //# sourceMappingURL=software_postouch.service.js.map

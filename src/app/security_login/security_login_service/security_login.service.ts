@@ -23,7 +23,7 @@ export class Security_Login_Service {
                 localStorage.setItem('expires_in', response.json().expires_in);
                 localStorage.setItem('token_type', response.json().token_type);
                 localStorage.setItem('userName', response.json().userName);
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/postouch']);
                 console.log("success");
             },
             error => {

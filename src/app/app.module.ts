@@ -21,7 +21,7 @@ import { Software_Pos_Component } from './software_pos/software_pos_component/so
 
 // services
 import { Security_Login_Service } from './security_login/security_login_service/security_login.service';
-import { TableGroupService } from './software_postouch/software_postouch_service/software_postouch.service';
+import { Software_Postouch_Service } from './software_postouch/software_postouch_service/software_postouch.service';
 
 // paths and Routes
 const appRoutes: Routes = [
@@ -59,7 +59,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     Security_Login_Service,
-    TableGroupService
+    Software_Postouch_Service
   ],
   bootstrap: [
     AppComponent

@@ -66,7 +66,7 @@ AppModule = __decorate([
         ],
         providers: [
             security_login_service_1.Security_Login_Service,
-            software_postouch_service_1.TableGroupService
+            software_postouch_service_1.Software_Postouch_Service
         ],
         bootstrap: [
             app_component_1.AppComponent
