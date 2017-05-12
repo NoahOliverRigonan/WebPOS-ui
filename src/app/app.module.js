@@ -22,6 +22,32 @@ var landing_page_component_1 = require("./landing_page/landing_page_component/la
 var software_dashboard_component_1 = require("./software_dashboard/software_dashboard_component/software_dashboard.component");
 var software_postouch_component_1 = require("./software_postouch/software_postouch_component/software_postouch.component");
 var software_pos_component_1 = require("./software_pos/software_pos_component/software_pos.component");
+var software_item_component_1 = require("./software_item/software_item_component/software_item.component");
+var software_discount_component_1 = require("./software_discount/software_discount_component/software_discount.component");
+var software_customer_component_1 = require("./software_customer/software_customer_component/software_customer.component");
+var software_supplier_component_1 = require("./software_supplier/software_supplier_component/software_supplier.component");
+var software_systemtables_component_1 = require("./software_systemtables/software_systemtables_component/software_systemtables.component");
+var software_user_component_1 = require("./software_user/software_user_component/software_user.component");
+var software_collection_component_1 = require("./software_collection/software_collection_component/software_collection.component");
+var software_purchase_component_1 = require("./software_purchase/software_purchase_component/software_purchase.component");
+var software_disbursement_component_1 = require("./software_disbursement/software_disbursement_component/software_disbursement.component");
+var software_stockin_component_1 = require("./software_stockin/software_stockin_component/software_stockin.component");
+var software_stockout_component_1 = require("./software_stockout/software_stockout_component/software_stockout.component");
+var software_itemgroup_component_1 = require("./software_itemgroup/software_itemgroup_component/software_itemgroup.component");
+var software_itemcomponent_component_1 = require("./software_itemcomponent/software_itemcomponent_component/software_itemcomponent.component");
+var software_table_component_1 = require("./software_table/software_table_component/software_table.component");
+var software_inventory_component_1 = require("./software_inventory/software_inventory_component/software_inventory.component");
+var software_stockcount_component_1 = require("./software_stockcount/software_stockcount_component/software_stockcount.component");
+var software_salesreport_component_1 = require("./software_salesreport/software_salesreport_component/software_salesreport.component");
+var software_collectionreport_component_1 = require("./software_collectionreport/software_collectionreport_component/software_collectionreport.component");
+var software_accountreceivable_component_1 = require("./software_accountreceivable/software_accountreceivable_component/software_accountreceivable.component");
+var software_debitcreditmemo_component_1 = require("./software_debitcreditmemo/software_debitcreditmemo_component/software_debitcreditmemo.component");
+var software_disbursementreport_component_1 = require("./software_disbursementreport/software_disbursementreport_component/software_disbursementreport.component");
+var software_accountingreport_component_1 = require("./software_accountingreport/software_accountingreport_component/software_accountingreport.component");
+var software_settings_component_1 = require("./software_settings/software_settings_component/software_settings.component");
+var software_posreport_component_1 = require("./software_posreport/software_posreport_component/software_posreport.component");
+var software_80mmreport_component_1 = require("./software_80mmreport/software_80mmreport_component/software_80mmreport.component");
+var software_utilities_component_1 = require("./software_utilities/software_utilities_component/software_utilities.component");
 // services
 var security_login_service_1 = require("./security_login/security_login_service/security_login.service");
 var software_postouch_service_1 = require("./software_postouch/software_postouch_service/software_postouch.service");
@@ -33,7 +59,33 @@ var appRoutes = [
     { path: 'home', component: landing_page_component_1.Landing_Page_Component },
     { path: 'dashboard', component: software_dashboard_component_1.Software_Dashboard_Component },
     { path: 'postouch', component: software_postouch_component_1.Software_Postouch_Component },
-    { path: 'pos', component: software_pos_component_1.Software_Pos_Component }
+    { path: 'pos', component: software_pos_component_1.Software_Pos_Component },
+    { path: 'item', component: software_item_component_1.Software_Item_Component },
+    { path: 'discount', component: software_discount_component_1.Software_Discount_Component },
+    { path: 'customer', component: software_customer_component_1.Software_Customer_Component },
+    { path: 'supplier', component: software_supplier_component_1.Software_Supplier_Component },
+    { path: 'systable', component: software_systemtables_component_1.Software_SystemTable_Component },
+    { path: 'user', component: software_user_component_1.Software_User_Component },
+    { path: 'collection', component: software_collection_component_1.Software_Collection_Component },
+    { path: 'purchase', component: software_purchase_component_1.Software_Purchase_Component },
+    { path: 'disbursement', component: software_disbursement_component_1.Software_Disbursement_Component },
+    { path: 'stock-in', component: software_stockin_component_1.Software_Stockin_Component },
+    { path: 'stock-out', component: software_stockout_component_1.Software_Stockout_Component },
+    { path: 'itemgroup', component: software_itemgroup_component_1.Software_Itemgroup_Component },
+    { path: 'itemcomponent', component: software_itemcomponent_component_1.Software_Itemcomponent_Component },
+    { path: 'table', component: software_table_component_1.Software_Table_Component },
+    { path: 'inventory', component: software_inventory_component_1.Software_Inventory_Component },
+    { path: 'stock-count', component: software_stockcount_component_1.Software_Stockcount_Component },
+    { path: 'salesreport', component: software_salesreport_component_1.Software_Salesreport_Component },
+    { path: 'collectionreport', component: software_collectionreport_component_1.Software_Collectionreport_Component },
+    { path: 'accountreceivable', component: software_accountreceivable_component_1.Software_Accountreceivable_Component },
+    { path: 'debitcreditmemo', component: software_debitcreditmemo_component_1.Software_Debitcreditmemo_Component },
+    { path: 'disbursementreport', component: software_disbursementreport_component_1.Software_Disbursementreport_Component },
+    { path: 'accountingreport', component: software_accountingreport_component_1.Software_Accountingreport_Component },
+    { path: 'settings', component: software_settings_component_1.Software_Settings_Component },
+    { path: 'posreport', component: software_posreport_component_1.Software_Posreport_Component },
+    { path: '80mmreport', component: software_80mmreport_component_1.Software_80mmreport_Component },
+    { path: 'utilities', component: software_utilities_component_1.Software_Utilities_Component },
 ];
 // ng_modules
 var AppModule = (function () {
@@ -62,7 +114,33 @@ AppModule = __decorate([
             landing_page_component_1.Landing_Page_Component,
             software_dashboard_component_1.Software_Dashboard_Component,
             software_postouch_component_1.Software_Postouch_Component,
-            software_pos_component_1.Software_Pos_Component
+            software_pos_component_1.Software_Pos_Component,
+            software_item_component_1.Software_Item_Component,
+            software_discount_component_1.Software_Discount_Component,
+            software_customer_component_1.Software_Customer_Component,
+            software_supplier_component_1.Software_Supplier_Component,
+            software_systemtables_component_1.Software_SystemTable_Component,
+            software_user_component_1.Software_User_Component,
+            software_collection_component_1.Software_Collection_Component,
+            software_purchase_component_1.Software_Purchase_Component,
+            software_disbursement_component_1.Software_Disbursement_Component,
+            software_stockin_component_1.Software_Stockin_Component,
+            software_stockout_component_1.Software_Stockout_Component,
+            software_itemgroup_component_1.Software_Itemgroup_Component,
+            software_itemcomponent_component_1.Software_Itemcomponent_Component,
+            software_table_component_1.Software_Table_Component,
+            software_inventory_component_1.Software_Inventory_Component,
+            software_stockcount_component_1.Software_Stockcount_Component,
+            software_salesreport_component_1.Software_Salesreport_Component,
+            software_collectionreport_component_1.Software_Collectionreport_Component,
+            software_accountreceivable_component_1.Software_Accountreceivable_Component,
+            software_debitcreditmemo_component_1.Software_Debitcreditmemo_Component,
+            software_disbursementreport_component_1.Software_Disbursementreport_Component,
+            software_accountingreport_component_1.Software_Accountingreport_Component,
+            software_settings_component_1.Software_Settings_Component,
+            software_posreport_component_1.Software_Posreport_Component,
+            software_80mmreport_component_1.Software_80mmreport_Component,
+            software_utilities_component_1.Software_Utilities_Component
         ],
         providers: [
             security_login_service_1.Security_Login_Service,
