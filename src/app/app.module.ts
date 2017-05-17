@@ -48,6 +48,7 @@ import { Software_Utilities_Component } from './software_utilities/software_util
 // services
 import { Security_Login_Service } from './security_login/security_login_service/security_login.service';
 import { Software_Postouch_Service } from './software_postouch/software_postouch_service/software_postouch.service';
+import { Software_Item_Service } from './software_item/software_item_service/software_item.service';
 
 // paths and Routes
 const appRoutes: Routes = [
@@ -137,7 +138,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     Security_Login_Service,
-    Software_Postouch_Service
+    Software_Postouch_Service,
+    Software_Item_Service
   ],
   bootstrap: [
     AppComponent

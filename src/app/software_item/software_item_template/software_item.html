@@ -1,8 +1,83 @@
+<div class="section-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postouch-header">
+                    <h1 class="software-h1"><i class="fa fa-cubes"></i> Item</h1>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 style="color:white;">Web POS - ITEM</h1>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                </div>
+                <div class="panel-body">
+                    <wj-flex-grid [itemsSource]="itemCollectionView" [selectionMode]="3" [headersVisibility]="1">
+                        <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                <button class="btn btn-primary btn-xs btn-md btn-block" (click)="btnEditLead()">
+                                                    <i class="fa fa-edit fa-fw"></i> Edit
+                                                </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                <button class="btn btn-danger btn-xs btn-block" (click)="btnEditLead()">
+                                                    <i class="fa fa-trash fa-fw"></i> Delete
+                                                </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Code'" [binding]="'ItemCode'" [isReadOnly]="true" [width]="200">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Description'" [binding]="'ItemDescription'" [isReadOnly]="true" [width]="250">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Category'" [binding]="'Category'" [isReadOnly]="true" [width]="220">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Bar Code'" [binding]="'BarCode'" [isReadOnly]="true" [width]="200">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Price'" [binding]="'Price'" [isReadOnly]="true" [width]="150">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Qty'" [binding]="'OnhandQuantity'" [isReadOnly]="true" [width]="150">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Unit'" [binding]="'Unit'" [isReadOnly]="true" [width]="120">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'L'" [binding]="'IsLocked'" [isReadOnly]="true" [width]="50">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'I'" [binding]="'IsInventory'" [isReadOnly]="true" [width]="50">
+                        </wj-flex-grid-column>
+                    </wj-flex-grid>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-12 btn-group group-button" id="">
+                            <button type="button" class="btn btn-default" (click)="moveItemToFirstPage()">
+                                                    <span class="fa fa-fast-backward"></span> 
+                                                </button>
+                            <button type="button" class="btn btn-default" (click)="moveItemToPreviousPage()">
+                                                    <span class="fa fa-step-backward"></span> 
+                                                </button>
+                            <button type="button" class="btn btn-default" disabled style="width:100px">
+                                                    {{ indexItem }}
+                                                </button>
+                            <button type="button" class="btn btn-default" (click)="moveItemToNextPage()">
+                                                     <span class="fa fa-step-forward"></span>
+                                                </button>
+                            <button type="button" class="btn btn-default" (click)="moveItemToLastPage()">
+                                                     <span class="fa fa-fast-forward"></span>
+                                                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<button id="load-item-data" (click)="getTable()" [hidden]="true"></button>
 <shared-footer></shared-footer>

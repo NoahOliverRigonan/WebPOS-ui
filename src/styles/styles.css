@@ -12,15 +12,16 @@ body{
   bottom:0;
   width:100%;
   position: relative;
-  margin-bottom: 0px; /* negative value of footer height */
+  margin-left: 0px; /* negative value of footer height */
   height: 200px;
   clear:both;
   padding-top:20px;
+  margin-bottom:0px;
   background-color:whitesmoke;
   
 }
 h1 {
-  color: #369;
+  color: white;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
@@ -124,6 +125,18 @@ h5{
     background-color: transparent;
     color: inherit;
 }
+
+.postouch-walk-in{
+    width:100%;
+    height:auto;
+    padding:20px;
+}
+
+.postouch-delivery{
+    width:100%;
+    height:auto;
+    padding:20px;
+}
 /*
 .wj-flexgrid{
     width:100%;
@@ -187,13 +200,23 @@ h5{
       font-size: 25px;
       padding:15px;
     }
-    .group-button{
+    /*.group-button{
       margin: 0px 0px 0px 5px;
-    }
+    }*/
     .postouch-table-bill{
-      margin-top:150px;
+      margin-top:auto;
     }
- 
+    .postouch-walk-in{
+    width:100%;
+    height:auto;
+    padding:20px;
+    }
+
+    .postouch-delivery{
+        width:100%;
+        height:auto;
+        padding:20px;
+    }
     
     .wj-dropdown {
     color: #000;
@@ -231,7 +254,6 @@ h5{
         background-color: transparent;
         color: inherit;
     }
-
 }
 
 @media screen and (max-width :667px) and (min-width:375px){
@@ -239,13 +261,25 @@ h5{
       font-size: 25px;
       padding:15px;
     }
-    .group-button{
+    /*.group-button{
       margin: 0px 0px 0px 55px;
-    }
+    }*/
     .postouch-table-bill{
-      margin-top:150px;
+      margin-top:auto;
     }
-    
+
+  .postouch-walk-in{
+    width:100%;
+    height:auto;
+    padding:20px;
+    }
+
+    .postouch-delivery{
+        width:100%;
+        height:auto;
+        padding:20px;
+    }
+
     .wj-dropdown {
     color: #000;
     padding-left: 3px;
@@ -289,13 +323,24 @@ h5{
       font-size: 25px;
       padding:15px;
     }
-    .group-button{
+    /*.group-button{
       margin: 0px 0px 0px 30%;
-    }
+    }*/
     .postouch-table-bill{
       margin-top:150px;
     }
   
+  .postouch-walk-in{
+    width:100%;
+    height:auto;
+    padding:20px;
+}
+
+.postouch-delivery{
+    width:100%;
+    height:auto;
+    padding:20px;
+}
     
     .wj-dropdown {
     color: #000;
@@ -341,10 +386,20 @@ h5{
       font-size: 25px;
       padding:15px;
     }
-    .group-button{
+    /*.group-button{
       margin: 0px 0px 0px 30%;
+    }*/
+    .postouch-walk-in{
+    width:100%;
+    height:auto;
+    padding:20px;
     }
-    
+
+    .postouch-delivery{
+        width:100%;
+        height:auto;
+        padding:20px;
+    }
     
     .wj-dropdown {
     color: #000;
@@ -382,9 +437,9 @@ h5{
         background-color: transparent;
         color: inherit;
     }
-
 }
-.wj-cell {
+
+#tablePostouchSaleFlexGrid > .wj-cell {
     position: absolute;
     box-sizing: border-box;
     overflow: hidden;
@@ -397,4 +452,7 @@ h5{
     height: 40px;
 }
 
+.panel , .btn {
+  border-radius: 0px;
+}
 

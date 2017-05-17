@@ -51,6 +51,7 @@ var software_utilities_component_1 = require("./software_utilities/software_util
 // services
 var security_login_service_1 = require("./security_login/security_login_service/security_login.service");
 var software_postouch_service_1 = require("./software_postouch/software_postouch_service/software_postouch.service");
+var software_item_service_1 = require("./software_item/software_item_service/software_item.service");
 // paths and Routes
 var appRoutes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -144,7 +145,8 @@ AppModule = __decorate([
         ],
         providers: [
             security_login_service_1.Security_Login_Service,
-            software_postouch_service_1.Software_Postouch_Service
+            software_postouch_service_1.Software_Postouch_Service,
+            software_item_service_1.Software_Item_Service
         ],
         bootstrap: [
             app_component_1.AppComponent

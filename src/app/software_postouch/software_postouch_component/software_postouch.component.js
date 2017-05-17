@@ -15,22 +15,47 @@ var Software_Postouch_Component = (function () {
     function Software_Postouch_Component(router, softwarePostouchService) {
         this.router = router;
         this.softwarePostouchService = softwarePostouchService;
+        this.filterTableSaleNoGroupSelectedValue = "1";
+        this.filterTableUserGroupSelectedValue = "1";
+        this.filterTableCodeSelectedValue = "1";
         this.filterTableGroupSelectedValue = "1";
         this.isLoading = true;
         this.isFinishLoading = false;
         this.isTableGroupSelected = false;
         this.tableIndex = " ";
+        this.tableGroupIndex = " ";
     }
     Software_Postouch_Component.prototype.filterTableGroupSelectedIndexChanged = function () {
         if (this.isTableGroupSelected) {
-            this.getTable();
         }
         else {
             this.isTableGroupSelected = true;
         }
     };
     Software_Postouch_Component.prototype.getTableGroup = function () {
-        this.tableGroupList = this.softwarePostouchService.getListTableGroup();
+        var _this = this;
+        this.tableGroupList = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTableGroup());
+        this.tableGroupList.pageSize = 1;
+        this.tableGroupList.trackChanges = true;
+        setTimeout(function () {
+            _this.tableGroupIndex = (_this.tableGroupList.pageIndex + 1) + " / " + _this.tableGroupList.pageCount;
+        }, 200);
+    };
+    Software_Postouch_Component.prototype.tableGroupMoveToFirstPage = function () {
+        this.tableGroupList.moveToFirstPage();
+        this.tableGroupIndex = (this.tableGroupList.pageIndex + 1) + " / " + this.tableGroupList.pageCount;
+    };
+    Software_Postouch_Component.prototype.tableGroupMoveToPreviousPage = function () {
+        this.tableGroupList.moveToPreviousPage();
+        this.tableGroupIndex = (this.tableGroupList.pageIndex + 1) + " / " + this.tableGroupList.pageCount;
+    };
+    Software_Postouch_Component.prototype.tableGroupMoveToNextPage = function () {
+        this.tableGroupList.moveToNextPage();
+        this.tableGroupIndex = (this.tableGroupList.pageIndex + 1) + " / " + this.tableGroupList.pageCount;
+    };
+    Software_Postouch_Component.prototype.tableGroupMoveToLastPage = function () {
+        this.tableGroupList.moveToLastPage();
+        this.tableGroupIndex = (this.tableGroupList.pageIndex + 1) + " / " + this.tableGroupList.pageCount;
     };
     Software_Postouch_Component.prototype.setTableGroupSelectedValue = function () {
         this.filterTableGroupSelectedValue = "1";
@@ -39,10 +64,20 @@ var Software_Postouch_Component = (function () {
         this.isLoading = false;
         this.isFinishLoading = true;
     };
-    Software_Postouch_Component.prototype.getTable = function () {
+    //Table Postouch For Sale Collection View
+    Software_Postouch_Component.prototype.getTableSale = function () {
+        this.tablePostouchSaleCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTableSale(this.filterTableSaleNoGroupSelectedValue, this.filterTableUserGroupSelectedValue, this.filterTableCodeSelectedValue));
+        this.tablePostouchSaleCollectionView.pageSize = 5;
+        this.tablePostouchSaleCollectionView.trackChanges = true;
+        // setTimeout(() => {
+        //     this.tableIndex = (this.tableGroupCollectionView.pageIndex + 1) + " / " + this.tableGroupCollectionView.pageCount;
+        // }, 200);
+    };
+    //Table Group Collection View
+    Software_Postouch_Component.prototype.getTable = function (tableGroupId) {
         var _this = this;
-        this.tableGroupCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTable(this.filterTableGroupSelectedValue));
-        this.tableGroupCollectionView.pageSize = 15;
+        this.tableGroupCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTable(tableGroupId));
+        this.tableGroupCollectionView.pageSize = 10;
         this.tableGroupCollectionView.trackChanges = true;
         setTimeout(function () {
             _this.tableIndex = (_this.tableGroupCollectionView.pageIndex + 1) + " / " + _this.tableGroupCollectionView.pageCount;
@@ -68,7 +103,38 @@ var Software_Postouch_Component = (function () {
         if (!localStorage.getItem('access_token')) {
             this.router.navigate(['security_login']);
         }
+        // this.getTableSale();
         this.getTableGroup();
+    };
+    Software_Postouch_Component.prototype.btnTableGroup1Click = function () {
+        var currentId = this.tableGroupList.currentItem;
+        this.loadTableGroupData();
+        this.getTable(currentId.tableGroup1Id);
+    };
+    Software_Postouch_Component.prototype.btnTableGroup2Click = function () {
+        var currentId = this.tableGroupList.currentItem;
+        this.loadTableGroupData();
+        this.getTable(currentId.tableGroup2Id);
+    };
+    Software_Postouch_Component.prototype.btnTableGroup3Click = function () {
+        var currentId = this.tableGroupList.currentItem;
+        this.loadTableGroupData();
+        this.getTable(currentId.tableGroup3Id);
+    };
+    Software_Postouch_Component.prototype.btnTableGroup4Click = function () {
+        var currentId = this.tableGroupList.currentItem;
+        this.loadTableGroupData();
+        this.getTable(currentId.tableGroup4Id);
+    };
+    Software_Postouch_Component.prototype.btnTableGroup5Click = function () {
+        var currentId = this.tableGroupList.currentItem;
+        this.loadTableGroupData();
+        this.getTable(currentId.tableGroup5Id);
+    };
+    Software_Postouch_Component.prototype.btnTableGroup6Click = function () {
+        var currentId = this.tableGroupList.currentItem;
+        this.loadTableGroupData();
+        this.getTable(currentId.tableGroup6Id);
     };
     return Software_Postouch_Component;
 }());
