@@ -9,7 +9,6 @@
             <div class="col-md-4"></div>
         </div>
     </div>
-
 </div>
 <div class="section-body">
     <div class="container-fluid">
@@ -20,45 +19,49 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
+                                    <h4 id="currentDateTime">
+                                    </h4>
+                                </div>
+                                <div class="panel-heading">
                                     <wj-flex-grid [itemsSource]="tableGroupList" [selectionMode]="1" [headersVisibility]="0" id="tablePostouchSaleFlexGrid">
                                         <wj-flex-grid-column [header]="'Detail'" [binding]="'tableGroup1'" [isReadOnly]="true" [width]="'1*'">
                                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                <button class="btn btn-info btn-md btn-block" (click)="btnTableGroup1Click()">
+                                                <button class="btn btn-info btn-md btn-responsive btn-block" (click)="btnTableGroup1Click()">
                                                      &nbsp;{{ '' }} {{ cell.item.tableGroup1 }} {{ '' }}&nbsp;
                                                 </button>
                                             </template>
                                         </wj-flex-grid-column>
                                         <wj-flex-grid-column [header]="'Detail'" [binding]="'tableGroup2'" [isReadOnly]="true" [width]="'1*'">
                                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                <button class="btn btn-info btn-md btn-block" (click)="btnTableGroup2Click()">
+                                                <button class="btn btn-info btn-md btn-responsive btn-block" (click)="btnTableGroup2Click()">
                                                     &nbsp;{{ '' }} {{ cell.item.tableGroup2 }} {{ '' }}&nbsp;
                                                 </button>
                                             </template>
                                         </wj-flex-grid-column>
                                         <wj-flex-grid-column [header]="'Detail'" [binding]="'tableGroup3'" [isReadOnly]="true" [width]="'1*'">
                                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                <button class="btn btn-info btn-md btn-block" (click)="btnTableGroup3Click()">
+                                                <button class="btn btn-info btn-md btn-responsive btn-block" (click)="btnTableGroup3Click()">
                                                     &nbsp;{{ '' }} {{ cell.item.tableGroup3 }} {{ '' }}&nbsp;
                                                 </button>
                                             </template>
                                         </wj-flex-grid-column>
                                         <wj-flex-grid-column [header]="'Detail'" [binding]="'tableGroup4'" [isReadOnly]="true" [width]="'1*'">
                                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                <button class="btn btn-info btn-md btn-block" (click)="btnTableGroup4Click()">
+                                                <button class="btn btn-info btn-md btn-responsive btn-block" (click)="btnTableGroup4Click()">
                                                     &nbsp;{{ '' }} {{ cell.item.tableGroup4 }} {{ '' }}&nbsp;
                                                 </button>
                                             </template>
                                         </wj-flex-grid-column>
                                         <wj-flex-grid-column [header]="'Detail'" [binding]="'tableGroup5'" [isReadOnly]="true" [width]="'1*'">
                                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                <button class="btn btn-info btn-md btn-block" (click)="btnTableGroup5Click()">
+                                                <button class="btn btn-info btn-md btn-responsive btn-block" (click)="btnTableGroup5Click()">
                                                     &nbsp;{{ '' }} {{ cell.item.tableGroup5 }} {{ '' }}&nbsp;
                                                 </button>
                                             </template>
                                         </wj-flex-grid-column>
                                         <wj-flex-grid-column [header]="'Detail'" [binding]="'tableGroup6'" [isReadOnly]="true" [width]="'1*'">
                                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                <button class="btn btn-info btn-md btn-block" (click)="btnTableGroup6Click()">
+                                                <button class="btn btn-info btn-md btn-responsive btn-block" (click)="btnTableGroup6Click()">
                                                     &nbsp;{{ '' }} {{ cell.item.tableGroup6 }} {{ '' }}&nbsp;
                                                 </button>
                                             </template>
@@ -89,45 +92,45 @@
                                     <div *ngIf="isLoading" align="center">
                                     </div>
                                     <div *ngIf="isFinishLoading">
-                                        <wj-flex-grid [itemsSource]="tableGroupCollectionView" style="height: 500px;" [selectionMode]="1" [headersVisibility]="0" id="tablePostouchSaleFlexGrid">
+                                        <wj-flex-grid [itemsSource]="tableGroupCollectionView" [selectionMode]="1" [headersVisibility]="0" id="tablePostouchSaleFlexGrid">
                                             <wj-flex-grid-column [header]="'Detail'" [binding]="'tableNo1'" [isReadOnly]="true" [width]="'1*'">
                                                 <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                    <button class="btn btn-primary btn-md btn-block" (click)="btnEditLead()">
+                                                    <button class="btn btn-primary btn-responsive btn-md btn-block" (click)="btnEditLead()">
                                                      &nbsp;{{ '' }} {{ cell.item.tableNo1 }} {{ '' }}&nbsp;
                                                 </button>
                                                 </template>
                                             </wj-flex-grid-column>
                                             <wj-flex-grid-column [header]="'Detail'" [binding]="'tableNo2'" [isReadOnly]="true" [width]="'1*'">
                                                 <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                    <button class="btn btn-primary btn-md btn-block" (click)="btnEditLead()">
+                                                    <button class="btn btn-primary btn-responsive btn-md btn-block" (click)="btnEditLead()">
                                                     &nbsp;{{ '' }} {{ cell.item.tableNo2 }} {{ '' }}&nbsp;
                                                 </button>
                                                 </template>
                                             </wj-flex-grid-column>
                                             <wj-flex-grid-column [header]="'Detail'" [binding]="'tableNo3'" [isReadOnly]="true" [width]="'1*'">
                                                 <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                    <button class="btn btn-primary btn-md btn-block" (click)="btnEditLead()">
+                                                    <button class="btn btn-primary btn-responsive btn-md btn-block" (click)="btnEditLead()">
                                                     &nbsp;{{ '' }} {{ cell.item.tableNo3 }} {{ '' }}&nbsp;
                                                 </button>
                                                 </template>
                                             </wj-flex-grid-column>
                                             <wj-flex-grid-column [header]="'Detail'" [binding]="'tableNo4'" [isReadOnly]="true" [width]="'1*'">
                                                 <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                    <button class="btn btn-primary btn-md btn-block" (click)="btnEditLead()">
+                                                    <button class="btn btn-primary btn-responsive btn-md btn-block" (click)="btnEditLead()">
                                                     &nbsp;{{ '' }} {{ cell.item.tableNo4 }} {{ '' }}&nbsp;
                                                 </button>
                                                 </template>
                                             </wj-flex-grid-column>
                                             <wj-flex-grid-column [header]="'Detail'" [binding]="'tableNo5'" [isReadOnly]="true" [width]="'1*'">
                                                 <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                    <button class="btn btn-primary btn-md btn-block" (click)="btnEditLead()">
+                                                    <button class="btn btn-primary btn-responsive btn-md btn-block" (click)="btnEditLead()">
                                                     &nbsp;{{ '' }} {{ cell.item.tableNo5 }} {{ '' }}&nbsp;
                                                 </button>
                                                 </template>
                                             </wj-flex-grid-column>
                                             <wj-flex-grid-column [header]="'Detail'" [binding]="'tableNo6'" [isReadOnly]="true" [width]="'1*'">
                                                 <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                    <button class="btn btn-primary btn-md btn-block" (click)="btnEditLead()">
+                                                    <button class="btn btn-primary btn-responsive btn-md btn-block" (click)="btnEditLead()">
                                                     &nbsp;{{ '' }} {{ cell.item.tableNo6 }} {{ '' }}&nbsp;
                                                 </button>
                                                 </template>
@@ -184,13 +187,13 @@
                             </ul>
                             <br />
                             <wj-flex-grid [itemsSource]="tablePostouchSaleCollectionView" [selectionMode]="3" [headersVisibility]="1">
-                                <wj-flex-grid-column [header]="'Sales No.'" [binding]="'SalesNumber'" [isReadOnly]="true" [width]="110">
+                                <wj-flex-grid-column [header]="'Sales No.'" [binding]="'SalesNumber'" [isReadOnly]="true" [width]="150">
                                 </wj-flex-grid-column>
-                                <wj-flex-grid-column [header]="'Amount'" [binding]="'Amount'" [isReadOnly]="true" [width]="110">
+                                <wj-flex-grid-column [header]="'Amount'" [binding]="'Amount'" [isReadOnly]="true" [width]="130">
                                 </wj-flex-grid-column>
                                 <wj-flex-grid-column [header]="'Table'" [binding]="'TableCode'" [isReadOnly]="true" [width]="50">
                                 </wj-flex-grid-column>
-                                <wj-flex-grid-column [header]="'User'" [binding]="'AccountName'" [isReadOnly]="true" [width]="160">
+                                <wj-flex-grid-column [header]="'User'" [binding]="'AccountName'" [isReadOnly]="true" [width]="250">
                                 </wj-flex-grid-column>
                             </wj-flex-grid>
                             <!--<div class="tab-content">

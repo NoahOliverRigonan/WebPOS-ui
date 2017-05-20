@@ -46,6 +46,7 @@ export class Software_Postouch_Service {
                     let fixIndex = 5;
                     let fixIndexValue = 5;
 
+
                     for (var i = 0; i <= (results.length - 1) + 5; i++) {
                         if (fixIndex == i) {
                             if ((i - fixIndexValue) + 5 <= length) {
@@ -112,10 +113,9 @@ export class Software_Postouch_Service {
                             });
 
                             fixIndex += 6;
-                        } 
+                        }
                     }
                 }
-
                 (<HTMLButtonElement>document.getElementById("set-table-group-selectedValue")).click();
                 // setTimeout(() => {
                 //     
@@ -225,7 +225,7 @@ export class Software_Postouch_Service {
 
                             fixIndex += 6;
                         } else {
-                             
+
                         }
                     }
                 }

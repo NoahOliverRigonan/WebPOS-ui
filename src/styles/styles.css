@@ -137,6 +137,12 @@ h5{
     height:auto;
     padding:20px;
 }
+
+.btn-responsive{
+    height: 100px;
+}
+
+
 /*
 .wj-flexgrid{
     width:100%;
@@ -195,7 +201,14 @@ h5{
 .delivery > .fa-motorcycle{
   margin: 25% 5% 25% 45%;
 }*/
+
 @media screen and (max-width :360px) and (min-width:320px){
+    .btn-responsive {
+    padding:4px 10px;
+    font-size:90%;
+    line-height: 1.2;
+    }
+
     .software-h1{
       font-size: 25px;
       padding:15px;
@@ -257,6 +270,12 @@ h5{
 }
 
 @media screen and (max-width :667px) and (min-width:375px){
+    .btn-responsive {
+    padding:4px 9px;
+    font-size:90%;
+    line-height: 1.2;
+    }
+
     .software-h1{
       font-size: 25px;
       padding:15px;
@@ -382,6 +401,11 @@ h5{
 }
 
 @media screen and (max-width :1366px) and (min-width:1024px){
+    .btn-responsive {
+    padding:4px 9px;
+    font-size:90%;
+    /*line-height: 1.2;*/
+    }
     .software-h1{
       font-size: 25px;
       padding:15px;
@@ -439,6 +463,24 @@ h5{
     }
 }
 
+@media (max-width: 768px) {
+  .btn-responsive {
+    padding:2px 4px;
+    font-size:80%;
+    line-height: 1;
+    border-radius:3px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .btn-responsive {
+    padding:4px 9px;
+    font-size:90%;
+    line-height: 1.2;
+  }
+}
+
+
 #tablePostouchSaleFlexGrid > .wj-cell {
     position: absolute;
     box-sizing: border-box;
@@ -455,4 +497,15 @@ h5{
 .panel , .btn {
   border-radius: 0px;
 }
+textarea[type="text"]{
+  border-radius: 0px;
+  
+}
 
+input[type="text"]{
+  border-radius: 0px;
+  height:40px;
+}
+input[type="checkbox"]{
+  border-radius: 0px;
+}

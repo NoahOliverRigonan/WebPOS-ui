@@ -99,12 +99,19 @@ var Software_Postouch_Component = (function () {
         this.tableGroupCollectionView.moveToLastPage();
         this.tableIndex = (this.tableGroupCollectionView.pageIndex + 1) + " / " + this.tableGroupCollectionView.pageCount;
     };
+    Software_Postouch_Component.prototype.setCurrentDate = function () {
+        return new Date();
+    };
     Software_Postouch_Component.prototype.ngOnInit = function () {
+        var _this = this;
         if (!localStorage.getItem('access_token')) {
             this.router.navigate(['security_login']);
         }
         // this.getTableSale();
         this.getTableGroup();
+        setInterval(function () {
+            document.getElementById("currentDateTime").innerHTML = _this.setCurrentDate().toDateString() + " " + _this.setCurrentDate().toLocaleTimeString();
+        }, 1000);
     };
     Software_Postouch_Component.prototype.btnTableGroup1Click = function () {
         var currentId = this.tableGroupList.currentItem;
@@ -141,7 +148,7 @@ var Software_Postouch_Component = (function () {
 Software_Postouch_Component = __decorate([
     core_1.Component({
         selector: 'software_postouch',
-        templateUrl: 'app/software_postouch/software_postouch_template/software_postouch.html'
+        templateUrl: 'app/software_postouch/software_postouch_template/software_postouch.html',
     }),
     __metadata("design:paramtypes", [router_1.Router,
         software_postouch_service_1.Software_Postouch_Service])

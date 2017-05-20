@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Attribute } from '@angular/core';
 import { Software_Postouch_Service } from '../software_postouch_service/software_postouch.service';
 import { Router } from '@angular/router';
+import { DateFormatPipe } from 'angular2-moment';
 
 @Component({
     selector: 'software_postouch',
-    templateUrl: 'app/software_postouch/software_postouch_template/software_postouch.html'
+    templateUrl: 'app/software_postouch/software_postouch_template/software_postouch.html',
 })
 
 export class Software_Postouch_Component implements OnInit {
@@ -23,7 +24,7 @@ export class Software_Postouch_Component implements OnInit {
 
     constructor(
         private router: Router,
-        private softwarePostouchService: Software_Postouch_Service
+        private softwarePostouchService: Software_Postouch_Service,
     ) { }
 
     public filterTableGroupSelectedIndexChanged(): void {
@@ -42,7 +43,7 @@ export class Software_Postouch_Component implements OnInit {
             this.tableGroupIndex = (this.tableGroupList.pageIndex + 1) + " / " + this.tableGroupList.pageCount;
         }, 200);
     }
-    
+
     public tableGroupMoveToFirstPage(): void {
         this.tableGroupList.moveToFirstPage();
         this.tableGroupIndex = (this.tableGroupList.pageIndex + 1) + " / " + this.tableGroupList.pageCount;
@@ -73,7 +74,7 @@ export class Software_Postouch_Component implements OnInit {
     }
     //Table Postouch For Sale Collection View
     public getTableSale(): void {
-        this.tablePostouchSaleCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTableSale(this.filterTableSaleNoGroupSelectedValue,this.filterTableUserGroupSelectedValue,this.filterTableCodeSelectedValue));
+        this.tablePostouchSaleCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTableSale(this.filterTableSaleNoGroupSelectedValue, this.filterTableUserGroupSelectedValue, this.filterTableCodeSelectedValue));
         this.tablePostouchSaleCollectionView.pageSize = 5;
         this.tablePostouchSaleCollectionView.trackChanges = true;
         // setTimeout(() => {
@@ -110,44 +111,53 @@ export class Software_Postouch_Component implements OnInit {
         this.tableIndex = (this.tableGroupCollectionView.pageIndex + 1) + " / " + this.tableGroupCollectionView.pageCount;
     }
 
+    public setCurrentDate() {
+        return new Date();
+    }
+
     public ngOnInit(): any {
         if (!localStorage.getItem('access_token')) {
             this.router.navigate(['security_login']);
         }
         // this.getTableSale();
         this.getTableGroup();
+
+        setInterval(() => {
+            (<HTMLButtonElement>document.getElementById("currentDateTime")).innerHTML = this.setCurrentDate().toDateString() + " " + this.setCurrentDate().toLocaleTimeString();
+        }, 1000);
     }
+
 
     public btnTableGroup1Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup1Id);
     }
-    
+
     public btnTableGroup2Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup2Id);
     }
-    
+
     public btnTableGroup3Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup3Id);
     }
-    
+
     public btnTableGroup4Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup4Id);
     }
-    
+
     public btnTableGroup5Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup5Id);
     }
-    
+
     public btnTableGroup6Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();

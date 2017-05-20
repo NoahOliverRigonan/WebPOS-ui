@@ -48,10 +48,12 @@ var software_settings_component_1 = require("./software_settings/software_settin
 var software_posreport_component_1 = require("./software_posreport/software_posreport_component/software_posreport.component");
 var software_80mmreport_component_1 = require("./software_80mmreport/software_80mmreport_component/software_80mmreport.component");
 var software_utilities_component_1 = require("./software_utilities/software_utilities_component/software_utilities.component");
+var software_itemdetail_component_1 = require("./software_itemdetail/software_itemdetail_component/software_itemdetail.component");
 // services
 var security_login_service_1 = require("./security_login/security_login_service/security_login.service");
 var software_postouch_service_1 = require("./software_postouch/software_postouch_service/software_postouch.service");
 var software_item_service_1 = require("./software_item/software_item_service/software_item.service");
+var software_itemdetail_service_1 = require("./software_itemdetail/software_itemdetail_service/software_itemdetail.service");
 // paths and Routes
 var appRoutes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -87,6 +89,7 @@ var appRoutes = [
     { path: 'posreport', component: software_posreport_component_1.Software_Posreport_Component },
     { path: '80mmreport', component: software_80mmreport_component_1.Software_80mmreport_Component },
     { path: 'utilities', component: software_utilities_component_1.Software_Utilities_Component },
+    { path: 'itemdetail', component: software_itemdetail_component_1.Software_Itemdetail_Component },
 ];
 // ng_modules
 var AppModule = (function () {
@@ -141,12 +144,14 @@ AppModule = __decorate([
             software_settings_component_1.Software_Settings_Component,
             software_posreport_component_1.Software_Posreport_Component,
             software_80mmreport_component_1.Software_80mmreport_Component,
-            software_utilities_component_1.Software_Utilities_Component
+            software_utilities_component_1.Software_Utilities_Component,
+            software_itemdetail_component_1.Software_Itemdetail_Component
         ],
         providers: [
             security_login_service_1.Security_Login_Service,
             software_postouch_service_1.Software_Postouch_Service,
-            software_item_service_1.Software_Item_Service
+            software_item_service_1.Software_Item_Service,
+            software_itemdetail_service_1.Software_Itemdetail_Service
         ],
         bootstrap: [
             app_component_1.AppComponent

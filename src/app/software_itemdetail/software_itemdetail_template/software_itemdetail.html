@@ -1,0 +1,176 @@
+<div class="section-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postouch-header">
+                    <h1 class="software-h1"><i class="fa fa-cubes"></i> Item Detail</h1>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#home">General Information</a></li>
+                                <li><a data-toggle="tab" href="#menu1">Other Information</a></li>
+                                <li><a data-toggle="tab" href="#menu2">Image</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <button class="btn btn-primary" (click)="LockDataItem()">Lock</button>
+                                <button class="btn btn-primary" (click)="()">Unlock</button>
+                                <button class="btn btn-primary" (click)="()">Save</button>
+                                <button class="btn btn-danger " (click)="()" routerLink='/item'>Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <br />
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <div class="row">
+                                <form class="form-horizontal">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="ItemCode" class="control-label col-sm-4">Item Code</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="ItemCode" name="ItemCode" id="ItemCode" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="BarCode" class="control-label col-sm-4">Bar Code(SKU)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="BarCode" name="BarCode" id="BarCode" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ItemDescription" class="control-label col-sm-4">Item Description</label>
+                                            <div class="col-sm-8">
+                                                <textarea type="text" [(ngModel)]="ItemDescription" name="ItemDescription" id="ItemDescription" class="form-control" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Alias" class="control-label col-sm-4">Alias</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="Alias" name="Alias" id="Alias" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Category" class="control-label col-sm-4">Category</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="Category" name="Category" id="Category" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Unit" class="control-label col-sm-4">Unit</label>
+                                            <div class="col-sm-8">
+                                                <wj-combo-box [itemsSource]="listUnitObservableArray" id="Unit" [placeholder]="'Select Unit'" [displayMemberPath]="'Unit'"
+                                                    [(selectedIndex)]="unitSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                    (selectedIndexChanged)="cboUnitSelectedIndexChanged()" style="width: 100%; border-radius: 0px;">
+                                                </wj-combo-box>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="DefaultSupplier" class="control-label col-sm-4">Default Supplier</label>
+                                            <div class="col-sm-8">
+                                                <wj-combo-box [itemsSource]="listSupplierObservableArray" id="DefaultSupplier" [placeholder]="'Select Supplier'" [displayMemberPath]="'Supplier'"
+                                                    [(selectedIndex)]="supplierSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                    (selectedIndexChanged)="cboSupplierSelectedIndexChanged()" style="width: 100%; border-radius: 0px;">
+                                                </wj-combo-box>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Cost" class="control-label col-sm-4">Cost</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="Cost" [(ngModel)]="Cost" name="Cost" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="MarkUp" class="control-label col-sm-4">Mark up ( % )</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="MarkUp" id="MarkUp" name="MarkUp" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Price" class="control-label col-sm-4">Price</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="Price" id="Price" name="Price" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="StockLevel" class="control-label col-sm-4">Stock Level Quantity</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="StockLevel" id="StockLevel" name="StockLevel" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="OnHand" class="control-label col-sm-4">On-hand Quantity</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="OnHand" id="OnHand" name="OnHand" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Inventory" class="control-label col-sm-4">Inventory</label>
+                                            <div class="col-sm-8">
+                                                <input type="checkbox" [(ngModel)]="Inventory" id="Inventory" name="Inventory" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Package" class="control-label col-sm-4">Package</label>
+                                            <div class="col-sm-8">
+                                                <input type="checkbox" [(ngModel)]="Package" id="Package" name="Package" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ExpDate" class="control-label col-sm-4">Expiry Date</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="ExpDate" id="ExpDate" name="ExpDate" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="LotNumber" class="control-label col-sm-4">Lot Number</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="LotNumber" id="LotNumber" name="LotNumber" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Remarks" class="control-label col-sm-4">Remarks</label>
+                                            <div class="col-sm-8">
+                                                <textarea type="text" [(ngModel)]="Remarks" id="Remarks" name="Remarks" class="form-control" rows="15"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <h3>Menu 1</h3>
+                            <p>Some content in menu 1.</p>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <h3>Menu 2</h3>
+                            <p>Some content in menu 2.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<shared-footer></shared-footer>
+<button id="btn-hidden-lock-item" [hidden]="true" (click)="startLoading()"></button>
+<button id="set-value-fields" [hidden]="true" (click)="setFieldValuesUnit()"></button>

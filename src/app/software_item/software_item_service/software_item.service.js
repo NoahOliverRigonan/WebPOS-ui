@@ -25,7 +25,7 @@ var Software_Item_Service = (function () {
     //MSTTABLE
     Software_Item_Service.prototype.getListOfItem = function () {
         var itemObsevableArray = new wijmo.collections.ObservableArray();
-        var url = "http://localhost:2558/api/item/list/";
+        var url = "http://localhost:2558/api/item/list/1";
         this.http.get(url, this.options).subscribe(function (response) {
             var results = response.json();
             if (results.length > 0) {
@@ -63,7 +63,11 @@ var Software_Item_Service = (function () {
                         IsLocked: results[i].IsLocked,
                         DefaultKitchenReport: results[i].DefaultKitchenReport,
                         IsPackage: results[i].IsPackage,
+                        listUnit: results[i].listUnit.Unit,
                     });
+                    for (var j = 0; j < results[i].listUnit.length; j++) {
+                        console.log(results[i].listUnit[j].Unit + " - " + (j + 1));
+                    }
                 }
             }
         });
