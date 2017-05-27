@@ -13,16 +13,17 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" id="itemList">
             <div class="panel panel-default">
                 <div class="panel-heading">
+                    <button type="" [hidden]="true" align="center" id="spin" ><i class="fa fa-spinner" id=""></i></button>
                     <div class="row">
                         <div class="col-sm-10">
                             <h4><i class="fa fa-cube fa-1x"></i> <strong>Item List</strong></h4>
                         </div>
                         <div class="col-sm-2" align="right">
-                                <button class="btn btn-primary btn-lg " routerLink='/itemdetail'>Add</button>
-                                <button class="btn btn-danger btn-lg " routerLink='/dashboard'>Close</button>
+                            <button class="btn btn-primary btn-lg " (click)="btnAddItem()">Add</button>
+                            <button class="btn btn-danger btn-lg " routerLink='/dashboard'>Close</button>
                         </div>
                     </div>
                 </div>
@@ -30,23 +31,23 @@
                     <wj-flex-grid [itemsSource]="itemCollectionView" [selectionMode]="3" [headersVisibility]="1">
                         <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                <button class="btn btn-primary btn-xs btn-md btn-block" (click)="btnEditLead()">
+                                <button class="btn btn-primary btn-xs btn-md btn-block" (click)="btnEditItem()">
                                                     <i class="fa fa-edit fa-fw"></i> Edit
                                                 </button>
                             </template>
                         </wj-flex-grid-column>
                         <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                <button class="btn btn-danger btn-xs btn-block" (click)="btnEditLead()">
+                                <button class="btn btn-danger btn-xs btn-block" (click)="btnDeleteItem()">
                                                     <i class="fa fa-trash fa-fw"></i> Delete
                                                 </button>
                             </template>
                         </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Code'" [binding]="'ItemCode'" [isReadOnly]="true" [width]="200">
+                        <wj-flex-grid-column [header]="'Code'" [binding]="'ItemCode'" [isReadOnly]="true" [width]="250">
                         </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Description'" [binding]="'ItemDescription'" [isReadOnly]="true" [width]="250">
+                        <wj-flex-grid-column [header]="'Description'" [binding]="'ItemDescription'" [isReadOnly]="true" [width]="350">
                         </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Category'" [binding]="'Category'" [isReadOnly]="true" [width]="220">
+                        <wj-flex-grid-column [header]="'Category'" [binding]="'Category'" [isReadOnly]="true" [width]="320">
                         </wj-flex-grid-column>
                         <wj-flex-grid-column [header]="'Bar Code'" [binding]="'BarCode'" [isReadOnly]="true" [width]="200">
                         </wj-flex-grid-column>
@@ -87,5 +88,31 @@
         </div>
     </div>
 </div>
+
+<!--DELETE MODAL WARNING -->
+<div class="modal fade" id="delete-modal-warning" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content panel-danger">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <h2><i class="fa fa-exclamation-triangle"></i></h2>
+                </h4>
+            </div>
+            <div class="modal-body panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Cant delete Locked Item</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <button id="load-item-data" (click)="getTable()" [hidden]="true"></button>
+<button id="refreshGrid" (click)="getListItem()" [hidden]="true"></button>
+<button id="delete-modal-warning-id" [hidden]="true" data-toggle="modal" data-target="#delete-modal-warning"></button>
 <shared-footer></shared-footer>

@@ -11,6 +11,10 @@ var platform_browser_1 = require("@angular/platform-browser");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
+var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
+var ng2_toastr_2 = require("ng2-toastr/ng2-toastr");
+var ng2_toastr_3 = require("ng2-toastr/ng2-toastr");
+var animations_1 = require("@angular/platform-browser/animations");
 var wjFlexGrid = require("wijmo/wijmo.angular2.grid");
 var wjInput = require("wijmo/wijmo.angular2.input");
 // components
@@ -48,12 +52,16 @@ var software_settings_component_1 = require("./software_settings/software_settin
 var software_posreport_component_1 = require("./software_posreport/software_posreport_component/software_posreport.component");
 var software_80mmreport_component_1 = require("./software_80mmreport/software_80mmreport_component/software_80mmreport.component");
 var software_utilities_component_1 = require("./software_utilities/software_utilities_component/software_utilities.component");
+//SOFTWARE DETAIL
 var software_itemdetail_component_1 = require("./software_itemdetail/software_itemdetail_component/software_itemdetail.component");
-// services
+var software_discountdetail_component_1 = require("./software_discountdetail/software_discountdetail_component/software_discountdetail.component");
+// SERVICES
 var security_login_service_1 = require("./security_login/security_login_service/security_login.service");
 var software_postouch_service_1 = require("./software_postouch/software_postouch_service/software_postouch.service");
 var software_item_service_1 = require("./software_item/software_item_service/software_item.service");
 var software_itemdetail_service_1 = require("./software_itemdetail/software_itemdetail_service/software_itemdetail.service");
+var software_discount_service_1 = require("./software_discount/software_discount_service/software_discount.service");
+var software_discountdetail_service_1 = require("./software_discountdetail/software_discountdetail_service/software_discountdetail.service");
 // paths and Routes
 var appRoutes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -89,7 +97,9 @@ var appRoutes = [
     { path: 'posreport', component: software_posreport_component_1.Software_Posreport_Component },
     { path: '80mmreport', component: software_80mmreport_component_1.Software_80mmreport_Component },
     { path: 'utilities', component: software_utilities_component_1.Software_Utilities_Component },
-    { path: 'itemdetail', component: software_itemdetail_component_1.Software_Itemdetail_Component },
+    //POS13 SOFTWARE DETAIL
+    { path: 'itemdetail/:id', component: software_itemdetail_component_1.Software_Itemdetail_Component },
+    { path: 'discountdetail', component: software_discountdetail_component_1.Software_Discountdetail_Component },
 ];
 // ng_modules
 var AppModule = (function () {
@@ -103,7 +113,9 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             router_1.RouterModule.forRoot(appRoutes),
             forms_1.FormsModule,
-            http_1.HttpModule
+            http_1.HttpModule,
+            ng2_toastr_2.ToastModule,
+            animations_1.BrowserAnimationsModule
         ],
         declarations: [
             wjFlexGrid.WjFlexGrid,
@@ -145,13 +157,20 @@ AppModule = __decorate([
             software_posreport_component_1.Software_Posreport_Component,
             software_80mmreport_component_1.Software_80mmreport_Component,
             software_utilities_component_1.Software_Utilities_Component,
-            software_itemdetail_component_1.Software_Itemdetail_Component
+            // SOFTWARE DETAIL 
+            software_itemdetail_component_1.Software_Itemdetail_Component,
+            software_discountdetail_component_1.Software_Discountdetail_Component
         ],
         providers: [
             security_login_service_1.Security_Login_Service,
             software_postouch_service_1.Software_Postouch_Service,
             software_item_service_1.Software_Item_Service,
-            software_itemdetail_service_1.Software_Itemdetail_Service
+            software_discount_service_1.Software_Discount_Service,
+            software_discountdetail_service_1.Software_Discountdetail_Service,
+            ng2_toastr_1.ToastsManager,
+            ng2_toastr_3.ToastOptions,
+            //SOFTWARE DETAIL SERVICE PROVIDERS
+            software_itemdetail_service_1.Software_Itemdetail_Service,
         ],
         bootstrap: [
             app_component_1.AppComponent

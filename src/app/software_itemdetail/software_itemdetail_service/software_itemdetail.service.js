@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
+// import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 var Software_Itemdetail_Service = (function () {
     function Software_Itemdetail_Service(router, http) {
         this.router = router;
@@ -22,6 +23,7 @@ var Software_Itemdetail_Service = (function () {
         });
         this.options = new http_1.RequestOptions({ headers: this.headers });
     }
+    // UPLOAD IMAGE
     // public getUnittById(unitId: number) {
     //     let url = "http://localhost:2558/api/item/list/1" + unitId;
     //     this.http.get(url, this.options).subscribe(
@@ -55,11 +57,13 @@ var Software_Itemdetail_Service = (function () {
                     SalesAccountId: results[0].SalesAccountId,
                     AssetAccountId: results[0].AssetAccountId,
                     CostAccountId: results[0].CostAccountId,
+                    Account: results[0].Account,
                     InTaxId: results[0].InTaxId,
                     OutTaxId: results[0].OutTaxId,
                     UnitId: results[0].UnitId,
                     Unit: results[0].Unit,
                     DefaultSupplierId: results[0].DefaultSupplierId,
+                    DefaultSupplier: results[0].DefaultSupplier,
                     Cost: results[0].Cost,
                     MarkUp: results[0].MarkUp,
                     Price: results[0].Price,
@@ -78,11 +82,14 @@ var Software_Itemdetail_Service = (function () {
                     DefaultKitchenReport: results[0].DefaultKitchenReport,
                     IsPackage: results[0].IsPackage,
                     listUnit: results[0].listUnit,
-                    listSupplier: results[0].listSupplier
+                    listSupplier: results[0].listSupplier,
+                    listSalesAccount: results[0].listSalesAccount,
+                    listAssetAccount: results[0].listAssetAccount,
+                    listCostAccount: results[0].listCostAccount,
+                    listPurchaseVatTax: results[0].listPurchaseVatTax,
+                    listSalesVatTax: results[0].listSalesVatTax
                 });
-                setTimeout(function () {
-                    document.getElementById("set-value-fields").click();
-                }, 100);
+                document.getElementById("set-value-fields").click();
             }
             else {
                 console.log("No data");
@@ -92,24 +99,12 @@ var Software_Itemdetail_Service = (function () {
     };
     //http://localhost:2558/api/item/post
     //ADD ITEM
-    //
-    Software_Itemdetail_Service.prototype.postSupportData = function (supportObject, toastr) {
-        var _this = this;
-        var url = "http://localhost:22626/api/support/post";
-        this.http.post(url, JSON.stringify(supportObject), this.options).subscribe(function (response) {
-            if (response.json() > 0) {
-                _this.toastr.success('', 'Save Successful');
-                setTimeout(function () {
-                    document.getElementById("btn-hidden-support-detail-modal").click();
-                    _this.router.navigate(['/supportDetail', response.json()]);
-                }, 1000);
-            }
-            else {
-                _this.toastr.error('', 'Something`s went wrong!');
-                document.getElementById("btnSaveSupport").innerHTML = "<i class='fa fa-save fa-fw'></i> Save";
-                document.getElementById("btnSaveSupport").disabled = false;
-                document.getElementById("btnCloseSupport").disabled = false;
-            }
+    // toastr: ToastsManager
+    // update ITEM
+    Software_Itemdetail_Service.prototype.putItemData = function (id, itemObject) {
+        var url = "http://localhost:2558/api/item/put/" + id;
+        this.http.put(url, JSON.stringify(itemObject), this.options).subscribe(function (response) {
+            console.log('', 'Save Successful');
         }, function (error) {
             alert("Error");
         });

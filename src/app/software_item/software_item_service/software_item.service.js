@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
+var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_Item_Service = (function () {
-    function Software_Item_Service(router, http) {
+    function Software_Item_Service(router, http, toastr) {
         this.router = router;
         this.http = http;
+        this.toastr = toastr;
         //  Global Variables
         this.headers = new http_1.Headers({
             'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
@@ -25,7 +27,7 @@ var Software_Item_Service = (function () {
     //MSTTABLE
     Software_Item_Service.prototype.getListOfItem = function () {
         var itemObsevableArray = new wijmo.collections.ObservableArray();
-        var url = "http://localhost:2558/api/item/list/1";
+        var url = "http://localhost:2558/api/item/list";
         this.http.get(url, this.options).subscribe(function (response) {
             var results = response.json();
             if (results.length > 0) {
@@ -63,22 +65,47 @@ var Software_Item_Service = (function () {
                         IsLocked: results[i].IsLocked,
                         DefaultKitchenReport: results[i].DefaultKitchenReport,
                         IsPackage: results[i].IsPackage,
-                        listUnit: results[i].listUnit.Unit,
                     });
-                    for (var j = 0; j < results[i].listUnit.length; j++) {
-                        console.log(results[i].listUnit[j].Unit + " - " + (j + 1));
-                    }
                 }
             }
         });
         return itemObsevableArray;
+    };
+    // delete ITEM
+    Software_Item_Service.prototype.deleteItem = function (id, toastr) {
+        var _this = this;
+        var url = "http://localhost:2558/api/item/delete/" + id;
+        this.http.delete(url, this.options).subscribe(function (response) {
+            _this.toastr.success('', 'Successfully Deleted');
+            setTimeout(function () {
+                document.getElementById("refreshGrid").click();
+            }, 1000);
+        }, function (error) {
+            document.getElementById("delete-modal-warning-id").click();
+        });
+    };
+    Software_Item_Service.prototype.postItemData = function (itemObject) {
+        var _this = this;
+        var url = "http://localhost:2558/api/item/post";
+        this.http.post(url, JSON.stringify(itemObject), this.options).subscribe(function (response) {
+            var results = response.json();
+            if (results > 0) {
+                _this.router.navigate(['/itemdetail', results]);
+            }
+            else {
+                alert("Error");
+            }
+        }, function (error) {
+            alert("Error");
+        });
     };
     return Software_Item_Service;
 }());
 Software_Item_Service = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [router_1.Router,
-        http_1.Http])
+        http_1.Http, typeof (_a = typeof ng2_toastr_1.ToastsManager !== "undefined" && ng2_toastr_1.ToastsManager) === "function" && _a || Object])
 ], Software_Item_Service);
 exports.Software_Item_Service = Software_Item_Service;
+var _a;
 //# sourceMappingURL=software_item.service.js.map

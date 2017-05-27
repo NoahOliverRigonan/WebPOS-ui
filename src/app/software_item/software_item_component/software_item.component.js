@@ -11,11 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var software_item_service_1 = require("../software_item_service/software_item.service");
 var router_1 = require("@angular/router");
+var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_Item_Component = (function () {
-    function Software_Item_Component(router, softwareItemService) {
+    function Software_Item_Component(router, softwareItemService, toastr, vcRef) {
         this.router = router;
         this.softwareItemService = softwareItemService;
+        this.toastr = toastr;
+        this.vcRef = vcRef;
+        this.toastr.setRootViewContainerRef(vcRef);
     }
+    Software_Item_Component.prototype.btnAddItem = function () {
+        if (this.lock != true) {
+            this.softwareItemService.postItemData(null);
+        }
+    };
     Software_Item_Component.prototype.getListItem = function () {
         this.itemCollectionView = new wijmo.collections.CollectionView(this.softwareItemService.getListOfItem());
         this.itemCollectionView.pageSize = 15;
@@ -40,6 +49,24 @@ var Software_Item_Component = (function () {
         this.itemCollectionView.moveToLastPage();
         this.indexItem = (this.itemCollectionView.pageIndex + 1) + " / " + this.itemCollectionView.pageCount;
     };
+    Software_Item_Component.prototype.btnEditItem = function () {
+        var currentSelectedItem = this.itemCollectionView.currentItem;
+        this.router.navigate(['/itemdetail', currentSelectedItem.Id]);
+    };
+    Software_Item_Component.prototype.btnDeleteItem = function () {
+        var toastr;
+        var currentSelectedItem = this.itemCollectionView.currentItem;
+        this.softwareItemService.deleteItem(currentSelectedItem.Id, toastr);
+    };
+    // // activity delete confirmation click
+    // public btnActivityDeleteConfirmationClick() {
+    //     this.startLoading();
+    //     let toastr: ToastsManager;
+    //     (<HTMLButtonElement>document.getElementById("btnActivityDeleteConfirmation")).innerHTML = "<i class='fa fa-spinner fa-spin fa-fw'></i> Deleting";
+    //     (<HTMLButtonElement>document.getElementById("btnActivityDeleteConfirmation")).disabled = true;
+    //     (<HTMLButtonElement>document.getElementById("btnActivityCloseDeleteConfirmation")).disabled = true;
+    //     this.activityService.deleteActivityData(this.activityId, toastr);
+    // }
     Software_Item_Component.prototype.ngOnInit = function () {
         if (!localStorage.getItem('access_token')) {
             this.router.navigate(['security_login']);
@@ -51,10 +78,11 @@ var Software_Item_Component = (function () {
 Software_Item_Component = __decorate([
     core_1.Component({
         selector: 'software_item',
-        templateUrl: 'app/software_item/software_item_template/software_item.html'
+        templateUrl: 'app/software_item/software_item_template/software_item.html',
     }),
     __metadata("design:paramtypes", [router_1.Router,
-        software_item_service_1.Software_Item_Service])
+        software_item_service_1.Software_Item_Service, typeof (_a = typeof ng2_toastr_1.ToastsManager !== "undefined" && ng2_toastr_1.ToastsManager) === "function" && _a || Object, core_1.ViewContainerRef])
 ], Software_Item_Component);
 exports.Software_Item_Component = Software_Item_Component;
+var _a;
 //# sourceMappingURL=software_item.component.js.map

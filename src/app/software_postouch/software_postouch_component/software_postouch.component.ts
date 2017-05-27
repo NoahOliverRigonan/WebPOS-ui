@@ -111,7 +111,7 @@ export class Software_Postouch_Component implements OnInit {
         this.tableIndex = (this.tableGroupCollectionView.pageIndex + 1) + " / " + this.tableGroupCollectionView.pageCount;
     }
 
-    public setCurrentDate() {
+    public setCurrentDate() : Date {
         return new Date();
     }
 
@@ -123,7 +123,7 @@ export class Software_Postouch_Component implements OnInit {
         this.getTableGroup();
 
         setInterval(() => {
-            (<HTMLButtonElement>document.getElementById("currentDateTime")).innerHTML = this.setCurrentDate().toDateString() + " " + this.setCurrentDate().toLocaleTimeString();
+            this.setCurrentDate()?(<HTMLButtonElement>document.getElementById("currentDateTime")).innerHTML = this.setCurrentDate().toDateString() + " || " + this.setCurrentDate().toLocaleTimeString():"NA"; 
         }, 1000);
     }
 

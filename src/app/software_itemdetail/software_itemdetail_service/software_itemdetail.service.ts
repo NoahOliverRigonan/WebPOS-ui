@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions } from '@angular/http';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+// import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Injectable()
 export class Software_Itemdetail_Service {
@@ -15,7 +16,10 @@ export class Software_Itemdetail_Service {
     constructor(
         private router: Router,
         private http: Http,
+        // private toastr: ToastsManager
     ) { }
+
+    // UPLOAD IMAGE
 
     // public getUnittById(unitId: number) {
     //     let url = "http://localhost:2558/api/item/list/1" + unitId;
@@ -32,8 +36,7 @@ export class Software_Itemdetail_Service {
     //         }
     //     );
     // }
-    
-    
+
     //GET ITEM UNIT
     public getItemDetail(Id: number): wijmo.collections.ObservableArray {
         let itemObservableArray = new wijmo.collections.ObservableArray();
@@ -53,11 +56,13 @@ export class Software_Itemdetail_Service {
                         SalesAccountId: results[0].SalesAccountId,
                         AssetAccountId: results[0].AssetAccountId,
                         CostAccountId: results[0].CostAccountId,
+                        Account: results[0].Account,
                         InTaxId: results[0].InTaxId,
                         OutTaxId: results[0].OutTaxId,
                         UnitId: results[0].UnitId,
                         Unit: results[0].Unit,
                         DefaultSupplierId: results[0].DefaultSupplierId,
+                        DefaultSupplier: results[0].DefaultSupplier,
                         Cost: results[0].Cost,
                         MarkUp: results[0].MarkUp,
                         Price: results[0].Price,
@@ -76,43 +81,36 @@ export class Software_Itemdetail_Service {
                         DefaultKitchenReport: results[0].DefaultKitchenReport,
                         IsPackage: results[0].IsPackage,
                         listUnit: results[0].listUnit,
-                        listSupplier: results[0].listSupplier
+                        listSupplier: results[0].listSupplier,
+                        listSalesAccount: results[0].listSalesAccount,
+                        listAssetAccount: results[0].listAssetAccount,
+                        listCostAccount: results[0].listCostAccount,
+                        listPurchaseVatTax: results[0].listPurchaseVatTax,
+                        listSalesVatTax: results[0].listSalesVatTax
                     });
-
-                    setTimeout(() => {
-                        (<HTMLButtonElement>document.getElementById("set-value-fields")).click();
-                    }, 100);
+                    (<HTMLButtonElement>document.getElementById("set-value-fields")).click();
 
                 } else {
                     console.log("No data");
                 }
             }
         );
-
         return itemObservableArray;
     }
 
 
     //http://localhost:2558/api/item/post
     //ADD ITEM
-    //
+    // toastr: ToastsManager
 
-        public postSupportData(supportObject: Object, toastr: ToastsManager) {
-        let url = "http://localhost:22626/api/support/post";
-        this.http.post(url, JSON.stringify(supportObject), this.options).subscribe(
+   
+
+        // update ITEM
+    public putItemData(id: number, itemObject: Object) {
+        let url = "http://localhost:2558/api/item/put/" + id;
+        this.http.put(url, JSON.stringify(itemObject), this.options).subscribe(
             response => {
-                if (response.json() > 0) {
-                    this.toastr.success('', 'Save Successful');
-                    setTimeout(() => {
-                        document.getElementById("btn-hidden-support-detail-modal").click();
-                        this.router.navigate(['/supportDetail', response.json()]);
-                    }, 1000);
-                } else {
-                    this.toastr.error('', 'Something`s went wrong!');
-                    (<HTMLButtonElement>document.getElementById("btnSaveSupport")).innerHTML = "<i class='fa fa-save fa-fw'></i> Save";
-                    (<HTMLButtonElement>document.getElementById("btnSaveSupport")).disabled = false;
-                    (<HTMLButtonElement>document.getElementById("btnCloseSupport")).disabled = false;
-                }
+                console.log('', 'Save Successful');
             },
             error => {
                 alert("Error");

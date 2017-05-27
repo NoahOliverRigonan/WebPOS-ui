@@ -110,7 +110,7 @@ var Software_Postouch_Component = (function () {
         // this.getTableSale();
         this.getTableGroup();
         setInterval(function () {
-            document.getElementById("currentDateTime").innerHTML = _this.setCurrentDate().toDateString() + " " + _this.setCurrentDate().toLocaleTimeString();
+            _this.setCurrentDate() ? document.getElementById("currentDateTime").innerHTML = _this.setCurrentDate().toDateString() + " || " + _this.setCurrentDate().toLocaleTimeString() : "NA";
         }, 1000);
     };
     Software_Postouch_Component.prototype.btnTableGroup1Click = function () {

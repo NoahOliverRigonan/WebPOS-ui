@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions } from '@angular/http';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Injectable()
 export class Software_Item_Service {
@@ -15,13 +15,14 @@ export class Software_Item_Service {
     constructor(
         private router: Router,
         private http: Http,
+        private toastr: ToastsManager
     ) { }
 
 
     //MSTTABLE
     public getListOfItem(): wijmo.collections.ObservableArray {
         let itemObsevableArray = new wijmo.collections.ObservableArray();
-        let url = "http://localhost:2558/api/item/list/1";
+        let url = "http://localhost:2558/api/item/list";
         this.http.get(url, this.options).subscribe(
             response => {
                 var results = response.json();
@@ -60,16 +61,52 @@ export class Software_Item_Service {
                             IsLocked: results[i].IsLocked,
                             DefaultKitchenReport: results[i].DefaultKitchenReport,
                             IsPackage: results[i].IsPackage,
-                            listUnit: results[i].listUnit.Unit,
+                            // listUnit: results[i].listUnit.Unit,
                         });
 
-                        for (var j = 0; j < results[i].listUnit.length; j++) {
-                            console.log(results[i].listUnit[j].Unit + " - " + (j + 1));
-                        }
+                        // for (var j = 0; j < results[i].listUnit.length; j++) {
+                        //     console.log(results[i].listUnit[j].Unit + " - " + (j + 1));
+                        // }
                     }
                 }
             }
         );
         return itemObsevableArray;
     }
+
+
+    // delete ITEM
+    public deleteItem(id: number, toastr: ToastsManager) {
+        let url = "http://localhost:2558/api/item/delete/" + id;
+        this.http.delete(url, this.options).subscribe(
+            response => {
+                this.toastr.success('', 'Successfully Deleted');
+                setTimeout(() => {
+                    (<HTMLButtonElement>document.getElementById("refreshGrid")).click();
+                }, 1000)
+            },
+            error => {
+                (<HTMLButtonElement>document.getElementById("delete-modal-warning-id")).click();
+            }
+        )
+    }
+
+    public postItemData(itemObject: Object) {
+        let url = "http://localhost:2558/api/item/post";
+        this.http.post(url, JSON.stringify(itemObject), this.options).subscribe(
+            response => {
+                var results = response.json();
+                if (results > 0) {
+                    this.router.navigate(['/itemdetail', results]);
+                } else {
+                    alert("Error");
+                }
+            },
+            error => {
+                alert("Error");
+            }
+        )
+    }
+
+
 }
