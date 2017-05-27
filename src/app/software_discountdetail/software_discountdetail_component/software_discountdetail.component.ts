@@ -22,25 +22,25 @@ export class Software_Discountdetail_Component implements OnInit {
     //Other Methods
     private itemId: number;
     //DISCOUNT ITEM FIELDS
-    private Discount : String;
-    private DiscountRate : number;
-    private IsVatExempt : Boolean;
-    private IsDateScheduled: Boolean;
-    private DateStart  : Date;
-    private DateEnd : Date;
-    private IsDayScheduled: Boolean;
-    private DayMon: Boolean;
-    private DayTue: Boolean;
-    private DayWed: Boolean;
-    private DayThu: Boolean;
-    private DayFri: Boolean;
-    private DaySat: Boolean;
-    private DaySun: Boolean;
-    private EntryUserId : number;
-    private EntryDateTime: Date;
-    private UpdateUserId : number;
-    private UpdateDateTime: Date;
-    private IsLocked: Boolean;
+    // private Discount : String;
+    // private DiscountRate : number;
+    // private IsVatExempt : Boolean;
+    // private IsDateScheduled: Boolean;
+    // private DateStart  : Date;
+    // private DateEnd : Date;
+    // private IsDayScheduled: Boolean;
+    // private DayMon: Boolean;
+    // private DayTue: Boolean;
+    // private DayWed: Boolean;
+    // private DayThu: Boolean;
+    // private DayFri: Boolean;
+    // private DaySat: Boolean;
+    // private DaySun: Boolean;
+    // private EntryUserId : number;
+    // private EntryDateTime: Date;
+    // private UpdateUserId : number;
+    // private UpdateDateTime: Date;
+    // private IsLocked: Boolean;
 
     constructor(
         private router: Router,
@@ -69,9 +69,6 @@ export class Software_Discountdetail_Component implements OnInit {
                 this.listOfItemDescriptionCollectionView.items[0].listOfItemDescription = this.itemDiscountCollectionView.items[0].listOfItemDescription;
             }
 
-            
-            this.DateStart = this.itemDiscountCollectionView.items[0].DateStart;
-            this.DateEnd = this.itemDiscountCollectionView.items[0].DateEnd;
         }
     }
 

@@ -45,8 +45,9 @@ Software_Discount_Component = __decorate([
         templateUrl: 'app/software_discount/software_discount_template/software_discount.html'
     }),
     __metadata("design:paramtypes", [router_1.Router,
-        software_discount_service_1.Software_Discount_Service, typeof (_a = typeof ng2_toastr_1.ToastsManager !== "undefined" && ng2_toastr_1.ToastsManager) === "function" && _a || Object, core_1.ViewContainerRef])
+        software_discount_service_1.Software_Discount_Service,
+        ng2_toastr_1.ToastsManager,
+        core_1.ViewContainerRef])
 ], Software_Discount_Component);
 exports.Software_Discount_Component = Software_Discount_Component;
-var _a;
 //# sourceMappingURL=software_discount.component.js.map

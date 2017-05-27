@@ -81,8 +81,9 @@ Software_Item_Component = __decorate([
         templateUrl: 'app/software_item/software_item_template/software_item.html',
     }),
     __metadata("design:paramtypes", [router_1.Router,
-        software_item_service_1.Software_Item_Service, typeof (_a = typeof ng2_toastr_1.ToastsManager !== "undefined" && ng2_toastr_1.ToastsManager) === "function" && _a || Object, core_1.ViewContainerRef])
+        software_item_service_1.Software_Item_Service,
+        ng2_toastr_1.ToastsManager,
+        core_1.ViewContainerRef])
 ], Software_Item_Component);
 exports.Software_Item_Component = Software_Item_Component;
-var _a;
 //# sourceMappingURL=software_item.component.js.map

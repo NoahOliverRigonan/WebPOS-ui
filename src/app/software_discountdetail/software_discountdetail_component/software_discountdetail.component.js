@@ -12,6 +12,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var software_discountdetail_service_1 = require("../software_discountdetail_service/software_discountdetail.service");
 var Software_Discountdetail_Component = (function () {
+    //DISCOUNT ITEM FIELDS
     function Software_Discountdetail_Component(router, softwareDiscountItemService) {
         this.router = router;
         this.softwareDiscountItemService = softwareDiscountItemService;
@@ -34,8 +35,6 @@ var Software_Discountdetail_Component = (function () {
             if (this.itemDiscountCollectionView.items.length > 0) {
                 this.listOfItemDescriptionCollectionView.items[0].listOfItemDescription = this.itemDiscountCollectionView.items[0].listOfItemDescription;
             }
-            this.DateStart = this.itemDiscountCollectionView.items[0].DateStart;
-            this.DateEnd = this.itemDiscountCollectionView.items[0].DateEnd;
         }
     };
     Software_Discountdetail_Component.prototype.cboItemCodeSelectedIndex = function () {

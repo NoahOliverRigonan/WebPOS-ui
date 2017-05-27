@@ -98,8 +98,8 @@ var Software_Discount_Service = (function () {
 Software_Discount_Service = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [router_1.Router,
-        http_1.Http, typeof (_a = typeof ng2_toastr_1.ToastsManager !== "undefined" && ng2_toastr_1.ToastsManager) === "function" && _a || Object])
+        http_1.Http,
+        ng2_toastr_1.ToastsManager])
 ], Software_Discount_Service);
 exports.Software_Discount_Service = Software_Discount_Service;
-var _a;
 //# sourceMappingURL=software_discount.service.js.map

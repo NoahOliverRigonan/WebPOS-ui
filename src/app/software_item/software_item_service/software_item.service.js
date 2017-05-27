@@ -104,8 +104,8 @@ var Software_Item_Service = (function () {
 Software_Item_Service = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [router_1.Router,
-        http_1.Http, typeof (_a = typeof ng2_toastr_1.ToastsManager !== "undefined" && ng2_toastr_1.ToastsManager) === "function" && _a || Object])
+        http_1.Http,
+        ng2_toastr_1.ToastsManager])
 ], Software_Item_Service);
 exports.Software_Item_Service = Software_Item_Service;
-var _a;
 //# sourceMappingURL=software_item.service.js.map
