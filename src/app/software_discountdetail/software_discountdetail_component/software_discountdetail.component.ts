@@ -70,8 +70,8 @@ export class Software_Discountdetail_Component implements OnInit {
             }
 
             
-            this.DateStart = this.itemCollectionView.items[0].DateStart;
-            this.DateEnd = this.itemCollectionView.items[0].DateEnd;
+            this.DateStart = this.itemDiscountCollectionView.items[0].DateStart;
+            this.DateEnd = this.itemDiscountCollectionView.items[0].DateEnd;
         }
     }
 
@@ -89,34 +89,34 @@ export class Software_Discountdetail_Component implements OnInit {
         (<HTMLButtonElement>document.getElementById("btn-hidden-add-detail-modal")).click();
     }
 
-    public getDiscountItemObjecet(){
+    // public getDiscountItemObjecet(){
 
-        let dataObject = 
-        {
-            Discount:
-            DiscountRate:
-            IsVatExempt:
-            IsDateScheduled:
-            DateStart:
-            DateEnd:
-            IsTimeScheduled:
-            TimeStart:
-            TimeEnd:
-            IsDayScheduled:
-            DayMon:
-            DayTue:
-            DayWed:
-            DayThu:
-            DayFri:
-            DaySat:
-            DaySun:
-            EntryUserId:
-            EntryDateTime:
-            UpdateUserId:
-            UpdateDateTime:
-            IsLocked:
+    //     let dataObject = 
+    //     {
+    //         Discount:
+    //         DiscountRate:
+    //         IsVatExempt:
+    //         IsDateScheduled:
+    //         DateStart:
+    //         DateEnd:
+    //         IsTimeScheduled:
+    //         TimeStart:
+    //         TimeEnd:
+    //         IsDayScheduled:
+    //         DayMon:
+    //         DayTue:
+    //         DayWed:
+    //         DayThu:
+    //         DayFri:
+    //         DaySat:
+    //         DaySun:
+    //         EntryUserId:
+    //         EntryDateTime:
+    //         UpdateUserId:
+    //         UpdateDateTime:
+    //         IsLocked:
 
-        }
+    //     }
 
-    }
+    // }
 }

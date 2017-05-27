@@ -34,8 +34,8 @@ var Software_Discountdetail_Component = (function () {
             if (this.itemDiscountCollectionView.items.length > 0) {
                 this.listOfItemDescriptionCollectionView.items[0].listOfItemDescription = this.itemDiscountCollectionView.items[0].listOfItemDescription;
             }
-            this.DateStart = this.itemCollectionView.items[0].DateStart;
-            this.DateEnd = this.itemCollectionView.items[0].DateEnd;
+            this.DateStart = this.itemDiscountCollectionView.items[0].DateStart;
+            this.DateEnd = this.itemDiscountCollectionView.items[0].DateEnd;
         }
     };
     Software_Discountdetail_Component.prototype.cboItemCodeSelectedIndex = function () {
@@ -48,21 +48,6 @@ var Software_Discountdetail_Component = (function () {
     };
     Software_Discountdetail_Component.prototype.addItemModal = function () {
         document.getElementById("btn-hidden-add-detail-modal").click();
-    };
-    Software_Discountdetail_Component.prototype.getDiscountItemObjecet = function () {
-        var dataObject = {
-            Discount: DiscountRate,
-            IsVatExempt: IsDateScheduled,
-            DateStart: DateEnd,
-            IsTimeScheduled: TimeStart,
-            TimeEnd: IsDayScheduled,
-            DayMon: DayTue,
-            DayWed: DayThu,
-            DayFri: DaySat,
-            DaySun: EntryUserId,
-            EntryDateTime: UpdateUserId,
-            UpdateDateTime: IsLocked
-        };
     };
     return Software_Discountdetail_Component;
 }());
