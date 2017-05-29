@@ -97,7 +97,7 @@ export class Software_Discount_Service {
             },
             error => {
                 setTimeout(()=>{
-                document.innerHTML("Something went wrong");
+                    alert("Err0r");
                 },1000)
             }
         )
