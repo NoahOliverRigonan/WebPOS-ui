@@ -58,7 +58,7 @@ var Software_Item_Component = (function () {
         var currentSelectedItem = this.itemCollectionView.currentItem;
         this.softwareItemService.deleteItem(currentSelectedItem.Id, toastr);
     };
-    // // activity delete confirmation click
+    // activity delete confirmation click
     // public btnActivityDeleteConfirmationClick() {
     //     this.startLoading();
     //     let toastr: ToastsManager;

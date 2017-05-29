@@ -63,21 +63,6 @@ var Software_Discountdetail_Service = (function () {
         });
         return discountItemObservableArray;
     };
-    Software_Discountdetail_Service.prototype.postItemData = function (itemObject) {
-        var _this = this;
-        var url = "http://localhost:2558/api/item/post";
-        this.http.post(url, JSON.stringify(itemObject), this.options).subscribe(function (response) {
-            var results = response.json();
-            if (results > 0) {
-                _this.router.navigate(['/itemdetail', results]);
-            }
-            else {
-                alert("Error");
-            }
-        }, function (error) {
-            alert("Error");
-        });
-    };
     return Software_Discountdetail_Service;
 }());
 Software_Discountdetail_Service = __decorate([

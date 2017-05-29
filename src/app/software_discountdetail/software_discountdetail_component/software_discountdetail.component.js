@@ -13,6 +13,25 @@ var router_1 = require("@angular/router");
 var software_discountdetail_service_1 = require("../software_discountdetail_service/software_discountdetail.service");
 var Software_Discountdetail_Component = (function () {
     //DISCOUNT ITEM FIELDS
+    // private Discount : String;
+    // private DiscountRate : number;
+    // private IsVatExempt : Boolean;
+    // private IsDateScheduled: Boolean;
+    // private DateStart  : Date;
+    // private DateEnd : Date;
+    // private IsDayScheduled: Boolean;
+    // private DayMon: Boolean;
+    // private DayTue: Boolean;
+    // private DayWed: Boolean;
+    // private DayThu: Boolean;
+    // private DayFri: Boolean;
+    // private DaySat: Boolean;
+    // private DaySun: Boolean;
+    // private EntryUserId : number;
+    // private EntryDateTime: Date;
+    // private UpdateUserId : number;
+    // private UpdateDateTime: Date;
+    // private IsLocked: Boolean;
     function Software_Discountdetail_Component(router, softwareDiscountItemService) {
         this.router = router;
         this.softwareDiscountItemService = softwareDiscountItemService;

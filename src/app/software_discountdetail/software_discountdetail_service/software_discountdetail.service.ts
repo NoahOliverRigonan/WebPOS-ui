@@ -64,22 +64,22 @@ export class Software_Discountdetail_Service {
         return discountItemObservableArray;
     }
 
-     public postItemData(itemObject: Object) {
-        let url = "http://localhost:2558/api/item/post";
-        this.http.post(url, JSON.stringify(itemObject), this.options).subscribe(
-            response => {
-                var results = response.json();
-                if (results > 0) {
-                    this.router.navigate(['/itemdetail', results]);
-                } else {
-                    alert("Error");
-                }
-            },
-            error => {
-                alert("Error");
-            }
-        )
-    }
+    //  public postItemData(itemObject: Object) {
+    //     let url = "http://localhost:2558/api/item/post";
+    //     this.http.post(url, JSON.stringify(itemObject), this.options).subscribe(
+    //         response => {
+    //             var results = response.json();
+    //             if (results > 0) {
+    //                 this.router.navigate(['/itemdetail', results]);
+    //             } else {
+    //                 alert("Error");
+    //             }
+    //         },
+    //         error => {
+    //             alert("Error");
+    //         }
+    //     )
+    // }
 
     //http://localhost:2558/api/item/post
     //ADD ITEM

@@ -70,7 +70,7 @@ export class Software_Item_Component implements OnInit {
         this.softwareItemService.deleteItem(currentSelectedItem.Id, toastr);
     }
 
-    // // activity delete confirmation click
+    // activity delete confirmation click
     // public btnActivityDeleteConfirmationClick() {
     //     this.startLoading();
     //     let toastr: ToastsManager;
