@@ -99,7 +99,11 @@ export class Software_Discount_Service {
             },
             error => {
                 setTimeout(()=>{
+<<<<<<< HEAD
                     alert("Error");
+=======
+                    alert("Err0r");
+>>>>>>> 44a6f60e0953111408cbd92eb899707f63cd423e
                 },1000)
             }
         )
