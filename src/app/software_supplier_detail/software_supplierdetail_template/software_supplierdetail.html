@@ -1,0 +1,114 @@
+<div class="section-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postouch-header">
+                    <h1 class="software-h1"><i class="fa fa-cubes"></i> Supplier Detail</h1>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</div>
+<div class="section-heading2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a routerLink="/supplier"> Supplier  </a>                    &nbsp;&nbsp; / &nbsp;&nbsp; Supplier Detail</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-12" align="right">
+                    <div class="">
+                        <button class="btn btn-lg btn-primary" (click)="LockDataItem()">Lock</button>
+                        <button class="btn btn-lg btn-primary">Unlock</button>
+                        <button class="btn btn-lg btn-primary" (click)="btnSaveEditItem()">Save</button>
+                        <button class="btn btn-lg btn-danger " routerLink='/supplier'>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="tab-content">
+                <div id="home">
+                    <div class="row-fluid">
+                        <form class="form-horizontal">
+                            <div class="span6">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Supplier" class="control-label col-sm-4">Supplier</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" [(ngModel)]="Supplier" name="Supplier" id="Supplier" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Address" class="control-label col-sm-4">Address</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" [(ngModel)]="Address" name="Address" id="Address" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="TelephoneNumber" class="control-label col-sm-4">Telephone No.</label>
+                                        <div class="col-sm-8">
+                                            <textarea type="text" [(ngModel)]="TelephoneNumber" name="TelephoneNumber" id="TelephoneNumber" class="form-control" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CellphoneNumber" class="control-label col-sm-4">Cellphone No.</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" [(ngModel)]="CellphoneNumber" name="CellphoneNumber" id="CellphoneNumber" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="FaxNumber" class="control-label col-sm-4">Fax Number</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" [(ngModel)]="FaxNumber" name="FaxNumber" id="FaxNumber" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Unit" class="control-label col-sm-4">Term</label>
+                                        <div class="col-sm-8">
+                                            <wj-combo-box [itemsSource]="listSupplierTermObservableArray" id="Term" [placeholder]="'Select Term'" [displayMemberPath]="'Term'"
+                                                [(selectedIndex)]="supplierTermSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                [selectedValuePath]="'Term'" [(selectedValue)]="termSelectedValue" (selectedIndexChanged)="cboTermSelectedIndexChanged()"
+                                                style="width: 100%; border-radius: 0px;">
+                                            </wj-combo-box>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="TIN" class="control-label col-sm-4">TIN</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" [(ngModel)]="TIN" name="TIN" id="TIN" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="DefaultSupplier" class="control-label col-sm-4">Account</label>
+                                        <div class="col-sm-8">
+                                            <wj-combo-box [itemsSource]="listSupplierAccountObservableArray" id="Account" [placeholder]="'Select Account'" [displayMemberPath]="'Account'"
+                                                [(selectedIndex)]="supplierAccountSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                [selectedValuePath]="'Account'" [(selectedValue)]="accountSelectedValue" (selectedIndexChanged)="cboAccountSelectedIndexChanged()"
+                                                style="width: 100%; border-radius: 0px;">
+                                            </wj-combo-box>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+        </div>
+    </div>
+</div>
+<shared-footer></shared-footer>
+<button id="btn-hidden-lock-item" [hidden]="true" (click)="startLoading()"></button>
+<button id="set-value-fields" [hidden]="true" (click)="setFieldValuesUnit()"></button>
+<button id="refreshGrid" (click)="getSupplier()" [hidden]="true"></button>

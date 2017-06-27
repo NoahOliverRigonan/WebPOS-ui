@@ -43,6 +43,12 @@ var Software_Postouch_Service = (function () {
                 var length_1 = (results.length - 1) + 5;
                 var fixIndex = 5;
                 var fixIndexValue = 5;
+                var tableGroudIdDineIn = results[0].Id;
+                var tableGroudIdWalkIn = results[1].Id;
+                var tableGroudIdDelivery = results[2].Id;
+                var tableGroudIdDineTableGroup = results[0].TableGroup;
+                var tableGroudIdWalkInTableGroup = results[1].TableGroup;
+                var tableGroudIdDeliveryTableGroup = results[2].TableGroup;
                 for (var i = 0; i <= (results.length - 1) + 5; i++) {
                     if (fixIndex == i) {
                         if ((i - fixIndexValue) + 5 <= length_1) {
@@ -105,8 +111,14 @@ var Software_Postouch_Service = (function () {
                             tableGroup5Id: tableGroup5Id,
                             tableGroup5: tableGroup5,
                             tableGroup6Id: tableGroup6Id,
-                            tableGroup6: tableGroup6
+                            tableGroup6: tableGroup6,
                         });
+                        if (tableGroudIdWalkIn == 2) {
+                            document.getElementById("walkIn").innerHTML = tableGroudIdWalkInTableGroup;
+                        }
+                        if (tableGroudIdDelivery == 3) {
+                            document.getElementById("delivery").innerHTML = tableGroudIdDeliveryTableGroup;
+                        }
                         fixIndex += 6;
                     }
                 }
@@ -210,6 +222,7 @@ var Software_Postouch_Service = (function () {
                     else {
                     }
                 }
+                document.getElementById("refresh-table-group").click();
             }
         });
         return tableObsevableArray;
@@ -235,6 +248,28 @@ var Software_Postouch_Service = (function () {
             }
         });
         return tableSaleObsevableArray;
+    };
+    //TABLE GROUP FOR WALKIN
+    Software_Postouch_Service.prototype.getListTableGroupWalkin = function () {
+        var tableGroupObsevableArray = new wijmo.collections.ObservableArray();
+        var url = "http://localhost:2558/api/tableGroup/get";
+        this.http.get(url, this.options).subscribe(function (response) {
+            var results = response.json();
+            if (results.length > 0) {
+                for (var i = 0; i <= results.length - 1; i++) {
+                    tableGroupObsevableArray.push({
+                        Id: results[i].Id,
+                        EntryUserId: results[i].EntryUserId,
+                        EntryDateTime: results[i].EntryDateTime,
+                        TableGroup: results[i].TableGroup,
+                        UpdateDateTime: results[i].UpdateDateTime,
+                        UpdateUserId: results[i].UpdateUserId,
+                        IsLocked: results[i].IsLocked,
+                    });
+                }
+            }
+        });
+        return tableGroupObsevableArray;
     };
     return Software_Postouch_Service;
 }());

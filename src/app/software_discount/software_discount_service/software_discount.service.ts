@@ -66,15 +66,14 @@ export class Software_Discount_Service {
     }
 
 
-
+    //ADD DISCOUNT 
     public postDiscountData(discountObject: Object) {
         let url = "http://localhost:2558/api/discount/post";
         this.http.post(url, JSON.stringify(discountObject), this.options).subscribe(
             response => {
-                this.toastr.success('', 'Successfully Added');
                 var results = response.json();
                 if (results > 0) {
-                    this.router.navigate(['/itemdetail', results]);
+                    this.router.navigate(['/discountdetail', results]);
                 } else {
                     alert("Error");
                 }
@@ -84,20 +83,23 @@ export class Software_Discount_Service {
             }
         )
     }
+    public isLoading(){
+        
+    }
 
-            // delete ITEM
+    //DELETE DISCOUNT
     public deleteDiscountItem(id: number, toastr: ToastsManager) {
         let url = "http://localhost:2558/api/discount/delete/" + id;
         this.http.delete(url, this.options).subscribe(
             response => {
-                this.toastr.warning('', 'Deleted');
+                this.toastr.info('', 'Successfully Deleted');
                 setTimeout(() => {
                     (<HTMLButtonElement>document.getElementById("refreshGrid")).click();
                 }, 1000)
             },
             error => {
                 setTimeout(()=>{
-                document.innerHTML("Something went wrong");
+                    alert("Error");
                 },1000)
             }
         )

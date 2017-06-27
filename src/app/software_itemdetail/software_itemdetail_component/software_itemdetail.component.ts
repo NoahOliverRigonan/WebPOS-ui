@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Software_Itemdetail_Service } from '../software_itemdetail_service/software_itemdetail.service';
-// import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'software_itemdetail',
@@ -89,8 +89,11 @@ export class Software_Itemdetail_Component implements OnInit {
         private router: Router,
         private softwareItemDetailService: Software_Itemdetail_Service,
         private activatedRoute: ActivatedRoute,
-        // private toastr: ToastsManager
-    ) { }
+        private toastr: ToastsManager,
+        private vcRef: ViewContainerRef
+    ) {
+        this.toastr.setRootViewContainerRef(vcRef);
+    }
 
 
     // get url Id parameter
@@ -99,13 +102,6 @@ export class Software_Itemdetail_Component implements OnInit {
             this.itemId = params['id'];
         });
         return this.itemId;
-    }
-
-    public ngOnInit(): any {
-        if (!localStorage.getItem('access_token')) {
-            this.router.navigate(['security_login']);
-        }
-        this.itemCollectionView = new wijmo.collections.CollectionView(this.softwareItemDetailService.getItemDetail(this.getIdUrlParameter()));
     }
     //
     // WJMO-COMBO-BOX - UNIT & SUPPLIER & TAX & ACCOUNT
@@ -246,14 +242,15 @@ export class Software_Itemdetail_Component implements OnInit {
             IsLocked: this.itemCollectionView.items[0].IsLocked = true,
             DefaultKitchenReport: this.itemCollectionView.items[0].DefaultKitchenReport,
             IsPackage: (<HTMLInputElement>document.getElementById("Package")).checked,
-            
+
         }
         return dataObject;
     }
 
     //SAVE ITEM 
     public btnSaveEditItem() {
-        this.softwareItemDetailService.putItemData(this.getIdUrlParameter(), this.getDataItemObject());
+        let toastr: ToastsManager;
+        this.softwareItemDetailService.putItemData(this.getIdUrlParameter(), this.getDataItemObject(), toastr);
         console.log(this.getDataItemObject());
     }
 
@@ -275,20 +272,48 @@ export class Software_Itemdetail_Component implements OnInit {
 
     //LOCK FIELDS
     public LockDataItem() {
-        (<HTMLButtonElement>document.getElementById("ItemCode")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("BarCode")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("ItemDescription")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("Alias")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("Category")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("Cost")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("MarkUp")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("Price")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("StockLevel")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("OnHand")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("Inventory")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("Package")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("ExpDate")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("LotNumber")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("Remarks")).disabled = true;
+        if (this.itemBoolean == true) {
+            (<HTMLButtonElement>document.getElementById("ItemCode")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("BarCode")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("ItemDescription")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("Alias")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("Category")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("Cost")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("MarkUp")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("Price")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("StockLevel")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("OnHand")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("Inventory")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("Package")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("GenericName")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("LotNumber")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("Remarks")).disabled = true;
+        } else {
+            (<HTMLButtonElement>document.getElementById("ItemCode")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("BarCode")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("ItemDescription")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("Alias")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("Category")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("Cost")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("MarkUp")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("Price")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("StockLevel")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("OnHand")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("Inventory")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("Package")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("GenericName")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("LotNumber")).disabled = false;
+            (<HTMLButtonElement>document.getElementById("Remarks")).disabled = false;
+        }
+
+
+    }
+
+    public ngOnInit(): any {
+        if (!localStorage.getItem('access_token')) {
+            this.router.navigate(['security_login']);
+        }
+        this.itemCollectionView = new wijmo.collections.CollectionView(this.softwareItemDetailService.getItemDetail(this.getIdUrlParameter()));
+        this.LockDataItem();
     }
 }

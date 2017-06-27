@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 @Component({
   selector: 'my-app',
@@ -7,8 +8,20 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   constructor(
-    private router: Router
+    private router: Router,
+    private slimLoadingBarService : SlimLoadingBarService
   ) { }
+
+  //start loading
+  public startLoading() {
+    this.slimLoadingBarService.progress = 30;
+    this.slimLoadingBarService.start();
+  }
+
+  // complete loading
+  public completeLoading() {
+    this.slimLoadingBarService.complete();
+  }
 
   public logout() {
     localStorage.removeItem('access_token');

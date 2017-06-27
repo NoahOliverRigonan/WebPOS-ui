@@ -12,17 +12,29 @@ var core_1 = require("@angular/core");
 var software_item_service_1 = require("../software_item_service/software_item.service");
 var router_1 = require("@angular/router");
 var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
+var ng2_slim_loading_bar_1 = require("ng2-slim-loading-bar");
 var Software_Item_Component = (function () {
-    function Software_Item_Component(router, softwareItemService, toastr, vcRef) {
+    function Software_Item_Component(router, softwareItemService, errorToastr, toastr, vcRef, slimLoadingBarService) {
         this.router = router;
         this.softwareItemService = softwareItemService;
+        this.errorToastr = errorToastr;
         this.toastr = toastr;
         this.vcRef = vcRef;
+        this.slimLoadingBarService = slimLoadingBarService;
         this.toastr.setRootViewContainerRef(vcRef);
     }
+    // start loading
+    Software_Item_Component.prototype.startLoading = function () {
+        this.slimLoadingBarService.progress = 30;
+        this.slimLoadingBarService.start();
+    };
+    // complete loading
+    Software_Item_Component.prototype.completeLoading = function () {
+        this.slimLoadingBarService.complete();
+    };
     Software_Item_Component.prototype.btnAddItem = function () {
         if (this.lock != true) {
-            this.softwareItemService.postItemData(null);
+            this.softwareItemService.postItemData(null, this.toastr);
         }
     };
     Software_Item_Component.prototype.getListItem = function () {
@@ -53,10 +65,30 @@ var Software_Item_Component = (function () {
         var currentSelectedItem = this.itemCollectionView.currentItem;
         this.router.navigate(['/itemdetail', currentSelectedItem.Id]);
     };
-    Software_Item_Component.prototype.btnDeleteItem = function () {
+    //
+    //DELETE ITEM AND DELETE ITEM MODAL
+    //
+    Software_Item_Component.prototype.btnDeleteItemModal = function () {
         var toastr;
         var currentSelectedItem = this.itemCollectionView.currentItem;
-        this.softwareItemService.deleteItem(currentSelectedItem.Id, toastr);
+        if (currentSelectedItem.Id) {
+            document.getElementById("deleteItemModal").click();
+        }
+        else {
+            this.softwareItemService.deleteItem(currentSelectedItem.Id, toastr);
+        }
+    };
+    Software_Item_Component.prototype.btnDeleteItem = function () {
+        var errorToastr;
+        var toastr;
+        var currentSelectedItem = this.itemCollectionView.currentItem;
+        if (currentSelectedItem.IsLocked == true) {
+            this.errorToastr.error('', 'You cant delete Lock Item');
+        }
+        else {
+            document.getElementById("btn-hidden-start-loading").click();
+            this.softwareItemService.deleteItem(currentSelectedItem.Id, toastr);
+        }
     };
     // activity delete confirmation click
     // public btnActivityDeleteConfirmationClick() {
@@ -83,7 +115,9 @@ Software_Item_Component = __decorate([
     __metadata("design:paramtypes", [router_1.Router,
         software_item_service_1.Software_Item_Service,
         ng2_toastr_1.ToastsManager,
-        core_1.ViewContainerRef])
+        ng2_toastr_1.ToastsManager,
+        core_1.ViewContainerRef,
+        ng2_slim_loading_bar_1.SlimLoadingBarService])
 ], Software_Item_Component);
 exports.Software_Item_Component = Software_Item_Component;
 //# sourceMappingURL=software_item.component.js.map

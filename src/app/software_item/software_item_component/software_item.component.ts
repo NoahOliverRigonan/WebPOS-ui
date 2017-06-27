@@ -2,6 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Software_Item_Service } from '../software_item_service/software_item.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 @Component({
     selector: 'software_item',
@@ -17,16 +18,28 @@ export class Software_Item_Component implements OnInit {
     constructor(
         private router: Router,
         private softwareItemService: Software_Item_Service,
+        private errorToastr: ToastsManager,
         private toastr: ToastsManager,
-        private vcRef: ViewContainerRef
+        private vcRef: ViewContainerRef,
+        private slimLoadingBarService: SlimLoadingBarService
     ) {
         this.toastr.setRootViewContainerRef(vcRef);
+    }
 
+    // start loading
+    public startLoading() {
+        this.slimLoadingBarService.progress = 30;
+        this.slimLoadingBarService.start();
+    }
+
+    // complete loading
+    public completeLoading() {
+        this.slimLoadingBarService.complete();
     }
 
     public btnAddItem(): void {
         if (this.lock != true) {
-            this.softwareItemService.postItemData(null);
+            this.softwareItemService.postItemData(null, this.toastr);
         }
     }
 
@@ -64,12 +77,34 @@ export class Software_Item_Component implements OnInit {
         this.router.navigate(['/itemdetail', currentSelectedItem.Id]);
     }
 
-    public btnDeleteItem() {
+    //
+    //DELETE ITEM AND DELETE ITEM MODAL
+    //
+    public btnDeleteItemModal() {
         let toastr: ToastsManager;
         let currentSelectedItem = this.itemCollectionView.currentItem;
-        this.softwareItemService.deleteItem(currentSelectedItem.Id, toastr);
+        if (currentSelectedItem.Id) {
+            (<HTMLButtonElement>document.getElementById("deleteItemModal")).click();
+        }
+        else {
+            this.softwareItemService.deleteItem(currentSelectedItem.Id, toastr);
+        }
+
     }
 
+    public btnDeleteItem() {
+        let errorToastr: ToastsManager;
+        let toastr: ToastsManager;
+        let currentSelectedItem = this.itemCollectionView.currentItem;
+        if (currentSelectedItem.IsLocked == true) {
+            this.errorToastr.error('', 'You cant delete Lock Item');
+        }
+        else {
+            (<HTMLButtonElement>document.getElementById("btn-hidden-start-loading")).click();
+            this.softwareItemService.deleteItem(currentSelectedItem.Id, toastr);
+        }
+    }
+    
     // activity delete confirmation click
     // public btnActivityDeleteConfirmationClick() {
     //     this.startLoading();

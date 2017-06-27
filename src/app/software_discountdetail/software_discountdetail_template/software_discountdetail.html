@@ -10,6 +10,15 @@
         </div>
     </div>
 </div>
+<div class="section-heading2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a routerLink="/discount">Discount</a> &nbsp;&nbsp; / &nbsp;&nbsp; Discount Detail</p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -18,7 +27,7 @@
                     <div class="" style="float:right;">
                         <button class="btn btn-primary btn-lg " routerLink=''>Lock</button>
                         <button class="btn btn-primary btn-lg " routerLink=''>Unlock</button>
-                        <button class="btn btn-danger btn-lg " routerLink='/discount'>Close</button>
+                        <button class="btn btn-danger btn-lg "  routerLink='/discount'>Close</button>
                     </div>
                 </div>
             </div>
@@ -43,7 +52,7 @@
                             <div class="form-group">
                                 <label for="VatExempt" class="control-label col-sm-4">VAT Exempt</label>
                                 <div class="col-sm-8">
-                                    <textarea type="checkbox" [(ngModel)]="VatExempt" name="VatExempt" id="VatExempt" class="form-control" rows="5"></textarea>
+                                    <input type="checkbox" [(ngModel)]="VatExempt" name="VatExempt" id="VatExempt" class="" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -65,27 +74,27 @@
                                 </div>
                             </div>-->
                             <div class="form-group">
-                                <label for="ExpDate" class="control-label col-sm-4">Expiry Date</label>
+                                <label for="ExpDate" class="control-label col-sm-4">Date Start</label>
                                 <div class="col-sm-8">
-                                    <!--<div class="input-group">
+                                    <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i> </span>
-                                        <wj-input-date [(value)]="ExpiryDate" [isRequired]="false" (valueChanged)="expiryDateChangeValue()" [format]="'MMM dd, yyyy'"
+                                        <wj-input-date [(value)]="DateStart" [isRequired]="false" (valueChanged)="startDateChangeValue()" [format]="'MMM dd, yyyy'"
                                             style="border-radius: 0px;">
                                         </wj-input-date>
-                                        <input type="hidden" class="form-control" id="dateStart" />
-                                    </div>-->
+                                        <input type="hidden" class="form-control" id="DateStart" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="ExpDate" class="control-label col-sm-4">Expiry Date</label>
+                                <label for="ExpDate" class="control-label col-sm-4">Date End</label>
                                 <div class="col-sm-8">
-                                    <!--<div class="input-group">
+                                    <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i> </span>
-                                        <wj-input-date [(value)]="ExpiryDate" [isRequired]="false" (valueChanged)="expiryDateChangeValue()" [format]="'MMM dd, yyyy'"
+                                        <wj-input-date [(value)]="DateEnd" [isRequired]="false" (valueChanged)="endDateChangeValue()" [format]="'MMM dd, yyyy'"
                                             style="border-radius: 0px;">
                                         </wj-input-date>
-                                        <input type="hidden" class="form-control" id="dateEnd" />
-                                    </div>-->
+                                        <input type="hidden" class="form-control" id="DateEnd" />
+                                    </div>
                                 </div>
                             </div>
 
@@ -244,5 +253,6 @@
     </div>
 </div>
 <shared-footer></shared-footer>
-<button id="set-value-fields" [hidden]="true" (click)="setFieldValues()"></button>
+<button id="set-value-fields-item" [hidden]="true" (click)="setFieldValuesItemDiscount()"></button>
+<button id="set-value-fields-discountdetail" [hidden]="true" (click)="setFieldValuesDiscount()"></button>
 <button id="btn-hidden-add-detail-modal" [hidden]="true" data-toggle="modal" data-target="#itemdiscount-detail-modal"></button>

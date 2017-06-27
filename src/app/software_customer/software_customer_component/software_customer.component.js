@@ -9,15 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var software_customer_service_1 = require("../software_customer_service/software_customer.service");
 var router_1 = require("@angular/router");
 var Software_Customer_Component = (function () {
-    function Software_Customer_Component(router) {
+    function Software_Customer_Component(router, softwareCustomerService) {
         this.router = router;
+        this.softwareCustomerService = softwareCustomerService;
     }
+    Software_Customer_Component.prototype.getCustomer = function () {
+        this.listMstCustomer = new wijmo.collections.CollectionView(this.softwareCustomerService.getCustomerList());
+    };
     Software_Customer_Component.prototype.ngOnInit = function () {
         if (!localStorage.getItem('access_token')) {
             this.router.navigate(['security_login']);
         }
+        this.getCustomer();
     };
     return Software_Customer_Component;
 }());
@@ -26,7 +32,8 @@ Software_Customer_Component = __decorate([
         selector: 'software_customer',
         templateUrl: 'app/software_customer/software_customer_template/software_customer.html'
     }),
-    __metadata("design:paramtypes", [router_1.Router])
+    __metadata("design:paramtypes", [router_1.Router,
+        software_customer_service_1.Software_Customer_Service])
 ], Software_Customer_Component);
 exports.Software_Customer_Component = Software_Customer_Component;
 //# sourceMappingURL=software_customer.component.js.map

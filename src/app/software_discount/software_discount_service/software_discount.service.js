@@ -62,14 +62,14 @@ var Software_Discount_Service = (function () {
         });
         return discountObsevableArray;
     };
+    //ADD DISCOUNT 
     Software_Discount_Service.prototype.postDiscountData = function (discountObject) {
         var _this = this;
         var url = "http://localhost:2558/api/discount/post";
         this.http.post(url, JSON.stringify(discountObject), this.options).subscribe(function (response) {
-            _this.toastr.success('', 'Successfully Added');
             var results = response.json();
             if (results > 0) {
-                _this.router.navigate(['/itemdetail', results]);
+                _this.router.navigate(['/discountdetail', results]);
             }
             else {
                 alert("Error");
@@ -78,18 +78,20 @@ var Software_Discount_Service = (function () {
             alert("Error");
         });
     };
-    // delete ITEM
+    Software_Discount_Service.prototype.isLoading = function () {
+    };
+    //DELETE DISCOUNT
     Software_Discount_Service.prototype.deleteDiscountItem = function (id, toastr) {
         var _this = this;
         var url = "http://localhost:2558/api/discount/delete/" + id;
         this.http.delete(url, this.options).subscribe(function (response) {
-            _this.toastr.warning('', 'Deleted');
+            _this.toastr.info('', 'Successfully Deleted');
             setTimeout(function () {
                 document.getElementById("refreshGrid").click();
             }, 1000);
         }, function (error) {
             setTimeout(function () {
-                document.innerHTML("Something went wrong");
+                alert("Error");
             }, 1000);
         });
     };

@@ -1,0 +1,337 @@
+<div class="section-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postouch-header">
+                    <h1 class="software-h1"><i class="fa fa-hand-pointer-o"></i> POS Touch Detail</h1>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</div>
+<div class="section-heading2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a routerLink="/postouch"> Pos Touch  </a>                    &nbsp;&nbsp; / &nbsp;&nbsp; Pos Touch Detail</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <button type="button" style="height: 88px;" class="btn btn-lg btn-primary btn-block pos-btn" (click)="itemGroupMoveToPreviousPage()">
+                                                    <span class="fa fa-fast-backward"></span> 
+                                                </button>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <wj-flex-grid style="height: 88px;" [itemsSource]="postouchDetailList" [selectionMode]="1" [headersVisibility]="0" id="ItemPostouchSaleFlexGrid">
+                                                <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroup1'" [isReadOnly]="true" [width]="'1*'">
+                                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                        <button class="btn btn-info btn-md btn-responsive btn-block pos-btn" (click)="btnItemGroup1Click()">
+                                                                &nbsp;{{ '' }} {{ cell.item.itemGroup1 }} {{ '' }}&nbsp;
+                                                            </button>
+                                                    </template>
+                                                </wj-flex-grid-column>
+                                                <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroup2'" [isReadOnly]="true" [width]="'1*'">
+                                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                        <button class="btn btn-info btn-md btn-responsive btn-block pos-btn" (click)="btnItemGroup2Click()">
+                                                                &nbsp;{{ '' }} {{ cell.item.itemGroup2 }} {{ '' }}&nbsp;
+                                                            </button>
+                                                    </template>
+                                                </wj-flex-grid-column>
+                                                <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroup3'" [isReadOnly]="true" [width]="'1*'">
+                                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                        <button class="btn btn-info btn-md btn-responsive btn-block pos-btn" (click)="btnItemGroup3Click()">
+                                                                &nbsp;{{ '' }} {{ cell.item.itemGroup3 }} {{ '' }}&nbsp;
+                                                            </button>
+                                                    </template>
+                                                </wj-flex-grid-column>
+                                                <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroup4'" [isReadOnly]="true" [width]="'1*'">
+                                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                        <button class="btn btn-info btn-md btn-responsive btn-block pos-btn" (click)="btnItemGroup4Click()">
+                                                                &nbsp;{{ '' }} {{ cell.item.itemGroup4 }} {{ '' }}&nbsp;
+                                                            </button>
+                                                    </template>
+                                                </wj-flex-grid-column>
+                                                <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroup5'" [isReadOnly]="true" [width]="'1*'">
+                                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                        <button class="btn btn-info btn-md btn-responsive btn-block pos-btn" (click)="btnItemGroup5Click()">
+                                                                &nbsp;{{ '' }} {{ cell.item.itemGroup5 }} {{ '' }}&nbsp;
+                                                            </button>
+                                                    </template>
+                                                </wj-flex-grid-column>
+                                                <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroup6'" [isReadOnly]="true" [width]="'1*'">
+                                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                        <button class="btn btn-info btn-md btn-responsive btn-block pos-btn" (click)="btnItemGroup6Click()">
+                                                                &nbsp;{{ '' }} {{ cell.item.itemGroup6}} {{ '' }}&nbsp;
+                                                            </button>
+                                                    </template>
+                                                </wj-flex-grid-column>
+                                            </wj-flex-grid>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="button" style="height: 88px;" class="btn btn-lg btn-primary btn-block pos-btn" (click)="itemGroupMoveToNextPage()">
+                                                        <span class="fa fa-fast-forward"></span>
+                                                </button>
+                                        </div>
+                                    </div>
+                                    <!--<Item style="width: 100%" class="Item-responsive Item">
+                                        <tr>
+                                            <td style="width: 10%">
+
+                                            </td>
+                                            <td style="width: 2%"></td>
+                                            <td style="width: 76%">
+
+                                            </td>
+                                            <td style="width: 2%"></td>
+                                            <td style="width: 10%">
+
+                                            </td>
+                                        </tr>
+                                    </Item>-->
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <button type="button" style="height: 432px;" class="btn btn-lg btn-primary btn-block pos-btn" (click)="ItemMoveToPreviousPage()">
+                                                    <span class="fa fa-step-backward"></span> 
+                                                </button>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div *ngIf="isLoading" align="center"></div>
+                                            <div *ngIf="isFinishLoading">
+                                                <wj-flex-grid style="height: 432px;" [itemsSource]="postouchDetailListGroup" [selectionMode]="1" [headersVisibility]="0"
+                                                    id="ItemPostouchSaleFlexGrid">
+                                                    <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroupItem1'" [isReadOnly]="true" [width]="'*'">
+                                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                            <button class="btn btn-primary btn-responsive btn-md btn-block pos-btn" (click)="keypadModal()">
+                                                                    &nbsp;{{ '' }} {{ cell.item.itemGroupItem1 }} {{ '' }}&nbsp;
+                                                                </button>
+                                                        </template>
+                                                    </wj-flex-grid-column>
+                                                    <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroupItem2'" [isReadOnly]="true" [width]="'*'">
+                                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                            <button class="btn btn-primary btn-responsive btn-md btn-block pos-btn" (click)="keypadModal()">
+                                                                    &nbsp;{{ '' }} {{ cell.item.itemGroupItem2 }} {{ '' }}&nbsp;
+                                                                </button>
+                                                        </template>
+                                                    </wj-flex-grid-column>
+                                                    <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroupItem3'" [isReadOnly]="true" [width]="'*'">
+                                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                            <button class="btn btn-primary btn-responsive btn-md btn-block pos-btn" (click)="keypadModal()">
+                                                                    &nbsp;{{ '' }} {{ cell.item.itemGroupItem3 }} {{ '' }}&nbsp;
+                                                                </button>
+                                                        </template>
+                                                    </wj-flex-grid-column>
+                                                    <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroupItem4'" [isReadOnly]="true" [width]="'*'">
+                                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                            <button class="btn btn-primary btn-responsive btn-md btn-block pos-btn" (click)="keypadModal()">
+                                                                    &nbsp;{{ '' }} {{ cell.item.itemGroupItem4 }} {{ '' }}&nbsp;
+                                                                </button>
+                                                        </template>
+                                                    </wj-flex-grid-column>
+                                                    <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroupItem5'" [isReadOnly]="true" [width]="'*'">
+                                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                            <button class="btn btn-primary btn-responsive btn-md btn-block pos-btn" (click)="keypadModal()">
+                                                                    &nbsp;{{ '' }} {{ cell.item.itemGroupItem5 }} {{ '' }}&nbsp;
+                                                                </button>
+                                                        </template>
+                                                    </wj-flex-grid-column>
+                                                    <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroupItem6'" [isReadOnly]="true" [width]="'*'">
+                                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                                            <button class="btn btn-primary btn-responsive btn-md btn-block pos-btn" (click)="btnItemList6()">
+                                                                    &nbsp;{{ '' }} {{ cell.item.itemGroupItem6 }} {{ '' }}&nbsp;
+                                                                </button>
+                                                        </template>
+                                                    </wj-flex-grid-column>
+                                                </wj-flex-grid>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="button" style="height: 432px;" class="btn btn-lg btn-primary btn-block pos-btn" (click)="ItemMoveToNextPage()">
+                                                     <span class="fa fa-step-forward"></span>
+                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-info pos-btn" id="delivery">
+                                                <h1>Change Table</h1>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <wj-flex-grid [itemsSource]="ItemPostouchSaleCollectionView" [selectionMode]="3" [headersVisibility]="1">
+                                <wj-flex-grid-column [header]="'Item'" [binding]="''" [isReadOnly]="true" [width]="500">
+                                </wj-flex-grid-column>
+                                <wj-flex-grid-column [header]="'Amount'" [binding]="''" [isReadOnly]="true" [width]="230">
+                                </wj-flex-grid-column>
+                            </wj-flex-grid>
+                            <!--<div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <h3>Open</h3>
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <h3>Billed Out</h3>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <h3>Collected</h3>
+                        </div>
+                        <div id="menu3" class="tab-pane fade">
+                            <h3>Menu 3</h3>
+                            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        </div>
+                    </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL FOR DELIVERY-->
+<div class="modal fade" id="keypad-modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-style">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal" (click)="log=''">&times;</button>
+            </div>
+            <div class="modal-body panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--<form materialize class="col s12">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                                    <label for="first_name">First Name</label>
+                                </div>
+                            </div>
+                        </form>-->
+                        <h1 style="color:black;background:whitesmoke; min-height:50px; padding:5px; margin-top:0;">
+                            {{log}}
+                        </h1>
+                        <!--<div class="input-group">
+                            <input class="form-control" #numOne aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">DEL</span>
+                        </div>
+                        <div class="input-group">
+                            <input class="form-control" #numTwo aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">DEL</span>
+                        </div>
+                        <br/>
+                        <button class="form-control" (click)="addNumbers(numOne.value,numTwo.value)">ADD</button>
+                        <input [hidden]="true" value="1" #numOne [(ngModel)]="textValue">
+                        <input [hidden]="true" value="2" #numTwo [(ngModel)]="textValue">
+                        <input [hidden]="true" value="3" #numThree [(ngModel)]="textValue">
+                        <input [hidden]="true" value="4" #numFour [(ngModel)]="textValue">
+                        <input [hidden]="true" value="5" #numFive [(ngModel)]="textValue">
+                        <input [hidden]="true" value="6" #numSix [(ngModel)]="textValue">
+                        <input [hidden]="true" value="7" #numSeven [(ngModel)]="textValue">
+                        <input [hidden]="true" value="8" #numEight [(ngModel)]="textValue">
+                        <input [hidden]="true" value="9" #numNine [(ngModel)]="textValue">
+                        <input [hidden]="true" value="0" #numZero [(ngModel)]="textValue">-->
+                        <!--<div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>5</td>
+                                        <td>6</td>
+                                        <td>></td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>6</td>
+                                        <td>9</td>
+                                        <td>,</td>
+                                    </tr>
+                                    <tr>
+                                        <td>.</td>
+                                        <td>0</td>
+                                        <td>DEL</td>
+                                        <td>OK</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>-->
+                        <div id="container">
+                            <ul id="keyboard">
+                                <li class="letter" (click)="logText(textbox1.value)">1</li>
+                                <li class="letter" (click)="logText(textbox2.value)">2</li>
+                                <li class="letter" (click)="logText(textbox3.value)">3</li>
+                                <li class="letter clearl" (click)="logText(textbox4.value)">4</li>
+                                <li class="letter" (click)="logText(textbox5.value)">5</li>
+                                <li class="letter" (click)="logText(textbox6.value)">6</li>
+
+                                <li class="letter clearl" (click)="logText(textbox7.value)">7</li>
+                                <li class="letter " (click)="logText(textbox8.value)">8</li>
+                                <li class="letter" (click)="logText(textbox9.value)">9</li>
+                                <li class="letter" (click)="logText(textbox0.value)">0</li>
+                                <li class="switch">abc</li>
+                                <li class="return">retur</li>
+                                <li class="delete lastitem" (click)="log=''">DEL</li>
+                            </ul>
+                        </div>
+
+                        <input #textbox1 type="text" [hidden]="true" [(ngModel)]="num1" required>
+                        <input #textbox2 type="text" [hidden]="true" [(ngModel)]="num2" required>
+                        <input #textbox3 type="text" [hidden]="true" [(ngModel)]="num3" required>
+                        <input #textbox4 type="text" [hidden]="true" [(ngModel)]="num4" required>
+                        <input #textbox5 type="text" [hidden]="true" [(ngModel)]="num5" required>
+                        <input #textbox6 type="text" [hidden]="true" [(ngModel)]="num6" required>
+                        <input #textbox7 type="text" [hidden]="true" [(ngModel)]="num7" required>
+                        <input #textbox8 type="text" [hidden]="true" [(ngModel)]="num8" required>
+                        <input #textbox9 type="text" [hidden]="true" [(ngModel)]="num9" required>
+                        <input #textbox0 type="text" [hidden]="true" [(ngModel)]="num0" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button id="load-Item-group-data" (click)="loadItemGroupData()" [hidden]="true"></button>
+<button id="set-Item-group-selectedValue" (click)="setItemGroupSelectedValue()" [hidden]="true"></button>
+<!--<button id="set-Item-group" (click)="getItemGroupWalkInDelivery()" [hidden]="true"></button>
+<button id="load-Item-data" (click)="getItem()" [hidden]="true"></button>
+<button id="refresh-Item-group" (click)="refreshItemGroup()" [hidden]="true"></button>-->
+<button id="keypadModal" [hidden]="true" data-toggle="modal" data-target="#keypad-modal"></button>
+<shared-footer></shared-footer>

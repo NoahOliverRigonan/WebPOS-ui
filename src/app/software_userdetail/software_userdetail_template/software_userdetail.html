@@ -1,0 +1,189 @@
+<div class="section-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postouch-header">
+                    <h1 class="software-h1"><i class="fa fa-cubes"></i> User Detail</h1>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</div>
+<div class="section-heading2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a routerLink="/supplier"> User  </a>                    &nbsp;&nbsp; / &nbsp;&nbsp; User Detail</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-12" align="right">
+                    <div class="">
+                        <button class="btn btn-lg btn-primary" (click)="LockDataItem()">Lock</button>
+                        <button class="btn btn-lg btn-primary">Unlock</button>
+                        <button class="btn btn-lg btn-primary" (click)="btnSaveEditItem()">Save</button>
+                        <button class="btn btn-lg btn-danger " routerLink='/user'>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="tab-content">
+                <div id="home">
+                    <div class="row-fluid">
+                        <form class="form-horizontal">
+                            <div class="span6">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="UserName" class="control-label col-sm-4">User Name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" [(ngModel)]="UserName" name="UserName" id="UserName" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Password" class="control-label col-sm-4">Password</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" [(ngModel)]="Password" name="Password" id="Password" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="FullName" class="control-label col-sm-4">Full Name</label>
+                                        <div class="col-sm-8">
+                                            <textarea type="text" [(ngModel)]="FullName" name="FullName" id="FullName" class="form-control" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="UserCardNumber" class="control-label col-sm-4">User Card Number</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" [(ngModel)]="UserCardNumber" name="UserCardNumber" id="UserCardNumber" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Unit" class="control-label col-sm-4">Copy the rights of..</label>
+                                        <div class="col-sm-8">
+                                            <wj-combo-box [itemsSource]="listOfCopyRightUserObservableArray" id="UserName" [placeholder]="'Select...'" [displayMemberPath]="'UserName'"
+                                                [(selectedIndex)]="copyRightUserSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                [selectedValuePath]="'UserName'" [(selectedValue)]="copyRightSelectedValue" (selectedIndexChanged)="cboMstUserSelectedIndexChanged()"
+                                                style="width: 100%; border-radius: 0px;">
+                                            </wj-combo-box>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+        </div>
+
+        <!--<div class="panel-body">
+            <div class="form-group">
+                <label for="UserName" class="control-label col-sm-4">User Name</label>
+                <div class="col-sm-8">
+                    <input type="text" [(ngModel)]="UserName" name="UserName" id="UserName" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Password" class="control-label col-sm-4">Password</label>
+                <div class="col-sm-8">
+                    <input type="password" [(ngModel)]="Password" name="Password" id="Password" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="FullName" class="control-label col-sm-4">Full Name</label>
+                <div class="col-sm-8">
+                    <textarea type="text" [(ngModel)]="FullName" name="FullName" id="FullName" class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="UserCardNumber" class="control-label col-sm-4">User Card Number</label>
+                <div class="col-sm-8">
+                    <input type="text" [(ngModel)]="UserCardNumber" name="UserCardNumber" id="UserCardNumber" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="UserName" class="control-label col-sm-4">User Name</label>
+                <div class="col-sm-8">
+                    <input type="text" [(ngModel)]="UserName" name="UserName" id="UserName" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Password" class="control-label col-sm-4">Password</label>
+                <div class="col-sm-8">
+                    <input type="password" [(ngModel)]="Password" name="Password" id="Password" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="FullName" class="control-label col-sm-4">Full Name</label>
+                <div class="col-sm-8">
+                    <textarea type="text" [(ngModel)]="FullName" name="FullName" id="FullName" class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="container">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Forms/Reports</th>
+                            <th>Add</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Lock</th>
+                            <th>Unlock</th>
+                            <th>Print</th>
+                            <th>Preview</th>
+                            <th>View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <div class="col-sm-8">
+                                        <input type="text" [(ngModel)]="UserCardNumber" name="UserCardNumber" id="UserCardNumber" class="form-control" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>-->
+    </div>
+</div>
+<shared-footer></shared-footer>
+<!--<button id="btn-hidden-lock-item" [hidden]="true" (click)="startLoading()"></button>-->
+<button id="set-value-fields" [hidden]="true" (click)="setFieldValuesUnit()"></button>
+<!--<button id="refreshGrid" (click)="getSupplier()" [hidden]="true"></button>-->

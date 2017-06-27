@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Headers, Http, RequestOptions } from '@angular/http';
-// import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Injectable()
 export class Software_Itemdetail_Service {
@@ -16,8 +16,12 @@ export class Software_Itemdetail_Service {
     constructor(
         private router: Router,
         private http: Http,
-        // private toastr: ToastsManager
-    ) { }
+        private toastr: ToastsManager,
+        private activateroute: ActivatedRoute,
+        // private vcRef: ViewContainerRef
+    ) {
+        // this.toastr.setRootViewContainerRef(vcRef);
+    }
 
     // UPLOAD IMAGE
 
@@ -103,14 +107,17 @@ export class Software_Itemdetail_Service {
     //ADD ITEM
     // toastr: ToastsManager
 
-   
 
-        // update ITEM
-    public putItemData(id: number, itemObject: Object) {
+
+    // update ITEM
+    public putItemData(id: number, itemObject: Object, toastr: ToastsManager) {
         let url = "http://localhost:2558/api/item/put/" + id;
         this.http.put(url, JSON.stringify(itemObject), this.options).subscribe(
             response => {
-                console.log('', 'Save Successful');
+                this.toastr.success('', 'Edit Successful');
+                setTimeout(() => {
+                    this.router.navigate(['/item'])
+                }, 1000)
             },
             error => {
                 alert("Error");

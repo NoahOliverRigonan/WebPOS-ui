@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 @Injectable()
 export class Software_Item_Service {
@@ -15,7 +16,8 @@ export class Software_Item_Service {
     constructor(
         private router: Router,
         private http: Http,
-        private toastr: ToastsManager
+        private toastr: ToastsManager,
+        private slimLoadingBarService: SlimLoadingBarService
     ) { }
 
 
@@ -73,25 +75,29 @@ export class Software_Item_Service {
         );
         return itemObsevableArray;
     }
-
+    public startLoading() {
+        this.slimLoadingBarService.progress = 30;
+        this.slimLoadingBarService.start();
+    }
 
     // delete ITEM
     public deleteItem(id: number, toastr: ToastsManager) {
         let url = "http://localhost:2558/api/item/delete/" + id;
         this.http.delete(url, this.options).subscribe(
             response => {
-                this.toastr.success('', 'Successfully Deleted');
+                this.startLoading();
+                this.toastr.info('', 'Successfully Deleted');
                 setTimeout(() => {
                     (<HTMLButtonElement>document.getElementById("refreshGrid")).click();
                 }, 1000)
             },
             error => {
-                (<HTMLButtonElement>document.getElementById("delete-modal-warning-id")).click();
+                this.toastr.error(' ', 'Bad Request');
             }
         )
     }
 
-    public postItemData(itemObject: Object) {
+    public postItemData(itemObject: Object, toastr: ToastsManager) {
         let url = "http://localhost:2558/api/item/post";
         this.http.post(url, JSON.stringify(itemObject), this.options).subscribe(
             response => {
@@ -99,12 +105,12 @@ export class Software_Item_Service {
                 if (results > 0) {
                     this.router.navigate(['/itemdetail', results]);
                 } else {
-                    alert("Error");
+                    this.toastr.error('', 'Bad Request');
                 }
             },
             error => {
-                alert("Error");
-            }
+                this.toastr.error('', 'Bad Request');
+            },
         )
     }
 

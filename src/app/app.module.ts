@@ -9,6 +9,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+// import { MaterializeModule } from "angular2-materialize";
 
 import * as wjFlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjInput from 'wijmo/wijmo.angular2.input';
@@ -52,14 +54,26 @@ import { Software_Utilities_Component } from './software_utilities/software_util
 //SOFTWARE DETAIL
 import { Software_Itemdetail_Component } from './software_itemdetail/software_itemdetail_component/software_itemdetail.component';
 import { Software_Discountdetail_Component } from './software_discountdetail/software_discountdetail_component/software_discountdetail.component';
+import { Software_PostouchDetail_Component } from './software_postouchdetail/software_postouchdetail_component/software_postouchdetail.component';
+import { Software_SupplierDetail_Component } from './software_supplier_detail/software_supplierdetail_component/software_supplierdetail.component';
+import { Software_UserDetail_Component } from './software_userdetail/software_userdetail_component/software_userdetail.component';
 
 // SERVICES
 import { Security_Login_Service } from './security_login/security_login_service/security_login.service';
 import { Software_Postouch_Service } from './software_postouch/software_postouch_service/software_postouch.service';
 import { Software_Item_Service } from './software_item/software_item_service/software_item.service';
+import { Software_ItemGroup_Service } from './software_itemgroup/software_itemgroup_service/software_itemgroup.service';
+import { Software_ItemComponent_Service } from './software_itemcomponent/software_itemcomponent_service/software_itemcomponent.service';
 import { Software_Itemdetail_Service } from './software_itemdetail/software_itemdetail_service/software_itemdetail.service';
 import { Software_Discount_Service } from './software_discount/software_discount_service/software_discount.service';
 import { Software_Discountdetail_Service } from './software_discountdetail/software_discountdetail_service/software_discountdetail.service';
+import { Software_TableGroup_Service } from './software_table/software_table_service/software_table.service';
+import { Software_PostouchDetail_Service } from './software_postouchdetail/software_postouchdetail_service/software_postouchdetail.service';
+import { Software_User_Service } from './software_user/software_user_service/software_user.service';
+import { Software_Customer_Service } from './software_customer/software_customer_service/software_customer.service';
+import { Software_Supplier_Service } from './software_supplier/software_supplier_service/software_supplier.service';
+import { Software_SupplierDetail_Service } from './software_supplier_detail/software_supplierdetail_service/software_supplierdetail.service';
+import { Software_UserDetail_Service } from './software_userdetail/software_userdetail_service/software_userdetail.service';
 
 // paths and Routes
 const appRoutes: Routes = [
@@ -98,7 +112,10 @@ const appRoutes: Routes = [
   { path: 'utilities', component: Software_Utilities_Component },
   //POS13 SOFTWARE DETAIL
   { path: 'itemdetail/:id', component: Software_Itemdetail_Component },
-  { path: 'discountdetail', component: Software_Discountdetail_Component },
+  { path: 'discountdetail/:id', component: Software_Discountdetail_Component },
+  { path: 'postouchdetail/:id', component: Software_PostouchDetail_Component },
+  { path: 'supplierdetail/:id', component: Software_SupplierDetail_Component },
+  { path: 'userdetail/:id', component: Software_UserDetail_Component },
 ];
 
 // ng_modules
@@ -109,7 +126,9 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     ToastModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SlimLoadingBarModule.forRoot(),
+    // MaterializeModule
   ],
   declarations: [
     wjFlexGrid.WjFlexGrid,
@@ -151,23 +170,36 @@ const appRoutes: Routes = [
     Software_Posreport_Component,
     Software_80mmreport_Component,
     Software_Utilities_Component,
-    
+
+
 
     // SOFTWARE DETAIL 
     Software_Itemdetail_Component,
-    Software_Discountdetail_Component
+    Software_Discountdetail_Component,
+    Software_PostouchDetail_Component,
+    Software_SupplierDetail_Component,
+    Software_UserDetail_Component,
   ],
   providers: [
     Security_Login_Service,
     Software_Postouch_Service,
     Software_Item_Service,
+    Software_ItemGroup_Service,
     Software_Discount_Service,
-    Software_Discountdetail_Service,
-
+    Software_TableGroup_Service,
+    Software_ItemComponent_Service,
+    Software_User_Service,
+    Software_Customer_Service,
+    Software_Supplier_Service,
+    Software_UserDetail_Service,
+    //Other
     ToastsManager,
     ToastOptions,
     //SOFTWARE DETAIL SERVICE PROVIDERS
     Software_Itemdetail_Service,
+    Software_PostouchDetail_Service,
+    Software_Discountdetail_Service,
+    Software_SupplierDetail_Service,
   ],
   bootstrap: [
     AppComponent

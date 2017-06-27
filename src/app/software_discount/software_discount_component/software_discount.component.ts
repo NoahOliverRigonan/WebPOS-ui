@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewContainerRef} from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Software_Discount_Service } from '../software_discount_service/software_discount.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -9,16 +9,19 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 
 export class Software_Discount_Component implements OnInit {
-    private listDiscountCollectionView : wijmo.collections.CollectionView;
+    private listDiscountCollectionView: wijmo.collections.CollectionView;
+    //Other Method
+    private lock:Boolean;
 
     constructor(
         private router: Router,
-        private softwareDiscountService : Software_Discount_Service,
-        private toastr : ToastsManager,
+        private softwareDiscountService: Software_Discount_Service,
+        private errorToastr: ToastsManager,
+        private toastr: ToastsManager,
         private vcRef: ViewContainerRef
     ) {
         this.toastr.setRootViewContainerRef(vcRef);
-     }
+    }
 
     public ngOnInit(): any {
         if (!localStorage.getItem('access_token')) {
@@ -27,17 +30,34 @@ export class Software_Discount_Component implements OnInit {
         this.getDiscount();
     }
 
-    public getDiscount(){
+     public btnAddDiscount(): void {
+        if (this.lock != true) {
+            this.softwareDiscountService.postDiscountData(null);
+        }
+    }
+
+    public getDiscount() {
         this.listDiscountCollectionView = new wijmo.collections.CollectionView(this.softwareDiscountService.getListOfDiscount());
     }
 
-    public deleteDiscount(){
+    public deleteDiscount() {
+        let errorToastr: ToastsManager;
         let toastr: ToastsManager;
         let currentDiscountItem = this.listDiscountCollectionView.currentItem;
-        this.softwareDiscountService.deleteDiscountItem(currentDiscountItem.Id , toastr)
+        if (currentDiscountItem.IsLocked == true) {
+            this.errorToastr.error('','You cant delete Lock Item');
+        }
+        else{
+            this.softwareDiscountService.deleteDiscountItem(currentDiscountItem.Id, toastr)
+        }
     }
 
-    public deleteDiscountModal(){
+    public deleteDiscountModal() {
         (<HTMLButtonElement>document.getElementById("delete-modal-warning-id")).click();
+    }
+
+    public btnEditItem() {
+        let currentSelectedItem = this.listDiscountCollectionView.currentItem;
+        this.router.navigate(['/discountdetail', currentSelectedItem.Id]);
     }
 }

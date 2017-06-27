@@ -10,14 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var software_table_service_1 = require("../software_table_service/software_table.service");
+var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_Table_Component = (function () {
-    function Software_Table_Component(router) {
+    function Software_Table_Component(router, softwareTableGroupService, toastr) {
         this.router = router;
+        this.softwareTableGroupService = softwareTableGroupService;
+        this.toastr = toastr;
     }
     Software_Table_Component.prototype.ngOnInit = function () {
         if (!localStorage.getItem('access_token')) {
             this.router.navigate(['security_login']);
         }
+        console.log(this.getTableGroup());
+    };
+    Software_Table_Component.prototype.getTableGroup = function () {
+        this.tableGroupCollectionView = new wijmo.collections.CollectionView(this.softwareTableGroupService.getTableGroup());
+        this.tableGroupCollectionView.pageSize = 15;
     };
     return Software_Table_Component;
 }());
@@ -26,7 +35,9 @@ Software_Table_Component = __decorate([
         selector: 'software_table',
         templateUrl: 'app/software_table/software_table_template/software_table.html'
     }),
-    __metadata("design:paramtypes", [router_1.Router])
+    __metadata("design:paramtypes", [router_1.Router,
+        software_table_service_1.Software_TableGroup_Service,
+        ng2_toastr_1.ToastsManager])
 ], Software_Table_Component);
 exports.Software_Table_Component = Software_Table_Component;
 //# sourceMappingURL=software_table.component.js.map

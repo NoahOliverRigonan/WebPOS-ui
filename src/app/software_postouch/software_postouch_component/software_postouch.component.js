@@ -12,9 +12,10 @@ var core_1 = require("@angular/core");
 var software_postouch_service_1 = require("../software_postouch_service/software_postouch.service");
 var router_1 = require("@angular/router");
 var Software_Postouch_Component = (function () {
-    function Software_Postouch_Component(router, softwarePostouchService) {
+    function Software_Postouch_Component(router, softwarePostouchService, activatedRoute) {
         this.router = router;
         this.softwarePostouchService = softwarePostouchService;
+        this.activatedRoute = activatedRoute;
         this.filterTableSaleNoGroupSelectedValue = "1";
         this.filterTableUserGroupSelectedValue = "1";
         this.filterTableCodeSelectedValue = "1";
@@ -31,6 +32,13 @@ var Software_Postouch_Component = (function () {
         else {
             this.isTableGroupSelected = true;
         }
+    };
+    Software_Postouch_Component.prototype.getIdUrlParameter = function () {
+        var _this = this;
+        this.activatedRoute.params.subscribe(function (params) {
+            _this.postouchDetailId = params['id'];
+        });
+        return this.postouchDetailId;
     };
     Software_Postouch_Component.prototype.getTableGroup = function () {
         var _this = this;
@@ -77,11 +85,41 @@ var Software_Postouch_Component = (function () {
     Software_Postouch_Component.prototype.getTable = function (tableGroupId) {
         var _this = this;
         this.tableGroupCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTable(tableGroupId));
-        this.tableGroupCollectionView.pageSize = 10;
+        this.tableGroupCollectionView.pageSize = 5;
         this.tableGroupCollectionView.trackChanges = true;
         setTimeout(function () {
             _this.tableIndex = (_this.tableGroupCollectionView.pageIndex + 1) + " / " + _this.tableGroupCollectionView.pageCount;
         }, 200);
+    };
+    //NAVIGATE TO POSTOUCH DETAIL ROW : 1
+    Software_Postouch_Component.prototype.btnTableList1 = function () {
+        var currentSelectedItem = this.tableGroupCollectionView.currentItem;
+        this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo1Id]);
+    };
+    //NAVIGATE TO POSTOUCH DETAIL ROW : 2
+    Software_Postouch_Component.prototype.btnTableList2 = function () {
+        var currentSelectedItem = this.tableGroupCollectionView.currentItem;
+        this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo2Id]);
+    };
+    //NAVIGATE TO POSTOUCH DETAIL ROW : 3
+    Software_Postouch_Component.prototype.btnTableList3 = function () {
+        var currentSelectedItem = this.tableGroupCollectionView.currentItem;
+        this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo3Id]);
+    };
+    //NAVIGATE TO POSTOUCH DETAIL ROW : 4
+    Software_Postouch_Component.prototype.btnTableLis4 = function () {
+        var currentSelectedItem = this.tableGroupCollectionView.currentItem;
+        this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo4Id]);
+    };
+    //NAVIGATE TO POSTOUCH DETAIL ROW : 5
+    Software_Postouch_Component.prototype.btnTableLis5 = function () {
+        var currentSelectedItem = this.tableGroupCollectionView.currentItem;
+        this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo5Id]);
+    };
+    //NAVIGATE TO POSTOUCH DETAIL ROW : 6
+    Software_Postouch_Component.prototype.btnTableLis6 = function () {
+        var currentSelectedItem = this.tableGroupCollectionView.currentItem;
+        this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo6Id]);
     };
     Software_Postouch_Component.prototype.tableMoveToFirstPage = function () {
         this.tableGroupCollectionView.moveToFirstPage();
@@ -103,15 +141,25 @@ var Software_Postouch_Component = (function () {
         return new Date();
     };
     Software_Postouch_Component.prototype.ngOnInit = function () {
-        var _this = this;
         if (!localStorage.getItem('access_token')) {
             this.router.navigate(['security_login']);
         }
         // this.getTableSale();
+        // this.gridItemFormatter();
         this.getTableGroup();
-        setInterval(function () {
-            _this.setCurrentDate() ? document.getElementById("currentDateTime").innerHTML = _this.setCurrentDate().toDateString() + " || " + _this.setCurrentDate().toLocaleTimeString() : "NA";
-        }, 1000);
+        this.setTime();
+    };
+    //TIME 
+    Software_Postouch_Component.prototype.setTime = function () {
+        // setInterval(() => {
+        //    (<HTMLButtonElement>document.getElementById("currentDateTime")).innerHTML = this.setCurrentDate().toDateString() + " || " + this.setCurrentDate().toLocaleTimeString();
+        // }, 1000)
+    };
+    Software_Postouch_Component.prototype.refreshTableGroup = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.tableGroupList.refresh();
+        }, 50);
     };
     Software_Postouch_Component.prototype.btnTableGroup1Click = function () {
         var currentId = this.tableGroupList.currentItem;
@@ -143,6 +191,9 @@ var Software_Postouch_Component = (function () {
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup6Id);
     };
+    Software_Postouch_Component.prototype.btnModalForDelivery = function () {
+        document.getElementById("delivery").click();
+    };
     return Software_Postouch_Component;
 }());
 Software_Postouch_Component = __decorate([
@@ -151,7 +202,8 @@ Software_Postouch_Component = __decorate([
         templateUrl: 'app/software_postouch/software_postouch_template/software_postouch.html',
     }),
     __metadata("design:paramtypes", [router_1.Router,
-        software_postouch_service_1.Software_Postouch_Service])
+        software_postouch_service_1.Software_Postouch_Service,
+        router_1.ActivatedRoute])
 ], Software_Postouch_Component);
 exports.Software_Postouch_Component = Software_Postouch_Component;
 //# sourceMappingURL=software_postouch.component.js.map

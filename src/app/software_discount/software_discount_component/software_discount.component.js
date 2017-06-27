@@ -13,9 +13,10 @@ var router_1 = require("@angular/router");
 var software_discount_service_1 = require("../software_discount_service/software_discount.service");
 var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_Discount_Component = (function () {
-    function Software_Discount_Component(router, softwareDiscountService, toastr, vcRef) {
+    function Software_Discount_Component(router, softwareDiscountService, errorToastr, toastr, vcRef) {
         this.router = router;
         this.softwareDiscountService = softwareDiscountService;
+        this.errorToastr = errorToastr;
         this.toastr = toastr;
         this.vcRef = vcRef;
         this.toastr.setRootViewContainerRef(vcRef);
@@ -26,16 +27,31 @@ var Software_Discount_Component = (function () {
         }
         this.getDiscount();
     };
+    Software_Discount_Component.prototype.btnAddDiscount = function () {
+        if (this.lock != true) {
+            this.softwareDiscountService.postDiscountData(null);
+        }
+    };
     Software_Discount_Component.prototype.getDiscount = function () {
         this.listDiscountCollectionView = new wijmo.collections.CollectionView(this.softwareDiscountService.getListOfDiscount());
     };
     Software_Discount_Component.prototype.deleteDiscount = function () {
+        var errorToastr;
         var toastr;
         var currentDiscountItem = this.listDiscountCollectionView.currentItem;
-        this.softwareDiscountService.deleteDiscountItem(currentDiscountItem.Id, toastr);
+        if (currentDiscountItem.IsLocked == true) {
+            this.errorToastr.error('', 'You cant delete Lock Item');
+        }
+        else {
+            this.softwareDiscountService.deleteDiscountItem(currentDiscountItem.Id, toastr);
+        }
     };
     Software_Discount_Component.prototype.deleteDiscountModal = function () {
         document.getElementById("delete-modal-warning-id").click();
+    };
+    Software_Discount_Component.prototype.btnEditItem = function () {
+        var currentSelectedItem = this.listDiscountCollectionView.currentItem;
+        this.router.navigate(['/discountdetail', currentSelectedItem.Id]);
     };
     return Software_Discount_Component;
 }());
@@ -46,6 +62,7 @@ Software_Discount_Component = __decorate([
     }),
     __metadata("design:paramtypes", [router_1.Router,
         software_discount_service_1.Software_Discount_Service,
+        ng2_toastr_1.ToastsManager,
         ng2_toastr_1.ToastsManager,
         core_1.ViewContainerRef])
 ], Software_Discount_Component);

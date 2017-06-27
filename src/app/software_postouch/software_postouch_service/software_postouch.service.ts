@@ -46,6 +46,13 @@ export class Software_Postouch_Service {
                     let fixIndex = 5;
                     let fixIndexValue = 5;
 
+                    let tableGroudIdDineIn = results[0].Id;
+                    let tableGroudIdWalkIn = results[1].Id;
+                    let tableGroudIdDelivery = results[2].Id;
+
+                    let tableGroudIdDineTableGroup = results[0].TableGroup;
+                    let tableGroudIdWalkInTableGroup = results[1].TableGroup;
+                    let tableGroudIdDeliveryTableGroup = results[2].TableGroup;
 
                     for (var i = 0; i <= (results.length - 1) + 5; i++) {
                         if (fixIndex == i) {
@@ -109,8 +116,15 @@ export class Software_Postouch_Service {
                                 tableGroup5Id: tableGroup5Id,
                                 tableGroup5: tableGroup5,
                                 tableGroup6Id: tableGroup6Id,
-                                tableGroup6: tableGroup6
+                                tableGroup6: tableGroup6,
                             });
+
+                            if (tableGroudIdWalkIn == 2) {
+                                (<HTMLButtonElement>document.getElementById("walkIn")).innerHTML = tableGroudIdWalkInTableGroup;
+                            }
+                            if (tableGroudIdDelivery == 3) {
+                                (<HTMLButtonElement>document.getElementById("delivery")).innerHTML = tableGroudIdDeliveryTableGroup;
+                            }
 
                             fixIndex += 6;
                         }
@@ -128,7 +142,7 @@ export class Software_Postouch_Service {
     }
 
     //MSTTABLE
-    public getListTable(tableId: String): wijmo.collections.ObservableArray {
+    public getListTable(tableId: number): wijmo.collections.ObservableArray {
         let tableObsevableArray = new wijmo.collections.ObservableArray();
         let url = "http://localhost:2558/api/table/list/" + tableId;
         this.http.get(url, this.options).subscribe(
@@ -228,6 +242,8 @@ export class Software_Postouch_Service {
 
                         }
                     }
+
+                    (<HTMLButtonElement>document.getElementById("refresh-table-group")).click();
                 }
             }
         );
@@ -260,5 +276,31 @@ export class Software_Postouch_Service {
         );
 
         return tableSaleObsevableArray;
+    }
+
+    //TABLE GROUP FOR WALKIN
+    public getListTableGroupWalkin(): wijmo.collections.ObservableArray {
+        let tableGroupObsevableArray = new wijmo.collections.ObservableArray();
+        let url = "http://localhost:2558/api/tableGroup/get";
+        this.http.get(url, this.options).subscribe(
+            response => {
+                var results = response.json();
+                if (results.length > 0) {
+                    for (var i = 0; i <= results.length - 1; i++) {
+                        tableGroupObsevableArray.push({
+                            Id: results[i].Id,
+                            EntryUserId: results[i].EntryUserId,
+                            EntryDateTime: results[i].EntryDateTime,
+                            TableGroup: results[i].TableGroup,
+                            UpdateDateTime: results[i].UpdateDateTime,
+                            UpdateUserId: results[i].UpdateUserId,
+                            IsLocked: results[i].IsLocked,
+                        });
+                    }
+                }
+            }
+        );
+
+        return tableGroupObsevableArray;
     }
 }

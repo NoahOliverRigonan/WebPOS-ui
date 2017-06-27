@@ -11,17 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
-// import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_Itemdetail_Service = (function () {
-    function Software_Itemdetail_Service(router, http) {
+    function Software_Itemdetail_Service(router, http, toastr, activateroute) {
         this.router = router;
         this.http = http;
+        this.toastr = toastr;
+        this.activateroute = activateroute;
         //  Global Variables
         this.headers = new http_1.Headers({
             'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
             'Content-Type': 'application/json'
         });
         this.options = new http_1.RequestOptions({ headers: this.headers });
+        // this.toastr.setRootViewContainerRef(vcRef);
     }
     // UPLOAD IMAGE
     // public getUnittById(unitId: number) {
@@ -101,10 +104,14 @@ var Software_Itemdetail_Service = (function () {
     //ADD ITEM
     // toastr: ToastsManager
     // update ITEM
-    Software_Itemdetail_Service.prototype.putItemData = function (id, itemObject) {
+    Software_Itemdetail_Service.prototype.putItemData = function (id, itemObject, toastr) {
+        var _this = this;
         var url = "http://localhost:2558/api/item/put/" + id;
         this.http.put(url, JSON.stringify(itemObject), this.options).subscribe(function (response) {
-            console.log('', 'Save Successful');
+            _this.toastr.success('', 'Edit Successful');
+            setTimeout(function () {
+                _this.router.navigate(['/item']);
+            }, 1000);
         }, function (error) {
             alert("Error");
         });
@@ -114,7 +121,9 @@ var Software_Itemdetail_Service = (function () {
 Software_Itemdetail_Service = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [router_1.Router,
-        http_1.Http])
+        http_1.Http,
+        ng2_toastr_1.ToastsManager,
+        router_1.ActivatedRoute])
 ], Software_Itemdetail_Service);
 exports.Software_Itemdetail_Service = Software_Itemdetail_Service;
 //# sourceMappingURL=software_itemdetail.service.js.map

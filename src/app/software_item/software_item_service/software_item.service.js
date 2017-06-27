@@ -12,11 +12,13 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
 var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
+var ng2_slim_loading_bar_1 = require("ng2-slim-loading-bar");
 var Software_Item_Service = (function () {
-    function Software_Item_Service(router, http, toastr) {
+    function Software_Item_Service(router, http, toastr, slimLoadingBarService) {
         this.router = router;
         this.http = http;
         this.toastr = toastr;
+        this.slimLoadingBarService = slimLoadingBarService;
         //  Global Variables
         this.headers = new http_1.Headers({
             'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
@@ -71,20 +73,25 @@ var Software_Item_Service = (function () {
         });
         return itemObsevableArray;
     };
+    Software_Item_Service.prototype.startLoading = function () {
+        this.slimLoadingBarService.progress = 30;
+        this.slimLoadingBarService.start();
+    };
     // delete ITEM
     Software_Item_Service.prototype.deleteItem = function (id, toastr) {
         var _this = this;
         var url = "http://localhost:2558/api/item/delete/" + id;
         this.http.delete(url, this.options).subscribe(function (response) {
-            _this.toastr.success('', 'Successfully Deleted');
+            _this.startLoading();
+            _this.toastr.info('', 'Successfully Deleted');
             setTimeout(function () {
                 document.getElementById("refreshGrid").click();
             }, 1000);
         }, function (error) {
-            document.getElementById("delete-modal-warning-id").click();
+            _this.toastr.error(' ', 'Bad Request');
         });
     };
-    Software_Item_Service.prototype.postItemData = function (itemObject) {
+    Software_Item_Service.prototype.postItemData = function (itemObject, toastr) {
         var _this = this;
         var url = "http://localhost:2558/api/item/post";
         this.http.post(url, JSON.stringify(itemObject), this.options).subscribe(function (response) {
@@ -93,10 +100,10 @@ var Software_Item_Service = (function () {
                 _this.router.navigate(['/itemdetail', results]);
             }
             else {
-                alert("Error");
+                _this.toastr.error('', 'Bad Request');
             }
         }, function (error) {
-            alert("Error");
+            _this.toastr.error('', 'Bad Request');
         });
     };
     return Software_Item_Service;
@@ -105,7 +112,8 @@ Software_Item_Service = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [router_1.Router,
         http_1.Http,
-        ng2_toastr_1.ToastsManager])
+        ng2_toastr_1.ToastsManager,
+        ng2_slim_loading_bar_1.SlimLoadingBarService])
 ], Software_Item_Service);
 exports.Software_Item_Service = Software_Item_Service;
 //# sourceMappingURL=software_item.service.js.map

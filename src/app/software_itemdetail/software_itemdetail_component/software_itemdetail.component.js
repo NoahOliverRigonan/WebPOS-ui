@@ -11,15 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var software_itemdetail_service_1 = require("../software_itemdetail_service/software_itemdetail.service");
-// import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_Itemdetail_Component = (function () {
-    function Software_Itemdetail_Component(router, softwareItemDetailService, activatedRoute) {
+    function Software_Itemdetail_Component(router, softwareItemDetailService, activatedRoute, toastr, vcRef) {
         this.router = router;
         this.softwareItemDetailService = softwareItemDetailService;
         this.activatedRoute = activatedRoute;
+        this.toastr = toastr;
+        this.vcRef = vcRef;
         //Other Method
         this.itemBoolean = true;
         this.refreshPage = true;
+        this.toastr.setRootViewContainerRef(vcRef);
     }
     // get url Id parameter
     Software_Itemdetail_Component.prototype.getIdUrlParameter = function () {
@@ -28,12 +31,6 @@ var Software_Itemdetail_Component = (function () {
             _this.itemId = params['id'];
         });
         return this.itemId;
-    };
-    Software_Itemdetail_Component.prototype.ngOnInit = function () {
-        if (!localStorage.getItem('access_token')) {
-            this.router.navigate(['security_login']);
-        }
-        this.itemCollectionView = new wijmo.collections.CollectionView(this.softwareItemDetailService.getItemDetail(this.getIdUrlParameter()));
     };
     //
     // WJMO-COMBO-BOX - UNIT & SUPPLIER & TAX & ACCOUNT
@@ -159,7 +156,8 @@ var Software_Itemdetail_Component = (function () {
     };
     //SAVE ITEM 
     Software_Itemdetail_Component.prototype.btnSaveEditItem = function () {
-        this.softwareItemDetailService.putItemData(this.getIdUrlParameter(), this.getDataItemObject());
+        var toastr;
+        this.softwareItemDetailService.putItemData(this.getIdUrlParameter(), this.getDataItemObject(), toastr);
         console.log(this.getDataItemObject());
     };
     //value 
@@ -175,21 +173,47 @@ var Software_Itemdetail_Component = (function () {
     };
     //LOCK FIELDS
     Software_Itemdetail_Component.prototype.LockDataItem = function () {
-        document.getElementById("ItemCode").disabled = true;
-        document.getElementById("BarCode").disabled = true;
-        document.getElementById("ItemDescription").disabled = true;
-        document.getElementById("Alias").disabled = true;
-        document.getElementById("Category").disabled = true;
-        document.getElementById("Cost").disabled = true;
-        document.getElementById("MarkUp").disabled = true;
-        document.getElementById("Price").disabled = true;
-        document.getElementById("StockLevel").disabled = true;
-        document.getElementById("OnHand").disabled = true;
-        document.getElementById("Inventory").disabled = true;
-        document.getElementById("Package").disabled = true;
-        document.getElementById("ExpDate").disabled = true;
-        document.getElementById("LotNumber").disabled = true;
-        document.getElementById("Remarks").disabled = true;
+        if (this.itemBoolean == true) {
+            document.getElementById("ItemCode").disabled = true;
+            document.getElementById("BarCode").disabled = true;
+            document.getElementById("ItemDescription").disabled = true;
+            document.getElementById("Alias").disabled = true;
+            document.getElementById("Category").disabled = true;
+            document.getElementById("Cost").disabled = true;
+            document.getElementById("MarkUp").disabled = true;
+            document.getElementById("Price").disabled = true;
+            document.getElementById("StockLevel").disabled = true;
+            document.getElementById("OnHand").disabled = true;
+            document.getElementById("Inventory").disabled = true;
+            document.getElementById("Package").disabled = true;
+            document.getElementById("GenericName").disabled = true;
+            document.getElementById("LotNumber").disabled = true;
+            document.getElementById("Remarks").disabled = true;
+        }
+        else {
+            document.getElementById("ItemCode").disabled = false;
+            document.getElementById("BarCode").disabled = false;
+            document.getElementById("ItemDescription").disabled = false;
+            document.getElementById("Alias").disabled = false;
+            document.getElementById("Category").disabled = false;
+            document.getElementById("Cost").disabled = false;
+            document.getElementById("MarkUp").disabled = false;
+            document.getElementById("Price").disabled = false;
+            document.getElementById("StockLevel").disabled = false;
+            document.getElementById("OnHand").disabled = false;
+            document.getElementById("Inventory").disabled = false;
+            document.getElementById("Package").disabled = false;
+            document.getElementById("GenericName").disabled = false;
+            document.getElementById("LotNumber").disabled = false;
+            document.getElementById("Remarks").disabled = false;
+        }
+    };
+    Software_Itemdetail_Component.prototype.ngOnInit = function () {
+        if (!localStorage.getItem('access_token')) {
+            this.router.navigate(['security_login']);
+        }
+        this.itemCollectionView = new wijmo.collections.CollectionView(this.softwareItemDetailService.getItemDetail(this.getIdUrlParameter()));
+        this.LockDataItem();
     };
     return Software_Itemdetail_Component;
 }());
@@ -200,7 +224,9 @@ Software_Itemdetail_Component = __decorate([
     }),
     __metadata("design:paramtypes", [router_1.Router,
         software_itemdetail_service_1.Software_Itemdetail_Service,
-        router_1.ActivatedRoute])
+        router_1.ActivatedRoute,
+        ng2_toastr_1.ToastsManager,
+        core_1.ViewContainerRef])
 ], Software_Itemdetail_Component);
 exports.Software_Itemdetail_Component = Software_Itemdetail_Component;
 //# sourceMappingURL=software_itemdetail.component.js.map

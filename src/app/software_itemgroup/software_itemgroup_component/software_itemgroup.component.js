@@ -10,14 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var software_itemgroup_service_1 = require("../software_itemgroup_service/software_itemgroup.service");
 var Software_Itemgroup_Component = (function () {
-    function Software_Itemgroup_Component(router) {
+    function Software_Itemgroup_Component(router, softwareItemGroupService) {
         this.router = router;
+        this.softwareItemGroupService = softwareItemGroupService;
     }
+    Software_Itemgroup_Component.prototype.getItemGroupList = function () {
+        this.listOfItemGroup = new wijmo.collections.CollectionView(this.softwareItemGroupService.getListOfItem());
+        this.listOfItemGroup.pageSize = 15;
+        this.listOfItemGroup.trackChanges = true;
+    };
     Software_Itemgroup_Component.prototype.ngOnInit = function () {
         if (!localStorage.getItem('access_token')) {
             this.router.navigate(['security_login']);
         }
+        this.getItemGroupList();
     };
     return Software_Itemgroup_Component;
 }());
@@ -26,7 +34,8 @@ Software_Itemgroup_Component = __decorate([
         selector: 'software_itemgroup',
         templateUrl: 'app/software_itemgroup/software_itemgroup_template/software_itemgroup.html'
     }),
-    __metadata("design:paramtypes", [router_1.Router])
+    __metadata("design:paramtypes", [router_1.Router,
+        software_itemgroup_service_1.Software_ItemGroup_Service])
 ], Software_Itemgroup_Component);
 exports.Software_Itemgroup_Component = Software_Itemgroup_Component;
 //# sourceMappingURL=software_itemgroup.component.js.map

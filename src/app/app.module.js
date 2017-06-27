@@ -15,6 +15,8 @@ var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var ng2_toastr_2 = require("ng2-toastr/ng2-toastr");
 var ng2_toastr_3 = require("ng2-toastr/ng2-toastr");
 var animations_1 = require("@angular/platform-browser/animations");
+var ng2_slim_loading_bar_1 = require("ng2-slim-loading-bar");
+// import { MaterializeModule } from "angular2-materialize";
 var wjFlexGrid = require("wijmo/wijmo.angular2.grid");
 var wjInput = require("wijmo/wijmo.angular2.input");
 // components
@@ -55,13 +57,25 @@ var software_utilities_component_1 = require("./software_utilities/software_util
 //SOFTWARE DETAIL
 var software_itemdetail_component_1 = require("./software_itemdetail/software_itemdetail_component/software_itemdetail.component");
 var software_discountdetail_component_1 = require("./software_discountdetail/software_discountdetail_component/software_discountdetail.component");
+var software_postouchdetail_component_1 = require("./software_postouchdetail/software_postouchdetail_component/software_postouchdetail.component");
+var software_supplierdetail_component_1 = require("./software_supplier_detail/software_supplierdetail_component/software_supplierdetail.component");
+var software_userdetail_component_1 = require("./software_userdetail/software_userdetail_component/software_userdetail.component");
 // SERVICES
 var security_login_service_1 = require("./security_login/security_login_service/security_login.service");
 var software_postouch_service_1 = require("./software_postouch/software_postouch_service/software_postouch.service");
 var software_item_service_1 = require("./software_item/software_item_service/software_item.service");
+var software_itemgroup_service_1 = require("./software_itemgroup/software_itemgroup_service/software_itemgroup.service");
+var software_itemcomponent_service_1 = require("./software_itemcomponent/software_itemcomponent_service/software_itemcomponent.service");
 var software_itemdetail_service_1 = require("./software_itemdetail/software_itemdetail_service/software_itemdetail.service");
 var software_discount_service_1 = require("./software_discount/software_discount_service/software_discount.service");
 var software_discountdetail_service_1 = require("./software_discountdetail/software_discountdetail_service/software_discountdetail.service");
+var software_table_service_1 = require("./software_table/software_table_service/software_table.service");
+var software_postouchdetail_service_1 = require("./software_postouchdetail/software_postouchdetail_service/software_postouchdetail.service");
+var software_user_service_1 = require("./software_user/software_user_service/software_user.service");
+var software_customer_service_1 = require("./software_customer/software_customer_service/software_customer.service");
+var software_supplier_service_1 = require("./software_supplier/software_supplier_service/software_supplier.service");
+var software_supplierdetail_service_1 = require("./software_supplier_detail/software_supplierdetail_service/software_supplierdetail.service");
+var software_userdetail_service_1 = require("./software_userdetail/software_userdetail_service/software_userdetail.service");
 // paths and Routes
 var appRoutes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -99,7 +113,10 @@ var appRoutes = [
     { path: 'utilities', component: software_utilities_component_1.Software_Utilities_Component },
     //POS13 SOFTWARE DETAIL
     { path: 'itemdetail/:id', component: software_itemdetail_component_1.Software_Itemdetail_Component },
-    { path: 'discountdetail', component: software_discountdetail_component_1.Software_Discountdetail_Component },
+    { path: 'discountdetail/:id', component: software_discountdetail_component_1.Software_Discountdetail_Component },
+    { path: 'postouchdetail/:id', component: software_postouchdetail_component_1.Software_PostouchDetail_Component },
+    { path: 'supplierdetail/:id', component: software_supplierdetail_component_1.Software_SupplierDetail_Component },
+    { path: 'userdetail/:id', component: software_userdetail_component_1.Software_UserDetail_Component },
 ];
 // ng_modules
 var AppModule = (function () {
@@ -115,7 +132,8 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             ng2_toastr_2.ToastModule,
-            animations_1.BrowserAnimationsModule
+            animations_1.BrowserAnimationsModule,
+            ng2_slim_loading_bar_1.SlimLoadingBarModule.forRoot(),
         ],
         declarations: [
             wjFlexGrid.WjFlexGrid,
@@ -159,18 +177,31 @@ AppModule = __decorate([
             software_utilities_component_1.Software_Utilities_Component,
             // SOFTWARE DETAIL 
             software_itemdetail_component_1.Software_Itemdetail_Component,
-            software_discountdetail_component_1.Software_Discountdetail_Component
+            software_discountdetail_component_1.Software_Discountdetail_Component,
+            software_postouchdetail_component_1.Software_PostouchDetail_Component,
+            software_supplierdetail_component_1.Software_SupplierDetail_Component,
+            software_userdetail_component_1.Software_UserDetail_Component,
         ],
         providers: [
             security_login_service_1.Security_Login_Service,
             software_postouch_service_1.Software_Postouch_Service,
             software_item_service_1.Software_Item_Service,
+            software_itemgroup_service_1.Software_ItemGroup_Service,
             software_discount_service_1.Software_Discount_Service,
-            software_discountdetail_service_1.Software_Discountdetail_Service,
+            software_table_service_1.Software_TableGroup_Service,
+            software_itemcomponent_service_1.Software_ItemComponent_Service,
+            software_user_service_1.Software_User_Service,
+            software_customer_service_1.Software_Customer_Service,
+            software_supplier_service_1.Software_Supplier_Service,
+            software_userdetail_service_1.Software_UserDetail_Service,
+            //Other
             ng2_toastr_1.ToastsManager,
             ng2_toastr_3.ToastOptions,
             //SOFTWARE DETAIL SERVICE PROVIDERS
             software_itemdetail_service_1.Software_Itemdetail_Service,
+            software_postouchdetail_service_1.Software_PostouchDetail_Service,
+            software_discountdetail_service_1.Software_Discountdetail_Service,
+            software_supplierdetail_service_1.Software_SupplierDetail_Service,
         ],
         bootstrap: [
             app_component_1.AppComponent
