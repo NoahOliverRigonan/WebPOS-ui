@@ -90,9 +90,7 @@ var Software_Discount_Service = (function () {
                 document.getElementById("refreshGrid").click();
             }, 1000);
         }, function (error) {
-            setTimeout(function () {
-                alert("Error");
-            }, 1000);
+            alert("Error");
         });
     };
     return Software_Discount_Service;
