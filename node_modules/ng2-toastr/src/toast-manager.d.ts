@@ -1,16 +1,17 @@
-import { ComponentRef, ApplicationRef, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { ComponentRef, ApplicationRef, NgZone, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { ToastOptions } from './toast-options';
 import { Toast } from './toast';
 import { Observable } from 'rxjs/Observable';
 export declare class ToastsManager {
     private componentFactoryResolver;
+    private ngZone;
     private appRef;
     private options;
     container: ComponentRef<any>;
     private index;
     private toastClicked;
     private _rootViewContainerRef;
-    constructor(componentFactoryResolver: ComponentFactoryResolver, appRef: ApplicationRef, options: ToastOptions);
+    constructor(componentFactoryResolver: ComponentFactoryResolver, ngZone: NgZone, appRef: ApplicationRef, options: ToastOptions);
     setRootViewContainerRef(vRef: ViewContainerRef): void;
     onClickToast(): Observable<Toast>;
     show(toast: Toast, options?: Object): Promise<Toast>;
