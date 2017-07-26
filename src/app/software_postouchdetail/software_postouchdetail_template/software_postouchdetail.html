@@ -26,8 +26,8 @@
                 <div class="">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
+                            <div class="panel panel-default style-panel-default">
+                                <div class="panel-heading style-panel-heading">
                                     <div class="row">
                                         <div class="col-md-1">
                                             <button type="button" style="height: 88px;" class="btn btn-lg btn-primary btn-block pos-btn" (click)="itemGroupMoveToPreviousPage()">
@@ -102,7 +102,7 @@
                                         </tr>
                                     </Item>-->
                                 </div>
-                                <div class="panel-body">
+                                <div class="panel-body style-panel-body">
                                     <div class="row">
                                         <div class="col-md-1">
                                             <button type="button" style="height: 432px;" class="btn btn-lg btn-primary btn-block pos-btn" (click)="ItemMoveToPreviousPage()">
@@ -151,7 +151,7 @@
                                                     </wj-flex-grid-column>
                                                     <wj-flex-grid-column [header]="'Detail'" [binding]="'itemGroupItem6'" [isReadOnly]="true" [width]="'*'">
                                                         <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                                            <button class="btn btn-primary btn-responsive btn-md btn-block pos-btn" (click)="btnItemList6()">
+                                                            <button class="btn btn-primary btn-responsive btn-md btn-block pos-btn" (click)="keypadModal()">
                                                                     &nbsp;{{ '' }} {{ cell.item.itemGroupItem6 }} {{ '' }}&nbsp;
                                                                 </button>
                                                         </template>
@@ -166,7 +166,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-footer">
+                                <div class="panel-footer style-panel-footer">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button class="btn btn-info pos-btn" id="delivery">
@@ -182,8 +182,8 @@
             </div>
             <div class="col-md-5">
                 <div class="">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
+                    <div class="panel panel-default style-panel-default">
+                        <div class="panel-body style-panel-body">
                             <wj-flex-grid [itemsSource]="ItemPostouchSaleCollectionView" [selectionMode]="3" [headersVisibility]="1">
                                 <wj-flex-grid-column [header]="'Item'" [binding]="''" [isReadOnly]="true" [width]="500">
                                 </wj-flex-grid-column>
@@ -222,49 +222,9 @@
             <div class="modal-body panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <!--<form materialize class="col s12">
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-                                    <label for="first_name">First Name</label>
-                                </div>
-                            </div>
-                        </form>-->
-                        <h1 style="color:black;background:whitesmoke; min-height:50px; padding:5px; margin-top:0;">
-                            {{log}}
-                        </h1>
-                        <!--<div class="input-group">
-                            <input class="form-control" #numOne aria-label="Amount (to the nearest dollar)">
-                            <span class="input-group-addon">DEL</span>
-                        </div>
-                        <div class="input-group">
-                            <input class="form-control" #numTwo aria-label="Amount (to the nearest dollar)">
-                            <span class="input-group-addon">DEL</span>
-                        </div>
-                        <br/>
-                        <button class="form-control" (click)="addNumbers(numOne.value,numTwo.value)">ADD</button>
-                        <input [hidden]="true" value="1" #numOne [(ngModel)]="textValue">
-                        <input [hidden]="true" value="2" #numTwo [(ngModel)]="textValue">
-                        <input [hidden]="true" value="3" #numThree [(ngModel)]="textValue">
-                        <input [hidden]="true" value="4" #numFour [(ngModel)]="textValue">
-                        <input [hidden]="true" value="5" #numFive [(ngModel)]="textValue">
-                        <input [hidden]="true" value="6" #numSix [(ngModel)]="textValue">
-                        <input [hidden]="true" value="7" #numSeven [(ngModel)]="textValue">
-                        <input [hidden]="true" value="8" #numEight [(ngModel)]="textValue">
-                        <input [hidden]="true" value="9" #numNine [(ngModel)]="textValue">
-                        <input [hidden]="true" value="0" #numZero [(ngModel)]="textValue">-->
-                        <!--<div class="table-responsive">
+                        <input type="text" class="form-control" />
+                        <div class="table-responsive">
                             <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
@@ -292,36 +252,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>-->
-                        <div id="container">
-                            <ul id="keyboard">
-                                <li class="letter" (click)="logText(textbox1.value)">1</li>
-                                <li class="letter" (click)="logText(textbox2.value)">2</li>
-                                <li class="letter" (click)="logText(textbox3.value)">3</li>
-                                <li class="letter clearl" (click)="logText(textbox4.value)">4</li>
-                                <li class="letter" (click)="logText(textbox5.value)">5</li>
-                                <li class="letter" (click)="logText(textbox6.value)">6</li>
-
-                                <li class="letter clearl" (click)="logText(textbox7.value)">7</li>
-                                <li class="letter " (click)="logText(textbox8.value)">8</li>
-                                <li class="letter" (click)="logText(textbox9.value)">9</li>
-                                <li class="letter" (click)="logText(textbox0.value)">0</li>
-                                <li class="switch">abc</li>
-                                <li class="return">retur</li>
-                                <li class="delete lastitem" (click)="log=''">DEL</li>
-                            </ul>
                         </div>
-
-                        <input #textbox1 type="text" [hidden]="true" [(ngModel)]="num1" required>
-                        <input #textbox2 type="text" [hidden]="true" [(ngModel)]="num2" required>
-                        <input #textbox3 type="text" [hidden]="true" [(ngModel)]="num3" required>
-                        <input #textbox4 type="text" [hidden]="true" [(ngModel)]="num4" required>
-                        <input #textbox5 type="text" [hidden]="true" [(ngModel)]="num5" required>
-                        <input #textbox6 type="text" [hidden]="true" [(ngModel)]="num6" required>
-                        <input #textbox7 type="text" [hidden]="true" [(ngModel)]="num7" required>
-                        <input #textbox8 type="text" [hidden]="true" [(ngModel)]="num8" required>
-                        <input #textbox9 type="text" [hidden]="true" [(ngModel)]="num9" required>
-                        <input #textbox0 type="text" [hidden]="true" [(ngModel)]="num0" required>
                     </div>
                 </div>
             </div>

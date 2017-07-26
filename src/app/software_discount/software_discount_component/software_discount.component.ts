@@ -11,7 +11,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class Software_Discount_Component implements OnInit {
     private listDiscountCollectionView: wijmo.collections.CollectionView;
     //Other Method
-    private lock:Boolean;
+    private lock: Boolean;
 
     constructor(
         private router: Router,
@@ -30,7 +30,7 @@ export class Software_Discount_Component implements OnInit {
         this.getDiscount();
     }
 
-     public btnAddDiscount(): void {
+    public btnAddDiscount(): void {
         if (this.lock != true) {
             this.softwareDiscountService.postDiscountData(null);
         }
@@ -40,20 +40,20 @@ export class Software_Discount_Component implements OnInit {
         this.listDiscountCollectionView = new wijmo.collections.CollectionView(this.softwareDiscountService.getListOfDiscount());
     }
 
+    public deleteDiscountModal() {
+        (<HTMLButtonElement>document.getElementById("delete-modal-warning-id")).click();
+    }
+
     public deleteDiscount() {
         let errorToastr: ToastsManager;
         let toastr: ToastsManager;
         let currentDiscountItem = this.listDiscountCollectionView.currentItem;
         if (currentDiscountItem.IsLocked == true) {
-            this.errorToastr.error('','You cant delete Lock Item');
+            this.errorToastr.error('', 'You cant delete Lock Item');
         }
-        else{
+        else {
             this.softwareDiscountService.deleteDiscountItem(currentDiscountItem.Id, toastr)
         }
-    }
-
-    public deleteDiscountModal() {
-        (<HTMLButtonElement>document.getElementById("delete-modal-warning-id")).click();
     }
 
     public btnEditItem() {

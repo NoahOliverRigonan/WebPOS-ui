@@ -28,13 +28,14 @@
 
       '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
       // other libraries
-      'rxjs': 'npm:rxjs',
+      'rxjs': 'node_modules/rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      'ng2-slim-loading-bar': 'node_modules/ng2-slim-loading-bar/bundles/index.umd.js'
+      'ng2-slim-loading-bar': 'npm:ng2-slim-loading-bar/bundles/index.umd.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
       app: {
+        main: 'main.js',
         defaultExtension: 'js',
         meta: {
           './*.js': {

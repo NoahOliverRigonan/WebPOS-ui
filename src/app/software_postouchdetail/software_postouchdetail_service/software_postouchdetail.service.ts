@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions } from '@angular/http';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 
 @Injectable()
@@ -15,6 +16,7 @@ export class Software_PostouchDetail_Service {
     constructor(
         private router: Router,
         private http: Http,
+        private toastr: ToastsManager,
     ) { }
 
     //MST ITEM GROUP
@@ -346,6 +348,24 @@ export class Software_PostouchDetail_Service {
 
         return tableObsevableArray;
     }
+
+
+
+
+    // public deleteItem(id: number, toastr: ToastsManager) {
+    //     let url = "http://localhost:2558/api/item/delete/" + id;
+    //     this.http.delete(url, this.options).subscribe(
+    //         response => {
+    //             this.toastr.info('', 'Successfully Deleted');
+    //             setTimeout(() => {
+    //                 (<HTMLButtonElement>document.getElementById("refreshGrid")).click();
+    //             }, 1000)
+    //         },
+    //         error => {
+    //             this.toastr.error(' ', 'Bad Request');
+    //         }
+    //     )
+    // }
 
 
 

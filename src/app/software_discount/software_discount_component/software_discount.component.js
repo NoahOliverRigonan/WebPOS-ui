@@ -35,6 +35,9 @@ var Software_Discount_Component = (function () {
     Software_Discount_Component.prototype.getDiscount = function () {
         this.listDiscountCollectionView = new wijmo.collections.CollectionView(this.softwareDiscountService.getListOfDiscount());
     };
+    Software_Discount_Component.prototype.deleteDiscountModal = function () {
+        document.getElementById("delete-modal-warning-id").click();
+    };
     Software_Discount_Component.prototype.deleteDiscount = function () {
         var errorToastr;
         var toastr;
@@ -45,9 +48,6 @@ var Software_Discount_Component = (function () {
         else {
             this.softwareDiscountService.deleteDiscountItem(currentDiscountItem.Id, toastr);
         }
-    };
-    Software_Discount_Component.prototype.deleteDiscountModal = function () {
-        document.getElementById("delete-modal-warning-id").click();
     };
     Software_Discount_Component.prototype.btnEditItem = function () {
         var currentSelectedItem = this.listDiscountCollectionView.currentItem;

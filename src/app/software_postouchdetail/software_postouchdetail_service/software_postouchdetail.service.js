@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
+var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_PostouchDetail_Service = (function () {
-    function Software_PostouchDetail_Service(router, http) {
+    function Software_PostouchDetail_Service(router, http, toastr) {
         this.router = router;
         this.http = http;
+        this.toastr = toastr;
         //  Global Variables
         this.headers = new http_1.Headers({
             'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
@@ -319,7 +321,8 @@ var Software_PostouchDetail_Service = (function () {
 Software_PostouchDetail_Service = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [router_1.Router,
-        http_1.Http])
+        http_1.Http,
+        ng2_toastr_1.ToastsManager])
 ], Software_PostouchDetail_Service);
 exports.Software_PostouchDetail_Service = Software_PostouchDetail_Service;
 //# sourceMappingURL=software_postouchdetail.service.js.map

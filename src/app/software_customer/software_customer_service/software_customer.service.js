@@ -58,6 +58,38 @@ var Software_Customer_Service = (function () {
         });
         return customerObsevableArray;
     };
+    // public startLoading() {
+    //     this.slimLoadingBarService.progress = 30;
+    //     this.slimLoadingBarService.start();
+    // }
+    //delete CUSTOMER
+    Software_Customer_Service.prototype.deleteCustomer = function (id, toastr) {
+        var _this = this;
+        var url = "http://localhost:2558/api/customer/delete/" + id;
+        this.http.delete(url, this.options).subscribe(function (response) {
+            _this.toastr.info('', 'Successfully Deleted');
+            setTimeout(function () {
+                document.getElementById("refreshGrid").click();
+            }, 1000);
+        }, function (error) {
+            _this.toastr.error(' ', 'Bad Request');
+        });
+    };
+    Software_Customer_Service.prototype.postCustomerData = function (customerObject) {
+        var _this = this;
+        var url = "http://localhost:2558/api/customer/post";
+        this.http.post(url, JSON.stringify(customerObject), this.options).subscribe(function (response) {
+            var results = response.json();
+            if (results > 0) {
+                _this.router.navigate(['/customerdetail', results]);
+            }
+            else {
+                _this.toastr.error('', 'Bad Request');
+            }
+        }, function (error) {
+            _this.toastr.error('', 'Bad Request');
+        });
+    };
     return Software_Customer_Service;
 }());
 Software_Customer_Service = __decorate([

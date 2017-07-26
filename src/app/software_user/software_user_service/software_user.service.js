@@ -80,10 +80,22 @@ var Software_User_Service = (function () {
                 _this.router.navigate(['/userdetail', results]);
             }
             else {
-                _this.toastr.error('', 'Bad Request');
+                _this.toastr.error('', 'Error');
             }
         }, function (error) {
             _this.toastr.error('', 'Bad Request');
+        });
+    };
+    Software_User_Service.prototype.deleteUserData = function (id, toastr) {
+        var _this = this;
+        var url = "http://localhost:2558/api/user/delete/" + id;
+        this.http.delete(url, this.options).subscribe(function (response) {
+            _this.toastr.info('', 'Successfully Deleted');
+            setTimeout(function () {
+                document.getElementById("refreshGrid").click();
+            }, 1000);
+        }, function (error) {
+            _this.toastr.error(' ', 'Bad Request');
         });
     };
     return Software_User_Service;

@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
+var core_2 = require("@angular/core");
 var platform_browser_dynamic_1 = require("@angular/platform-browser-dynamic");
 var platform_browser_1 = require("@angular/platform-browser");
 var router_1 = require("@angular/router");
@@ -54,12 +55,16 @@ var software_settings_component_1 = require("./software_settings/software_settin
 var software_posreport_component_1 = require("./software_posreport/software_posreport_component/software_posreport.component");
 var software_80mmreport_component_1 = require("./software_80mmreport/software_80mmreport_component/software_80mmreport.component");
 var software_utilities_component_1 = require("./software_utilities/software_utilities_component/software_utilities.component");
-//SOFTWARE DETAIL
+//SOFTWARE DETAIL COMPONENT
 var software_itemdetail_component_1 = require("./software_itemdetail/software_itemdetail_component/software_itemdetail.component");
+var software_customerdetail_component_1 = require("./software_customerdetail/software_customerdetail_component/software_customerdetail.component");
 var software_discountdetail_component_1 = require("./software_discountdetail/software_discountdetail_component/software_discountdetail.component");
 var software_postouchdetail_component_1 = require("./software_postouchdetail/software_postouchdetail_component/software_postouchdetail.component");
 var software_supplierdetail_component_1 = require("./software_supplier_detail/software_supplierdetail_component/software_supplierdetail.component");
 var software_userdetail_component_1 = require("./software_userdetail/software_userdetail_component/software_userdetail.component");
+var software_stockin_detail_component_1 = require("./software_stockin_detail/software_stockin_detail_component/software_stockin_detail.component");
+var software_purchasedetail_component_1 = require("./software_purchasedetail/software_purchasedetail_component/software_purchasedetail.component");
+var software_collectiondetail_component_1 = require("./software_collectiondetail/software_collectiondetail_component/software_collectiondetail.component");
 // SERVICES
 var security_login_service_1 = require("./security_login/security_login_service/security_login.service");
 var software_postouch_service_1 = require("./software_postouch/software_postouch_service/software_postouch.service");
@@ -67,15 +72,28 @@ var software_item_service_1 = require("./software_item/software_item_service/sof
 var software_itemgroup_service_1 = require("./software_itemgroup/software_itemgroup_service/software_itemgroup.service");
 var software_itemcomponent_service_1 = require("./software_itemcomponent/software_itemcomponent_service/software_itemcomponent.service");
 var software_itemdetail_service_1 = require("./software_itemdetail/software_itemdetail_service/software_itemdetail.service");
+var software_itemdetail_service_2 = require("./software_itemdetail/software_itemdetail_service/software_itemdetail.service");
 var software_discount_service_1 = require("./software_discount/software_discount_service/software_discount.service");
 var software_discountdetail_service_1 = require("./software_discountdetail/software_discountdetail_service/software_discountdetail.service");
+var software_discountdetail_service_2 = require("./software_discountdetail/software_discountdetail_service/software_discountdetail.service");
 var software_table_service_1 = require("./software_table/software_table_service/software_table.service");
 var software_postouchdetail_service_1 = require("./software_postouchdetail/software_postouchdetail_service/software_postouchdetail.service");
 var software_user_service_1 = require("./software_user/software_user_service/software_user.service");
 var software_customer_service_1 = require("./software_customer/software_customer_service/software_customer.service");
+var software_customerdetail_service_1 = require("./software_customerdetail/software_customerdetail_service/software_customerdetail.service");
 var software_supplier_service_1 = require("./software_supplier/software_supplier_service/software_supplier.service");
 var software_supplierdetail_service_1 = require("./software_supplier_detail/software_supplierdetail_service/software_supplierdetail.service");
 var software_userdetail_service_1 = require("./software_userdetail/software_userdetail_service/software_userdetail.service");
+var software_userdetail_service_2 = require("./software_userdetail/software_userdetail_service/software_userdetail.service");
+var software_stockin_service_1 = require("./software_stockin/software_stockin_service/software_stockin.service");
+var software_stockin_detail_service_1 = require("./software_stockin_detail/software_stockin_detail_service/software_stockin_detail.service");
+var software_stockin_detail_service_2 = require("./software_stockin_detail/software_stockin_detail_service/software_stockin_detail.service");
+var software_purchase_service_1 = require("./software_purchase/software_purchase_service/software_purchase.service");
+var software_purchasedetail_service_1 = require("./software_purchasedetail/software_purchasedetail_service/software_purchasedetail.service");
+var software_purchasedetail_service_2 = require("./software_purchasedetail/software_purchasedetail_service/software_purchasedetail.service");
+var software_collection_service_1 = require("./software_collection/software_collection_service/software_collection.service");
+var software_collectiondetail_service_1 = require("./software_collectiondetail/software_collectiondetail_service/software_collectiondetail.service");
+var software_collectiondetail_service_2 = require("./software_collectiondetail/software_collectiondetail_service/software_collectiondetail.service");
 // paths and Routes
 var appRoutes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -94,7 +112,7 @@ var appRoutes = [
     { path: 'collection', component: software_collection_component_1.Software_Collection_Component },
     { path: 'purchase', component: software_purchase_component_1.Software_Purchase_Component },
     { path: 'disbursement', component: software_disbursement_component_1.Software_Disbursement_Component },
-    { path: 'stock-in', component: software_stockin_component_1.Software_Stockin_Component },
+    { path: 'stock-in', component: software_stockin_component_1.Software_StockIn_Component },
     { path: 'stock-out', component: software_stockout_component_1.Software_Stockout_Component },
     { path: 'itemgroup', component: software_itemgroup_component_1.Software_Itemgroup_Component },
     { path: 'itemcomponent', component: software_itemcomponent_component_1.Software_Itemcomponent_Component },
@@ -113,10 +131,14 @@ var appRoutes = [
     { path: 'utilities', component: software_utilities_component_1.Software_Utilities_Component },
     //POS13 SOFTWARE DETAIL
     { path: 'itemdetail/:id', component: software_itemdetail_component_1.Software_Itemdetail_Component },
+    { path: 'customerdetail/:id', component: software_customerdetail_component_1.Software_Customerdetail_Component },
     { path: 'discountdetail/:id', component: software_discountdetail_component_1.Software_Discountdetail_Component },
     { path: 'postouchdetail/:id', component: software_postouchdetail_component_1.Software_PostouchDetail_Component },
     { path: 'supplierdetail/:id', component: software_supplierdetail_component_1.Software_SupplierDetail_Component },
     { path: 'userdetail/:id', component: software_userdetail_component_1.Software_UserDetail_Component },
+    { path: 'stockindetail/:id', component: software_stockin_detail_component_1.Software_StockInDetail_Component },
+    { path: 'purchasedetail/:id', component: software_purchasedetail_component_1.Software_PurchaseDetail_Component },
+    { path: 'collectiondetail/:id', component: software_collectiondetail_component_1.Software_CollectionDetail_Component },
 ];
 // ng_modules
 var AppModule = (function () {
@@ -141,6 +163,7 @@ AppModule = __decorate([
             wjFlexGrid.WjFlexGridCellTemplate,
             wjInput.WjComboBox,
             wjInput.WjInputDate,
+            wjInput.WjAutoComplete,
             app_component_1.AppComponent,
             security_login_component_1.Security_Login_Component,
             shared_header_component_1.Shared_Header_Component,
@@ -158,7 +181,7 @@ AppModule = __decorate([
             software_collection_component_1.Software_Collection_Component,
             software_purchase_component_1.Software_Purchase_Component,
             software_disbursement_component_1.Software_Disbursement_Component,
-            software_stockin_component_1.Software_Stockin_Component,
+            software_stockin_component_1.Software_StockIn_Component,
             software_stockout_component_1.Software_Stockout_Component,
             software_itemgroup_component_1.Software_Itemgroup_Component,
             software_itemcomponent_component_1.Software_Itemcomponent_Component,
@@ -177,10 +200,14 @@ AppModule = __decorate([
             software_utilities_component_1.Software_Utilities_Component,
             // SOFTWARE DETAIL 
             software_itemdetail_component_1.Software_Itemdetail_Component,
+            software_customerdetail_component_1.Software_Customerdetail_Component,
             software_discountdetail_component_1.Software_Discountdetail_Component,
             software_postouchdetail_component_1.Software_PostouchDetail_Component,
             software_supplierdetail_component_1.Software_SupplierDetail_Component,
             software_userdetail_component_1.Software_UserDetail_Component,
+            software_stockin_detail_component_1.Software_StockInDetail_Component,
+            software_purchasedetail_component_1.Software_PurchaseDetail_Component,
+            software_collectiondetail_component_1.Software_CollectionDetail_Component,
         ],
         providers: [
             security_login_service_1.Security_Login_Service,
@@ -194,14 +221,27 @@ AppModule = __decorate([
             software_customer_service_1.Software_Customer_Service,
             software_supplier_service_1.Software_Supplier_Service,
             software_userdetail_service_1.Software_UserDetail_Service,
+            software_userdetail_service_2.Software_UserForm_Service,
+            software_stockin_service_1.Software_StockIn_Service,
+            software_purchase_service_1.Software_Purchase_Service,
+            software_collection_service_1.Software_Collection_Service,
             //Other
             ng2_toastr_1.ToastsManager,
             ng2_toastr_3.ToastOptions,
             //SOFTWARE DETAIL SERVICE PROVIDERS
             software_itemdetail_service_1.Software_Itemdetail_Service,
+            software_itemdetail_service_2.Software_ItemPrice_Service,
             software_postouchdetail_service_1.Software_PostouchDetail_Service,
+            software_customerdetail_service_1.Software_Customerdetail_Service,
             software_discountdetail_service_1.Software_Discountdetail_Service,
+            software_discountdetail_service_2.Software_DiscountItem_Service,
             software_supplierdetail_service_1.Software_SupplierDetail_Service,
+            software_stockin_detail_service_1.Software_StockInDetail_Service,
+            software_stockin_detail_service_2.Software_StockInLine_Service,
+            software_purchasedetail_service_1.Software_PurchaseDetail_Service,
+            software_purchasedetail_service_2.Software_PurchaseDetailLine_Service,
+            software_collectiondetail_service_1.Software_CollectionDetail_Service,
+            software_collectiondetail_service_2.Software_CollectionLine_Service,
         ],
         bootstrap: [
             app_component_1.AppComponent
@@ -210,6 +250,6 @@ AppModule = __decorate([
 ], AppModule);
 exports.AppModule = AppModule;
 // Bootstrap application with hash style navigation and global services.
-core_1.enableProdMode();
+core_2.enableProdMode();
 platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(AppModule);
 //# sourceMappingURL=app.module.js.map

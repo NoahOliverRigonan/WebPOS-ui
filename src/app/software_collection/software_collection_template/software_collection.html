@@ -1,8 +1,126 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 style="color:white;">Web POS - COLLECTION</h1>
+<div class="section-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postouch-header">
+                    <h1 class="software-h1"><i class="fa fa-cubes"></i> Collection</h1>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
         </div>
     </div>
 </div>
+<div class="section-heading2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp; Collection</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section-heading-nav">
+    <div class="container">
+        <button class="btn-custom"><i class="fa fa-refresh fa-fw fa-2x"></i><br/><span>Refresh</span></button>
+        <button class="btn-custom" (click)="btnAddItem()"><i class="fa fa-plus fa-fw fa-2x"></i><br/><span>New</span></button>
+        <button class="btn-custom" (click)="btnEditItem()"><i class="fa fa-edit fa-fw fa-2x"></i><br/><span>Details</span></button>
+        <button class="btn-custom" (click)="btnDeleteCollectionModal()"><i class="fa fa-trash fa-fw fa-2x"></i><br/><span>Remove</span></button>
+        <button class="btn-custom" routerLink='/dashboard' style="float:right;"><i class="fa fa-close fa-fw fa-2x"></i><br/><span>Close</span></button>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" id="itemList">
+            <div class="panel panel-default style-panel-default">
+                <div class="panel-heading style-panel-heading">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="search"><i class="fa fa-search fa-fw fa-1x"></i></span>
+                        <input type="search" class="form-control" placeholder="Search here.." aria-describedby="search" />
+                    </div>
+                </div>
+                <div class="panel-body style-panel-body">
+                    <wj-flex-grid [itemsSource]="itemCollectionView" [selectionMode]="3" [headersVisibility]="1">
+                        <!--<wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                <button class="btn btn-primary btn-xs btn-md btn-block" (click)="btnEditItem()">
+                                                    <i class="fa fa-edit fa-fw"></i> Edit
+                                                </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                <button class="btn btn-danger btn-xs btn-block" (click)="btnDeleteItem()">
+                                                    <i class="fa fa-trash fa-fw"></i> Delete
+                                                </button>
+                            </template>
+                        </wj-flex-grid-column>-->
+                        <wj-flex-grid-column [header]="'Collection Date'" [binding]="'CollectionDate'" [isReadOnly]="true" [width]="250" align="center">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Collection Number'" [binding]="'CollectionNumber'" [isReadOnly]="true" [width]="150" align="center">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Sales No.'" [binding]="'SalesNumber'" [isReadOnly]="true" [width]="100" align="center">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Customer'" [binding]="'Customer'" [isReadOnly]="true" [width]="250" align="center">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Terminal'" [binding]="'Terminal'" [isReadOnly]="true" [width]="150" align="center">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Amount'" [binding]="'Amount'" [isReadOnly]="true" [width]="150" align="center">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'L'" [binding]="'IsLocked'" [isReadOnly]="true" [width]="50" align="center">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'C'" [binding]="'IsCancelled'" [isReadOnly]="true" [width]="50" align="center">
+                        </wj-flex-grid-column>
+                    </wj-flex-grid>
+                </div>
+                <div class="panel-footer style-panel-footer">
+                    <div class="row">
+                        <div class="col-sm-12 btn-group group-button" id="">
+                            <button type="button" class="btn btn-default" (click)="moveItemToFirstPage()">
+                                                    <span class="fa fa-fast-backward"></span> 
+                                                </button>
+                            <button type="button" class="btn btn-default" (click)="moveItemToPreviousPage()">
+                                                    <span class="fa fa-step-backward"></span> 
+                                                </button>
+                            <button type="button" class="btn btn-default" disabled style="width:100px">
+                                                    {{ indexItem }}
+                                                </button>
+                            <button type="button" class="btn btn-default" (click)="moveItemToNextPage()">
+                                                     <span class="fa fa-step-forward"></span>
+                                                </button>
+                            <button type="button" class="btn btn-default" (click)="moveItemToLastPage()">
+                                                     <span class="fa fa-fast-forward"></span>
+                                                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DELETE MODAL WARNING -->
+<div class="modal fade" id="delete-modal-warning" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content panel-danger">
+            <!--<div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <h2><i class="fa fa-exclamation-triangle"></i></h2>
+                </h4>
+            </div>-->
+            <div class="modal-body panel-body">
+                <p style="color:black">Delete Record?</p>
+            </div>
+            <div class="modal-footer" align="right">
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal" (click)="btnDeleteCollection()"><i class="fa fa-close fa-fw"></i> Delete</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button id="btn-hidden-start-loading" [hidden]="true" (click)="startLoading()"></button>
+<button id="btn-hidden-complete-loading" [hidden]="true" (click)="completeLoading()"></button>
+<!-- <button id="load-item-data" (click)="getTable()" [hidden]="true"></button> -->
+<button id="refreshGrid" (click)="getCollection()" [hidden]="true"></button>
+<button [hidden]="true" data-toggle="modal" id="deleteStockInModal" data-target="#delete-modal-warning"></button>
 <shared-footer></shared-footer>

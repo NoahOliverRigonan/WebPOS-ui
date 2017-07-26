@@ -22,9 +22,9 @@
 <div class="section-heading-nav">
     <div class="container">
         <button class="btn-custom"><i class="fa fa-refresh fa-fw fa-2x"></i><br/><span>Refresh</span></button>
-        <button class="btn-custom" (click)="btnAddItem()"><i class="fa fa-plus fa-fw fa-2x"></i><br/><span>New</span></button>
+        <button class="btn-custom" (click)="btnAddCustomer()"><i class="fa fa-plus fa-fw fa-2x"></i><br/><span>New</span></button>
         <button class="btn-custom" (click)="btnEditItem()"><i class="fa fa-edit fa-fw fa-2x"></i><br/><span>Details</span></button>
-        <button class="btn-custom" (click)="btnDeleteItemModal()"><i class="fa fa-trash fa-fw fa-2x"></i><br/><span>Remove</span></button>
+        <button class="btn-custom" (click)="btnDeleteCustomerModal()"><i class="fa fa-trash fa-fw fa-2x"></i><br/><span>Remove</span></button>
         <button class="btn-custom" routerLink='/dashboard' style="float:right;"><i class="fa fa-close fa-fw fa-2x"></i><br/><span>Close</span></button>
         <!--<li><span class="fa fa-refresh fa-2x" style="width:100%;"></span><a href="#"> Refresh</a></li>
         <li><span class="fa fa-plus fa-2x" style="width:100%;"></span> <a (click)="btnAddDiscount()">New</a></li>
@@ -109,25 +109,19 @@
 <div class="modal fade" id="delete-modal-warning" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content panel-danger">
-            <div class="modal-header panel-heading">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">
-                    <h2><i class="fa fa-exclamation-triangle"></i></h2>
-                </h4>
-            </div>
             <div class="modal-body panel-body">
-                <p style="color:black">Delete Item?</p>
+                <p style="color:black">Delete Record?</p>
             </div>
             <div class="modal-footer" align="right">
-                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal" (click)="btnDeleteItem()"><i class="fa fa-close fa-fw"></i> Delete</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal" (click)="btnDeleteCustomer()"><i class="fa fa-close fa-fw"></i> Delete</button>
                 <button type="button" id="btnCloseSupport" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
             </div>
         </div>
     </div>
 </div>
-<button id="btn-hidden-start-loading" [hidden]="true" (click)="startLoading()"></button>
+<!-- <button id="btn-hidden-start-loading" [hidden]="true" (click)="startLoading()"></button>
 <button id="btn-hidden-complete-loading" [hidden]="true" (click)="completeLoading()"></button>
-<button id="load-item-data" (click)="getTable()" [hidden]="true"></button>
-<button id="refreshGrid" (click)="getListItem()" [hidden]="true"></button>
-<button id="delete-modal-warning-id" [hidden]="true" data-toggle="modal" id="deleteItemModal" data-target="#delete-modal-warning"></button>
+<button id="load-item-data" (click)="getTable()" [hidden]="true"></button>-->
+<button id="refreshGrid" (click)="getCustomer()" [hidden]="true"></button>
+<button [hidden]="true" data-toggle="modal" id="deleteItemModal" data-target="#delete-modal-warning"></button>
 <shared-footer></shared-footer>

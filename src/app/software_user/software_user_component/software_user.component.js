@@ -13,11 +13,12 @@ var software_user_service_1 = require("../software_user_service/software_user.se
 var router_1 = require("@angular/router");
 var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_User_Component = (function () {
-    function Software_User_Component(router, softwareUserService, toastr, vcRef) {
+    function Software_User_Component(router, softwareUserService, toastr, vcRef, errorToastr) {
         this.router = router;
         this.softwareUserService = softwareUserService;
         this.toastr = toastr;
         this.vcRef = vcRef;
+        this.errorToastr = errorToastr;
         this.toastr.setRootViewContainerRef(vcRef);
     }
     Software_User_Component.prototype.ngOnInit = function () {
@@ -38,8 +39,21 @@ var Software_User_Component = (function () {
         this.router.navigate(['/userdetail', currentSelectedItem.Id]);
     };
     Software_User_Component.prototype.btnAddUser = function () {
-        if (this.lock != true) {
-            this.softwareUserService.postUserData(null, this.toastr);
+        this.softwareUserService.postUserData(null, this.toastr);
+    };
+    Software_User_Component.prototype.btnDeleteItemModal = function () {
+        document.getElementById("deleteUserModal").click();
+    };
+    Software_User_Component.prototype.btnDeleteItem = function () {
+        var errorToastr;
+        var toastr;
+        var currentSelectedItem = this.listMstUser.currentItem;
+        if (currentSelectedItem.IsLocked == true) {
+            this.errorToastr.error('', 'You cant delete Lock Item');
+        }
+        else {
+            // (<HTMLButtonElement>document.getElementById("btn-hidden-start-loading")).click();
+            this.softwareUserService.deleteUserData(currentSelectedItem.Id, toastr);
         }
     };
     return Software_User_Component;
@@ -52,7 +66,8 @@ Software_User_Component = __decorate([
     __metadata("design:paramtypes", [router_1.Router,
         software_user_service_1.Software_User_Service,
         ng2_toastr_1.ToastsManager,
-        core_1.ViewContainerRef])
+        core_1.ViewContainerRef,
+        ng2_toastr_1.ToastsManager])
 ], Software_User_Component);
 exports.Software_User_Component = Software_User_Component;
 //# sourceMappingURL=software_user.component.js.map

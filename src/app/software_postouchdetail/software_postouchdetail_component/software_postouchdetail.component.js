@@ -24,43 +24,14 @@ var Software_PostouchDetail_Component = (function () {
         this.itemGroupIndex = " ";
         this.isLoading = true;
         this.isFinishLoading = false;
-        this.num1 = "1";
-        this.num2 = "2";
-        this.num3 = "3";
-        this.num4 = "4";
-        this.num5 = "5";
-        this.num6 = "6";
-        this.num7 = "7";
-        this.num8 = "8";
-        this.num9 = "9";
-        this.num0 = "0";
-        this.log = '';
         this.toastr.setRootViewContainerRef(vcRef);
     }
-    Software_PostouchDetail_Component.prototype.logText = function (value) {
-        this.log += "" + value;
-    };
-    // removeNumbers(removeNumberByOne: any) {
-    //     let index = this.keypadNumber.indexOf(removeNumberByOne);
-    //     this.keypadNumber.splice(index, 1);
-    // }
-    // removeAllNumbers(removeNumber: any) {
-    //     let index = this.keypadNumber.indexOf(removeNumber);
-    //     this.keypadNumber.splice(index);
-    // }
     Software_PostouchDetail_Component.prototype.getIdUrlParameter = function () {
         var _this = this;
         this.activatedRoute.params.subscribe(function (params) {
             _this.postouchDetailId = params['id'];
         });
         return this.postouchDetailId;
-    };
-    Software_PostouchDetail_Component.prototype.ngOnInit = function () {
-        if (!localStorage.getItem('access_token')) {
-            this.router.navigate(['security_login']);
-        }
-        this.postouchDetailCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchDetailService.getListItem(this.getIdUrlParameter()));
-        this.getItemGroup();
     };
     Software_PostouchDetail_Component.prototype.loadItemGroupData = function () {
         this.isLoading = false;
@@ -125,6 +96,13 @@ var Software_PostouchDetail_Component = (function () {
     };
     Software_PostouchDetail_Component.prototype.keypadModal = function () {
         document.getElementById("keypadModal").click();
+    };
+    Software_PostouchDetail_Component.prototype.ngOnInit = function () {
+        if (!localStorage.getItem('access_token')) {
+            this.router.navigate(['security_login']);
+        }
+        this.postouchDetailCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchDetailService.getListItem(this.getIdUrlParameter()));
+        this.getItemGroup();
     };
     return Software_PostouchDetail_Component;
 }());

@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Software_Itemdetail_Service } from '../software_itemdetail_service/software_itemdetail.service';
+import { Software_ItemPrice_Service } from '../software_itemdetail_service/software_itemdetail.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import * as wjInput from 'wijmo/wijmo.angular2.input';
 
 @Component({
     selector: 'software_itemdetail',
@@ -11,6 +13,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class Software_Itemdetail_Component implements OnInit {
     //COLLECTION VIEW
     private itemCollectionView: wijmo.collections.CollectionView;
+    private itemPriceCollectionView: wijmo.collections.CollectionView;
     //FOR UNIT
     private listUnitObservableArray: wijmo.collections.ObservableArray;
     private unitSelectedIndex: number;
@@ -88,13 +91,13 @@ export class Software_Itemdetail_Component implements OnInit {
     constructor(
         private router: Router,
         private softwareItemDetailService: Software_Itemdetail_Service,
+        private softwareItemPriceService: Software_ItemPrice_Service,
         private activatedRoute: ActivatedRoute,
         private toastr: ToastsManager,
         private vcRef: ViewContainerRef
     ) {
         this.toastr.setRootViewContainerRef(vcRef);
     }
-
 
     // get url Id parameter
     public getIdUrlParameter() {
@@ -103,6 +106,7 @@ export class Software_Itemdetail_Component implements OnInit {
         });
         return this.itemId;
     }
+
     //
     // WJMO-COMBO-BOX - UNIT & SUPPLIER & TAX & ACCOUNT
     //
@@ -128,49 +132,35 @@ export class Software_Itemdetail_Component implements OnInit {
 
             this.listUnitObservableArray = this.itemCollectionView.items[0].listUnit;
             this.unitCollectionView = new wijmo.collections.CollectionView(this.listUnitObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.unitCollectionView.items[0].Unit = this.itemCollectionView.items[0].Unit;
-            }
+            this.unitCollectionView.items[0].listUnit = this.itemCollectionView.items[0].listUnit;
 
             this.listSupplierObservableArray = this.itemCollectionView.items[0].listSupplier;
             this.supplierCollectionView = new wijmo.collections.CollectionView(this.listSupplierObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.supplierCollectionView.items[0].listSupplier = this.itemCollectionView.items[0].listSupplier;
-            }
-
+            this.supplierCollectionView.items[0].listSupplier = this.itemCollectionView.items[0].listSupplier;
 
             this.listSalesAccountObservableArray = this.itemCollectionView.items[0].listSalesAccount;
             this.salesCollectionView = new wijmo.collections.CollectionView(this.listSalesAccountObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.salesCollectionView.items[0].listSalesAccount = this.itemCollectionView.items[0].listSalesAccount;
-            }
-
+            this.salesCollectionView.items[0].listSalesAccount = this.itemCollectionView.items[0].listSalesAccount;
 
             this.listAssetAccountObservableArray = this.itemCollectionView.items[0].listAssetAccount;
             this.assetCollectionView = new wijmo.collections.CollectionView(this.listAssetAccountObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.assetCollectionView.items[0].listAssetAccount = this.itemCollectionView.items[0].listAssetAccount;
-            }
+            this.assetCollectionView.items[0].listAssetAccount = this.itemCollectionView.items[0].listAssetAccount;
 
             this.listCostAccountObservableArray = this.itemCollectionView.items[0].listCostAccount;
             this.costCollectionView = new wijmo.collections.CollectionView(this.listCostAccountObservableArray)
-            if (this.itemCollectionView.items.length > 0) {
-                this.costCollectionView.items[0].listCostAccount = this.itemCollectionView.items[0].listCostAccount;
-            }
+            this.costCollectionView.items[0].listCostAccount = this.itemCollectionView.items[0].listCostAccount;
 
             this.listPurchaseVatTaxObservableArray = this.itemCollectionView.items[0].listPurchaseVatTax;
             this.purchaseVatCollectionView = new wijmo.collections.CollectionView(this.listPurchaseVatTaxObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.purchaseVatCollectionView.items[0].listPurchaseVatTax = this.itemCollectionView.items[0].listPurchaseVatTax;
-            }
+            this.purchaseVatCollectionView.items[0].listPurchaseVatTax = this.itemCollectionView.items[0].listPurchaseVatTax;
 
             this.listSalesVatTaxObservableArray = this.itemCollectionView.items[0].listSalesVatTax;
             this.salesVatCollectionView = new wijmo.collections.CollectionView(this.listSalesVatTaxObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.salesVatCollectionView.items[0].listSalesVatTax = this.itemCollectionView.items[0].listSalesVatTax;
-            }
+            this.salesVatCollectionView.items[0].listSalesVatTax = this.itemCollectionView.items[0].listSalesVatTax;
         }
     }
+
+
 
     public cboUnitSelectedIndexChanged(): void {
         this.itemCollectionView.items[0].listUnit[this.unitSelectedIndex].Id;
@@ -242,23 +232,19 @@ export class Software_Itemdetail_Component implements OnInit {
             IsLocked: this.itemCollectionView.items[0].IsLocked = true,
             DefaultKitchenReport: this.itemCollectionView.items[0].DefaultKitchenReport,
             IsPackage: (<HTMLInputElement>document.getElementById("Package")).checked,
-
         }
         return dataObject;
     }
-
     //SAVE ITEM 
     public btnSaveEditItem() {
         let toastr: ToastsManager;
         this.softwareItemDetailService.putItemData(this.getIdUrlParameter(), this.getDataItemObject(), toastr);
         console.log(this.getDataItemObject());
     }
-
     //value 
     public expiryDateChangeValue() {
 
     }
-
     //SET 
     public setDateRanged() {
         this.ExpiryDate = new Date();
@@ -268,45 +254,49 @@ export class Software_Itemdetail_Component implements OnInit {
     public setDropDownFields() {
         this.ExpiryDate = new Date((<HTMLInputElement>document.getElementById("ExpiryDate")).value.toString());
     }
+    //
+    // FOR MST ITEM PRICE 
+    //
 
+    public ClearAfterSave() {
+        (<HTMLInputElement>document.getElementById("PriceDescripton")).value = "";
+        (<HTMLInputElement>document.getElementById("ItemPrice")).value = " ";
+        (<HTMLInputElement>document.getElementById("TriggerQuantity")).value = " ";
+    }
 
-    //LOCK FIELDS
-    public LockDataItem() {
-        if (this.itemBoolean == true) {
-            (<HTMLButtonElement>document.getElementById("ItemCode")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("BarCode")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("ItemDescription")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("Alias")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("Category")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("Cost")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("MarkUp")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("Price")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("StockLevel")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("OnHand")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("Inventory")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("Package")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("GenericName")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("LotNumber")).disabled = true;
-            (<HTMLButtonElement>document.getElementById("Remarks")).disabled = true;
-        } else {
-            (<HTMLButtonElement>document.getElementById("ItemCode")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("BarCode")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("ItemDescription")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("Alias")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("Category")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("Cost")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("MarkUp")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("Price")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("StockLevel")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("OnHand")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("Inventory")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("Package")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("GenericName")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("LotNumber")).disabled = false;
-            (<HTMLButtonElement>document.getElementById("Remarks")).disabled = false;
+    public createItemPriceObject() {
+
+        let dataObject = {
+            ItemId: this.getIdUrlParameter(),
+            PriceDescripton: (<HTMLInputElement>document.getElementById("PriceDescription")).value = "",
+            Price: (<HTMLInputElement>document.getElementById("ItemPrice")).value,
+            TriggerQuantity: (<HTMLInputElement>document.getElementById("TriggerQuantity")).value,
         }
+        return dataObject;
+    }
+    public getItemPrice() {
+        this.itemPriceCollectionView = new wijmo.collections.CollectionView(this.softwareItemPriceService.getItemPriceById(this.getIdUrlParameter()));
+        this.itemPriceCollectionView.pageSize = 15;
+    }
 
+    public btnModalItemPrice() {
+        (<HTMLButtonElement>document.getElementById("modalStockInLine")).click();
+    }
 
+    public addItemPrice() {
+        let toast: ToastsManager;
+        this.itemPriceCollectionView = new wijmo.collections.CollectionView(this.softwareItemPriceService.postItemPrice(this.createItemPriceObject(), toast));
+    }
+
+    public btnDeleteItemPriceModal() {
+        (<HTMLButtonElement>document.getElementById("deleteItemPriceModal")).click();
+    }
+
+    public btnDeleteItemPrice() {
+        let toastr: ToastsManager;
+        let currentSelectedItem = this.itemPriceCollectionView.currentItem;
+        this.softwareItemPriceService.deleteItemPrice(currentSelectedItem.Id, toastr);
+        // (<HTMLButtonElement>document.getElementById("btn-hidden-start-loading")).click();
     }
 
     public ngOnInit(): any {
@@ -314,6 +304,6 @@ export class Software_Itemdetail_Component implements OnInit {
             this.router.navigate(['security_login']);
         }
         this.itemCollectionView = new wijmo.collections.CollectionView(this.softwareItemDetailService.getItemDetail(this.getIdUrlParameter()));
-        this.LockDataItem();
+        this.getItemPrice();
     }
 }

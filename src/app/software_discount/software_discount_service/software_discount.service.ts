@@ -83,9 +83,6 @@ export class Software_Discount_Service {
             }
         )
     }
-    public isLoading(){
-        
-    }
 
     //DELETE DISCOUNT
     public deleteDiscountItem(id: number, toastr: ToastsManager) {

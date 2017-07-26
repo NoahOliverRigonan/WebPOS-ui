@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a routerLink="/discount">Discount</a> &nbsp;&nbsp; / &nbsp;&nbsp; Discount Detail</p>
+                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a routerLink="/discount">Discount</a>                    &nbsp;&nbsp; / &nbsp;&nbsp; Discount Detail</p>
             </div>
         </div>
     </div>
@@ -25,9 +25,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="" style="float:right;">
-                        <button class="btn btn-primary btn-lg " routerLink=''>Lock</button>
+                        <button class="btn btn-primary btn-lg " (click)="btnSaveEdit()">Lock</button>
                         <button class="btn btn-primary btn-lg " routerLink=''>Unlock</button>
-                        <button class="btn btn-danger btn-lg "  routerLink='/discount'>Close</button>
+                        <button class="btn btn-danger btn-lg " routerLink='/discount'>Close</button>
                     </div>
                 </div>
             </div>
@@ -50,29 +50,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="VatExempt" class="control-label col-sm-4">VAT Exempt</label>
+                                <label for="IsVatExempt" class="control-label col-sm-4">VAT Exempt</label>
                                 <div class="col-sm-8">
-                                    <input type="checkbox" [(ngModel)]="VatExempt" name="VatExempt" id="VatExempt" class="" />
+                                    <input type="checkbox" [(ngModel)]="IsVatExempt" name="IsVatExempt" id="IsVatExempt" class="" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="DateSchedule" class="control-label col-sm-4">Date Scheduled</label>
+                                <label for="IsDateScheduled" class="control-label col-sm-4">Date Scheduled</label>
                                 <div class="col-sm-8">
-                                    <input type="checkbox" [(ngModel)]="DateSchedule" name="DateSchedule" id="DateSchedule" class="" />
+                                    <input type="checkbox" [(ngModel)]="IsDateScheduled" name="IsDateScheduled" id="IsDateScheduled" class="" />
                                 </div>
                             </div>
-                            <!--<div class="form-group">
-                                <label for="DateStart" class="control-label col-sm-4">Date Start</label>
-                                <div class="col-sm-8">
-                                    <input type="date" [(ngModel)]="DateStart" name="DateStart" id="DateStart" class="form-control" />
-                                </div>
-                            </div>-->
-                            <!--<div class="form-group">
-                                <label for="DateEnd" class="control-label col-sm-4">Date End</label>
-                                <div class="col-sm-8">
-                                    <input type="date" id="DateEnd" [(ngModel)]="DateEnd" name="DateEnd" class="form-control" />
-                                </div>
-                            </div>-->
                             <div class="form-group">
                                 <label for="ExpDate" class="control-label col-sm-4">Date Start</label>
                                 <div class="col-sm-8">
@@ -90,8 +78,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i> </span>
-                                        <wj-input-date [(value)]="DateEnd" [isRequired]="false" (valueChanged)="endDateChangeValue()" [format]="'MMM dd, yyyy'"
-                                            style="border-radius: 0px;">
+                                        <wj-input-date [(value)]="DateEnd" [isRequired]="false" (valueChanged)="endDateChangeValue()" [format]="'MMM dd, yyyy'" style="border-radius: 0px;">
                                         </wj-input-date>
                                         <input type="hidden" class="form-control" id="DateEnd" />
                                     </div>
@@ -105,7 +92,7 @@
                             <div class="form-group">
                                 <label for="DayScheduled" class="control-label col-sm-4">Day Scheduled</label>
                                 <div class="col-sm-8">
-                                    <input type="checkbox" [(ngModel)]="DayScheduled" id="DayScheduled" name="DayScheduled" />
+                                    <input type="checkbox" [(ngModel)]="IsDayScheduled" id="IsDayScheduled" name="IsDayScheduled" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -125,22 +112,22 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><input type="checkbox" [(ngModel)]="Mon" id="Mon" name="Mon" /></td>
-                                                <td><input type="checkbox" [(ngModel)]="Tue" id="Tue" name="Tue" /></td>
-                                                <td><input type="checkbox" [(ngModel)]="Wed" id="Wed" name="Wed" /></td>
-                                                <td><input type="checkbox" [(ngModel)]="Thu" id="Thu" name="Thu" /></td>
-                                                <td><input type="checkbox" [(ngModel)]="Fri" id="Fri" name="Fri" /></td>
-                                                <td><input type="checkbox" [(ngModel)]="Sat" id="Sat" name="Sat" /></td>
-                                                <td><input type="checkbox" [(ngModel)]="Sun" id="Sun" name="Sun" /></td>
+                                                <td><input type="checkbox" [(ngModel)]="DayMon" id="DayMon" name="DayMon" /></td>
+                                                <td><input type="checkbox" [(ngModel)]="DayTue" id="DayTue" name="DayTue" /></td>
+                                                <td><input type="checkbox" [(ngModel)]="DayWed" id="DayWed" name="DayWed" /></td>
+                                                <td><input type="checkbox" [(ngModel)]="DayThu" id="DayThu" name="DayThu" /></td>
+                                                <td><input type="checkbox" [(ngModel)]="DayFri" id="DayFri" name="DayFri" /></td>
+                                                <td><input type="checkbox" [(ngModel)]="DaySat" id="DaySat" name="DaySat" /></td>
+                                                <td><input type="checkbox" [(ngModel)]="DaySun" id="DaySun" name="DaySun" /></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="TimeScheduled" class="control-label col-sm-4">Time Scheduled</label>
+                                <label for="IsTimeScheduled" class="control-label col-sm-4">Time Scheduled</label>
                                 <div class="col-sm-8">
-                                    <input type="checkbox" [(ngModel)]="TimeScheduled" id="TimeScheduled" name="TimeScheduled" class="" />
+                                    <input type="checkbox" [(ngModel)]="IsTimeScheduled" id="IsTimeScheduled" name="IsTimeScheduled" class="" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -162,7 +149,7 @@
         </div>
         <div class="panel panel-footer"></div>
     </div>
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <div align="right">
                 <button id="" class="btn btn-default btn-md" (click)="addItemModal()">Add</button>
@@ -172,16 +159,16 @@
             <div class="row">
                 <div class="col-sm-12">
                     <wj-flex-grid [itemsSource]="itemDiscountCollectionView" [selectionMode]="3" [headersVisibility]="1">
-                        <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
+                        <!-- <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
                                 <button class="btn btn-primary btn-xs btn-md btn-block" (click)="btnEditItem()">
                                                     <i class="fa fa-edit fa-fw"></i> Edit
                                                 </button>
                             </template>
-                        </wj-flex-grid-column>
+                        </wj-flex-grid-column> -->
                         <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                                <button class="btn btn-danger btn-xs btn-md btn-block" (click)="btnEditItem()">
+                                <button class="btn btn-danger btn-xs btn-md btn-block" (click)="deleteDiscountModal()">
                                                     <i class="fa fa-edit fa-fw"></i> Delete
                                                 </button>
                             </template>
@@ -194,7 +181,7 @@
                         </wj-flex-grid-column>
                         <wj-flex-grid-column [header]="'A'" [binding]="''" [isReadOnly]="true" [width]="50">
                         </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="260">
+                        <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="360">
                         </wj-flex-grid-column>
                     </wj-flex-grid>
                 </div>
@@ -205,7 +192,7 @@
 
 <!-- item discount  detail modal -->
 <div class="modal fade" id="itemdiscount-detail-modal" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -218,7 +205,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4">Item Code</label>
                                 <div class="col-sm-8">
-                                    <button  id="error1" [hidden]="true" ></button>
+                                    <button id="error1" [hidden]="true"></button>
                                     <wj-combo-box [itemsSource]="listOfItemCodeObservableArray" [placeholder]="'Select Item Code'" [displayMemberPath]="'ItemCode'"
                                         [isEditable]="false" [isRequired]="true" [(selectedIndex)]="itemCodeSelectedIndex" (selectedIndexChanged)="cboItemCodeSelectedIndex()"
                                         style="width: 100%; border-radius: 0px;">
@@ -228,17 +215,17 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4">Item</label>
                                 <div class="col-sm-8">
-                                    <button  id="error1"  [hidden]="true"></button>
+                                    <button id="error1" [hidden]="true"></button>
                                     <wj-combo-box [itemsSource]="listOfItemDescriptionObservableArray" [placeholder]="'Select Item'" [displayMemberPath]="'ItemDescription'"
                                         [isEditable]="false" [isRequired]="true" [(selectedIndex)]="itemDescriptionSelectedIndex"
-                                        (selectedIndexChanged)="cboItemDescriptionSelectedIndex()" style="width: 100%; border-radius: 0px;">
+                                        (selectedIndexChanged)="cboItemDescriptionSelectedIndex()" style="width: 100%; border-radius: 0px;" disabled>
                                     </wj-combo-box>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-4">A</label>
                                 <div class="col-sm-8">
-                                    <input type="checkbox" id="" />
+                                    <input type="checkbox" id="" disabled/>
                                 </div>
                             </div>
                         </div>
@@ -246,7 +233,26 @@
                 </div>
             </div>
             <div class="modal-footer" align="right">
-                <button type="button" id="btnSaveSupport" class="btn btn-primary" (click)="btnSaveSupport()"><i class="fa fa-save fa-fw"></i> Save</button>
+                <button type="button" id="btnSaveSupport" class="btn btn-primary" data-dismiss="modal" (click)="addItemDiscount()"><i class="fa fa-save fa-fw"></i> Save</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DELETE MODAL WARNING -->
+<div class="modal fade" id="delete-modal-warning" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content panel-danger">
+            <div class="modal-body panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        Delete Record?
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button type="button" id="btnCloseSupport" class="btn btn-warning" data-dismiss="modal" (click)="deleteDiscount()"><i class="fa fa-trash fa-fw"></i> Delete</button>
                 <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
             </div>
         </div>
@@ -254,5 +260,6 @@
 </div>
 <shared-footer></shared-footer>
 <button id="set-value-fields-item" [hidden]="true" (click)="setFieldValuesItemDiscount()"></button>
-<button id="set-value-fields-discountdetail" [hidden]="true" (click)="setFieldValuesDiscount()"></button>
 <button id="btn-hidden-add-detail-modal" [hidden]="true" data-toggle="modal" data-target="#itemdiscount-detail-modal"></button>
+<button id="deleteModal" [hidden]="true" data-toggle="modal" data-target="#delete-modal-warning"></button>
+<button id="refreshGrid" (click)="getDiscountItem()" [hidden]="true"></button>

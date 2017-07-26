@@ -22,7 +22,7 @@
         <button class="btn-custom" (click)="refreshGrid()"><i class="fa fa-refresh fa-fw fa-2x"></i><br/><span>Refresh</span></button>
         <button class="btn-custom" (click)="btnAddUser()"><i class="fa fa-plus fa-fw fa-2x"></i><br/><span>New</span></button>
         <button class="btn-custom" (click)="btnEditItem()"><i class="fa fa-edit fa-fw fa-2x"></i><br/><span>Details</span></button>
-        <button class="btn-custom" (click)="deleteDiscountModal()"><i class="fa fa-trash fa-fw fa-2x"></i><br/><span>Remove</span></button>
+        <button class="btn-custom" (click)="btnDeleteItemModal()"><i class="fa fa-trash fa-fw fa-2x"></i><br/><span>Remove</span></button>
         <button class="btn-custom" routerLink='/dashboard' style="float:right;"><i class="fa fa-close fa-fw fa-2x"></i><br/><span>Close</span></button>
         <!--<li><span class="fa fa-refresh fa-2x" style="width:100%;"></span><a href="#"> Refresh</a></li>
         <li><span class="fa fa-plus fa-2x" style="width:100%;"></span> <a (click)="btnAddDiscount()">New</a></li>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <wj-flex-grid [itemsSource]="listMstUser" [selectionMode]="3" [headersVisibility]="1">
+                    <wj-flex-grid class="grid" [itemsSource]="listMstUser" [selectionMode]="3" [headersVisibility]="1">
                         <!--<wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
                                 <button class="btn btn-primary btn-xs btn-md btn-block" (click)="btnEditItem()">
@@ -84,26 +84,26 @@
 <div class="modal fade" id="delete-modal-warning" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content panel-danger">
-            <div class="modal-header panel-heading">
+            <!--<div class="modal-header panel-heading">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <i class="fa fa-exclamation-triangle"></i>
-            </div>
+            </div>-->
             <div class="modal-body panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        Delete Discounted Item?
+                        Delete User?
                     </div>
                 </div>
             </div>
             <div class="modal-footer" align="right">
-                <button type="button" id="btnCloseSupport" class="btn btn-warning" data-dismiss="modal" (click)="deleteDiscount()"><i class="fa fa-trash fa-fw"></i> Delete</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-warning" data-dismiss="modal" (click)="btnDeleteItem()"><i class="fa fa-trash fa-fw"></i> Delete</button>
                 <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
             </div>
         </div>
     </div>
 </div>
 <!--<button id="load-item-data" (click)="getTable()" [hidden]="true"></button>
-<button id="refreshGrid" (click)="getDiscount()" [hidden]="true"></button>
-<button id="delete-modal-warning-id" [hidden]="true" data-toggle="modal" data-target="#delete-modal-warning"></button>
 <button id="load-item-data" (click)="refreshGrid()" [hidden]="true"></button>-->
+<button id="refreshGrid" (click)="getUserList()" [hidden]="true"></button>
+<button id="deleteUserModal" [hidden]="true" data-toggle="modal" data-target="#delete-modal-warning"></button>
 <shared-footer></shared-footer>

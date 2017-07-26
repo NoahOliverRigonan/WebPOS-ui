@@ -78,8 +78,6 @@ var Software_Discount_Service = (function () {
             alert("Error");
         });
     };
-    Software_Discount_Service.prototype.isLoading = function () {
-    };
     //DELETE DISCOUNT
     Software_Discount_Service.prototype.deleteDiscountItem = function (id, toastr) {
         var _this = this;

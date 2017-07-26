@@ -1,4 +1,5 @@
-import { NgModule, enableProdMode } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,11 +11,13 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+
 // import { MaterializeModule } from "angular2-materialize";
 
 import * as wjFlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjInput from 'wijmo/wijmo.angular2.input';
 
+import {WjFlexGrid} from 'wijmo/wijmo.angular2.grid';
 // components
 import { AppComponent } from './app.component';
 import { Security_Login_Component } from './security_login/security_login_component/security_login.component';
@@ -33,7 +36,7 @@ import { Software_User_Component } from './software_user/software_user_component
 import { Software_Collection_Component } from './software_collection/software_collection_component/software_collection.component';
 import { Software_Purchase_Component } from './software_purchase/software_purchase_component/software_purchase.component';
 import { Software_Disbursement_Component } from './software_disbursement/software_disbursement_component/software_disbursement.component';
-import { Software_Stockin_Component } from './software_stockin/software_stockin_component/software_stockin.component';
+import { Software_StockIn_Component } from './software_stockin/software_stockin_component/software_stockin.component';
 import { Software_Stockout_Component } from './software_stockout/software_stockout_component/software_stockout.component';
 import { Software_Itemgroup_Component } from './software_itemgroup/software_itemgroup_component/software_itemgroup.component';
 import { Software_Itemcomponent_Component } from './software_itemcomponent/software_itemcomponent_component/software_itemcomponent.component';
@@ -51,12 +54,16 @@ import { Software_Posreport_Component } from './software_posreport/software_posr
 import { Software_80mmreport_Component } from './software_80mmreport/software_80mmreport_component/software_80mmreport.component';
 import { Software_Utilities_Component } from './software_utilities/software_utilities_component/software_utilities.component';
 
-//SOFTWARE DETAIL
+//SOFTWARE DETAIL COMPONENT
 import { Software_Itemdetail_Component } from './software_itemdetail/software_itemdetail_component/software_itemdetail.component';
+import { Software_Customerdetail_Component } from './software_customerdetail/software_customerdetail_component/software_customerdetail.component';
 import { Software_Discountdetail_Component } from './software_discountdetail/software_discountdetail_component/software_discountdetail.component';
 import { Software_PostouchDetail_Component } from './software_postouchdetail/software_postouchdetail_component/software_postouchdetail.component';
 import { Software_SupplierDetail_Component } from './software_supplier_detail/software_supplierdetail_component/software_supplierdetail.component';
 import { Software_UserDetail_Component } from './software_userdetail/software_userdetail_component/software_userdetail.component';
+import { Software_StockInDetail_Component } from './software_stockin_detail/software_stockin_detail_component/software_stockin_detail.component';
+import { Software_PurchaseDetail_Component } from './software_purchasedetail/software_purchasedetail_component/software_purchasedetail.component';
+import { Software_CollectionDetail_Component } from './software_collectiondetail/software_collectiondetail_component/software_collectiondetail.component';
 
 // SERVICES
 import { Security_Login_Service } from './security_login/security_login_service/security_login.service';
@@ -65,15 +72,28 @@ import { Software_Item_Service } from './software_item/software_item_service/sof
 import { Software_ItemGroup_Service } from './software_itemgroup/software_itemgroup_service/software_itemgroup.service';
 import { Software_ItemComponent_Service } from './software_itemcomponent/software_itemcomponent_service/software_itemcomponent.service';
 import { Software_Itemdetail_Service } from './software_itemdetail/software_itemdetail_service/software_itemdetail.service';
+import { Software_ItemPrice_Service } from './software_itemdetail/software_itemdetail_service/software_itemdetail.service';
 import { Software_Discount_Service } from './software_discount/software_discount_service/software_discount.service';
 import { Software_Discountdetail_Service } from './software_discountdetail/software_discountdetail_service/software_discountdetail.service';
+import { Software_DiscountItem_Service } from './software_discountdetail/software_discountdetail_service/software_discountdetail.service';
 import { Software_TableGroup_Service } from './software_table/software_table_service/software_table.service';
 import { Software_PostouchDetail_Service } from './software_postouchdetail/software_postouchdetail_service/software_postouchdetail.service';
 import { Software_User_Service } from './software_user/software_user_service/software_user.service';
 import { Software_Customer_Service } from './software_customer/software_customer_service/software_customer.service';
+import { Software_Customerdetail_Service } from './software_customerdetail/software_customerdetail_service/software_customerdetail.service';
 import { Software_Supplier_Service } from './software_supplier/software_supplier_service/software_supplier.service';
 import { Software_SupplierDetail_Service } from './software_supplier_detail/software_supplierdetail_service/software_supplierdetail.service';
 import { Software_UserDetail_Service } from './software_userdetail/software_userdetail_service/software_userdetail.service';
+import { Software_UserForm_Service } from './software_userdetail/software_userdetail_service/software_userdetail.service';
+import { Software_StockIn_Service } from './software_stockin/software_stockin_service/software_stockin.service';
+import { Software_StockInDetail_Service } from './software_stockin_detail/software_stockin_detail_service/software_stockin_detail.service';
+import { Software_StockInLine_Service } from './software_stockin_detail/software_stockin_detail_service/software_stockin_detail.service';
+import { Software_Purchase_Service } from './software_purchase/software_purchase_service/software_purchase.service';
+import { Software_PurchaseDetail_Service } from './software_purchasedetail/software_purchasedetail_service/software_purchasedetail.service';
+import { Software_PurchaseDetailLine_Service } from './software_purchasedetail/software_purchasedetail_service/software_purchasedetail.service';
+import { Software_Collection_Service } from './software_collection/software_collection_service/software_collection.service';
+import { Software_CollectionDetail_Service } from './software_collectiondetail/software_collectiondetail_service/software_collectiondetail.service';
+import { Software_CollectionLine_Service } from './software_collectiondetail/software_collectiondetail_service/software_collectiondetail.service';
 
 // paths and Routes
 const appRoutes: Routes = [
@@ -93,7 +113,7 @@ const appRoutes: Routes = [
   { path: 'collection', component: Software_Collection_Component },
   { path: 'purchase', component: Software_Purchase_Component },
   { path: 'disbursement', component: Software_Disbursement_Component },
-  { path: 'stock-in', component: Software_Stockin_Component },
+  { path: 'stock-in', component: Software_StockIn_Component },
   { path: 'stock-out', component: Software_Stockout_Component },
   { path: 'itemgroup', component: Software_Itemgroup_Component },
   { path: 'itemcomponent', component: Software_Itemcomponent_Component },
@@ -112,10 +132,14 @@ const appRoutes: Routes = [
   { path: 'utilities', component: Software_Utilities_Component },
   //POS13 SOFTWARE DETAIL
   { path: 'itemdetail/:id', component: Software_Itemdetail_Component },
+  { path: 'customerdetail/:id', component: Software_Customerdetail_Component },
   { path: 'discountdetail/:id', component: Software_Discountdetail_Component },
   { path: 'postouchdetail/:id', component: Software_PostouchDetail_Component },
   { path: 'supplierdetail/:id', component: Software_SupplierDetail_Component },
   { path: 'userdetail/:id', component: Software_UserDetail_Component },
+  { path: 'stockindetail/:id', component: Software_StockInDetail_Component },
+  { path: 'purchasedetail/:id', component: Software_PurchaseDetail_Component },
+  { path: 'collectiondetail/:id', component: Software_CollectionDetail_Component },
 ];
 
 // ng_modules
@@ -129,6 +153,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     SlimLoadingBarModule.forRoot(),
     // MaterializeModule
+    
   ],
   declarations: [
     wjFlexGrid.WjFlexGrid,
@@ -136,6 +161,7 @@ const appRoutes: Routes = [
     wjFlexGrid.WjFlexGridCellTemplate,
     wjInput.WjComboBox,
     wjInput.WjInputDate,
+    wjInput.WjAutoComplete,
     AppComponent,
     Security_Login_Component,
     Shared_Header_Component,
@@ -153,7 +179,7 @@ const appRoutes: Routes = [
     Software_Collection_Component,
     Software_Purchase_Component,
     Software_Disbursement_Component,
-    Software_Stockin_Component,
+    Software_StockIn_Component,
     Software_Stockout_Component,
     Software_Itemgroup_Component,
     Software_Itemcomponent_Component,
@@ -175,10 +201,14 @@ const appRoutes: Routes = [
 
     // SOFTWARE DETAIL 
     Software_Itemdetail_Component,
+    Software_Customerdetail_Component,
     Software_Discountdetail_Component,
     Software_PostouchDetail_Component,
     Software_SupplierDetail_Component,
     Software_UserDetail_Component,
+    Software_StockInDetail_Component,
+    Software_PurchaseDetail_Component,
+    Software_CollectionDetail_Component,
   ],
   providers: [
     Security_Login_Service,
@@ -192,14 +222,27 @@ const appRoutes: Routes = [
     Software_Customer_Service,
     Software_Supplier_Service,
     Software_UserDetail_Service,
+    Software_UserForm_Service,
+    Software_StockIn_Service,
+    Software_Purchase_Service,
+    Software_Collection_Service,
     //Other
     ToastsManager,
     ToastOptions,
     //SOFTWARE DETAIL SERVICE PROVIDERS
     Software_Itemdetail_Service,
+    Software_ItemPrice_Service,
     Software_PostouchDetail_Service,
+    Software_Customerdetail_Service,
     Software_Discountdetail_Service,
+    Software_DiscountItem_Service,
     Software_SupplierDetail_Service,
+    Software_StockInDetail_Service,
+    Software_StockInLine_Service,
+    Software_PurchaseDetail_Service,
+    Software_PurchaseDetailLine_Service,
+    Software_CollectionDetail_Service,
+    Software_CollectionLine_Service,
   ],
   bootstrap: [
     AppComponent

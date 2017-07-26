@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
+var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_Postouch_Service = (function () {
-    function Software_Postouch_Service(router, http) {
+    function Software_Postouch_Service(router, http, toastr) {
         this.router = router;
         this.http = http;
+        this.toastr = toastr;
         //  Global Variables
         this.headers = new http_1.Headers({
             'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
@@ -44,11 +46,7 @@ var Software_Postouch_Service = (function () {
                 var fixIndex = 5;
                 var fixIndexValue = 5;
                 var tableGroudIdDineIn = results[0].Id;
-                var tableGroudIdWalkIn = results[1].Id;
-                var tableGroudIdDelivery = results[2].Id;
                 var tableGroudIdDineTableGroup = results[0].TableGroup;
-                var tableGroudIdWalkInTableGroup = results[1].TableGroup;
-                var tableGroudIdDeliveryTableGroup = results[2].TableGroup;
                 for (var i = 0; i <= (results.length - 1) + 5; i++) {
                     if (fixIndex == i) {
                         if ((i - fixIndexValue) + 5 <= length_1) {
@@ -113,12 +111,6 @@ var Software_Postouch_Service = (function () {
                             tableGroup6Id: tableGroup6Id,
                             tableGroup6: tableGroup6,
                         });
-                        if (tableGroudIdWalkIn == 2) {
-                            document.getElementById("walkIn").innerHTML = tableGroudIdWalkInTableGroup;
-                        }
-                        if (tableGroudIdDelivery == 3) {
-                            document.getElementById("delivery").innerHTML = tableGroudIdDeliveryTableGroup;
-                        }
                         fixIndex += 6;
                     }
                 }
@@ -228,21 +220,49 @@ var Software_Postouch_Service = (function () {
         return tableObsevableArray;
     };
     //Trn Sales
-    Software_Postouch_Service.prototype.getListTableSale = function (salesId, userId, tableId) {
+    Software_Postouch_Service.prototype.getListTableSaleOpen = function () {
         var tableSaleObsevableArray = new wijmo.collections.ObservableArray();
-        var url = "http://localhost:2558/api/sales/list/" + salesId + '/' + userId + '/' + tableId;
+        var url = "http://localhost:2558/api/sales/listOpen";
         this.http.get(url, this.options).subscribe(function (response) {
             var results = response.json();
             if (results.length > 0) {
-                for (var i = 0; i <= results.length - 1; i++) {
+                for (var i = 0; i < results.length; i++) {
                     tableSaleObsevableArray.push({
                         Id: results[i].Id,
-                        TableId: results[i].TableId,
-                        AccountId: results[i].AccountId,
+                        PeriodId: results[i].TableId,
+                        SalesDate: results[i].SalesDate,
                         SalesNumber: results[i].SalesNumber,
+                        ManualInvoiceNumber: results[i].ManualInvoiceNumber,
                         Amount: results[i].Amount,
+                        TableId: results[i].TableId,
                         TableCode: results[i].TableCode,
+                        CustomerId: results[i].CustomerId,
+                        AccountId: results[i].AccountId,
                         AccountName: results[i].AccountName,
+                        TermId: results[i].TermId,
+                        DiscountId: results[i].DiscountId,
+                        SeniorCitizenId: results[i].SeniorCitizenId,
+                        SeniorCitizenName: results[i].SeniorCitizenName,
+                        SeniorCitizenAge: results[i].SeniorCitizenAge,
+                        Remarks: results[i].Remarks,
+                        SalesAgent: results[i].SalesAgent,
+                        SalesAgentName: results[i].SalesAgentName,
+                        TerminalId: results[i].TerminalId,
+                        PreparedBy: results[i].PreparedBy,
+                        CheckedBy: results[i].CheckedBy,
+                        ApprovedBy: results[i].ApprovedBy,
+                        IsLocked: results[i].IsLocked,
+                        IsCancelled: results[i].IsCancelled,
+                        PaidAmount: results[i].PaidAmount,
+                        CreditAmount: results[i].CreditAmount,
+                        DebitAmount: results[i].DebitAmount,
+                        BalanceAmount: results[i].BalanceAmount,
+                        EntryUserId: results[i].EntryUserId,
+                        EntryDateTime: results[i].EntryDateTime,
+                        UpdateUserId: results[i].UpdateUserId,
+                        UpdateDateTime: results[i].UpdateDateTime,
+                        Pax: results[i].Pax,
+                        TableStatus: results[i].TableStatus,
                     });
                 }
             }
@@ -271,12 +291,30 @@ var Software_Postouch_Service = (function () {
         });
         return tableGroupObsevableArray;
     };
+    Software_Postouch_Service.prototype.postSalesData = function (salesObject, toastr) {
+        var _this = this;
+        var url = "http://localhost:2558/api/sales/post";
+        this.http.post(url, JSON.stringify(salesObject), this.options).subscribe(function (response) {
+            var results = response.json();
+            if (results > 0) {
+                _this.router.navigate(['/postouchdetail', results]);
+            }
+            else {
+                _this.toastr.error('', 'Bad Request');
+                _this.router.navigate(['/postouch']);
+            }
+        }, function (error) {
+            _this.toastr.error('', 'Bad Request');
+            console.log(error);
+        });
+    };
     return Software_Postouch_Service;
 }());
 Software_Postouch_Service = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [router_1.Router,
-        http_1.Http])
+        http_1.Http,
+        ng2_toastr_1.ToastsManager])
 ], Software_Postouch_Service);
 exports.Software_Postouch_Service = Software_Postouch_Service;
 //# sourceMappingURL=software_postouch.service.js.map

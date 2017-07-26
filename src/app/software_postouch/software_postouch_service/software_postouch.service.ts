@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions } from '@angular/http';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 
 @Injectable()
@@ -15,6 +16,7 @@ export class Software_Postouch_Service {
     constructor(
         private router: Router,
         private http: Http,
+        private toastr: ToastsManager
     ) { }
 
     public getListTableGroup(): wijmo.collections.ObservableArray {
@@ -47,12 +49,7 @@ export class Software_Postouch_Service {
                     let fixIndexValue = 5;
 
                     let tableGroudIdDineIn = results[0].Id;
-                    let tableGroudIdWalkIn = results[1].Id;
-                    let tableGroudIdDelivery = results[2].Id;
-
                     let tableGroudIdDineTableGroup = results[0].TableGroup;
-                    let tableGroudIdWalkInTableGroup = results[1].TableGroup;
-                    let tableGroudIdDeliveryTableGroup = results[2].TableGroup;
 
                     for (var i = 0; i <= (results.length - 1) + 5; i++) {
                         if (fixIndex == i) {
@@ -118,14 +115,6 @@ export class Software_Postouch_Service {
                                 tableGroup6Id: tableGroup6Id,
                                 tableGroup6: tableGroup6,
                             });
-
-                            if (tableGroudIdWalkIn == 2) {
-                                (<HTMLButtonElement>document.getElementById("walkIn")).innerHTML = tableGroudIdWalkInTableGroup;
-                            }
-                            if (tableGroudIdDelivery == 3) {
-                                (<HTMLButtonElement>document.getElementById("delivery")).innerHTML = tableGroudIdDeliveryTableGroup;
-                            }
-
                             fixIndex += 6;
                         }
                     }
@@ -253,28 +242,56 @@ export class Software_Postouch_Service {
 
 
     //Trn Sales
-    public getListTableSale(salesId: String, userId: String, tableId: String): wijmo.collections.ObservableArray {
+    public getListTableSaleOpen(): wijmo.collections.ObservableArray {
         let tableSaleObsevableArray = new wijmo.collections.ObservableArray();
-        let url = "http://localhost:2558/api/sales/list/" + salesId + '/' + userId + '/' + tableId;
+        let url = "http://localhost:2558/api/sales/listOpen";
         this.http.get(url, this.options).subscribe(
             response => {
                 var results = response.json();
                 if (results.length > 0) {
-                    for (var i = 0; i <= results.length - 1; i++) {
+                    for (var i = 0; i < results.length; i++) {
                         tableSaleObsevableArray.push({
                             Id: results[i].Id,
-                            TableId: results[i].TableId,
-                            AccountId: results[i].AccountId,
+                            PeriodId: results[i].TableId,
+                            SalesDate: results[i].SalesDate,
                             SalesNumber: results[i].SalesNumber,
+                            ManualInvoiceNumber: results[i].ManualInvoiceNumber,
                             Amount: results[i].Amount,
+                            TableId: results[i].TableId,
                             TableCode: results[i].TableCode,
+                            CustomerId: results[i].CustomerId,
+                            AccountId: results[i].AccountId,
                             AccountName: results[i].AccountName,
+                            TermId: results[i].TermId,
+                            DiscountId: results[i].DiscountId,
+                            SeniorCitizenId: results[i].SeniorCitizenId,
+                            SeniorCitizenName: results[i].SeniorCitizenName,
+                            SeniorCitizenAge: results[i].SeniorCitizenAge,
+                            Remarks: results[i].Remarks,
+                            SalesAgent: results[i].SalesAgent,
+                            SalesAgentName: results[i].SalesAgentName,
+                            TerminalId: results[i].TerminalId,
+                            PreparedBy: results[i].PreparedBy,
+                            CheckedBy: results[i].CheckedBy,
+                            ApprovedBy: results[i].ApprovedBy,
+                            IsLocked: results[i].IsLocked,
+                            IsCancelled: results[i].IsCancelled,
+                            PaidAmount: results[i].PaidAmount,
+                            CreditAmount: results[i].CreditAmount,
+                            DebitAmount: results[i].DebitAmount,
+                            BalanceAmount: results[i].BalanceAmount,
+                            EntryUserId: results[i].EntryUserId,
+                            EntryDateTime: results[i].EntryDateTime,
+                            UpdateUserId: results[i].UpdateUserId,
+                            UpdateDateTime: results[i].UpdateDateTime,
+                            Pax: results[i].Pax,
+                            TableStatus: results[i].TableStatus,
                         });
                     }
+                    // (<HTMLButtonElement>document.getElementById("refreshGrid")).click();
                 }
             }
         );
-
         return tableSaleObsevableArray;
     }
 
@@ -297,10 +314,31 @@ export class Software_Postouch_Service {
                             IsLocked: results[i].IsLocked,
                         });
                     }
+
                 }
             }
         );
 
         return tableGroupObsevableArray;
+    }
+
+
+    public postSalesData(salesObject: Object, toastr: ToastsManager) {
+        let url = "http://localhost:2558/api/sales/post";
+        this.http.post(url, JSON.stringify(salesObject), this.options).subscribe(
+            response => {
+                var results = response.json();
+                if (results > 0) {
+                    this.router.navigate(['/postouchdetail', results]);
+                } else {
+                    this.toastr.error('', 'Bad Request');
+                    this.router.navigate(['/postouch']);
+                }
+            },
+            error => {
+                this.toastr.error('', 'Bad Request');
+                console.log(error);
+            },
+        )
     }
 }

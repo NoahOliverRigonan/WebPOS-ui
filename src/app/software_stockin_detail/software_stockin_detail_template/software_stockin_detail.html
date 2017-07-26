@@ -1,0 +1,405 @@
+<div class="section-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postouch-header">
+                    <h1 class="software-h1"><i class="fa fa-cubes"></i> Stock-In Detail</h1>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</div>
+<div class="section-heading2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a routerLink="/supplier"> Stock-In  </a>                    &nbsp;&nbsp; / &nbsp;&nbsp; Stock-In Detail</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-12" align="right">
+                    <div class="">
+                        <button class="btn btn-lg btn-primary" (click)="btnSaveEditItem()">Lock</button>
+                        <button class="btn btn-lg btn-primary">Unlock</button>
+                        <button class="btn btn-lg btn-danger " routerLink='/stock-in'>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="tab-content">
+                <div id="home">
+                    <div class="row-fluid">
+                        <form class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="StockInNumber" class="control-label col-sm-4">Stock In No.</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" [(ngModel)]="StockInNumber" name="StockInNumber" id="StockInNumber" class="form-control" disabled="true"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="PeriodId" class="control-label col-sm-4">Period</label>
+                                        <div class="col-sm-8">
+                                            <wj-auto-complete [itemsSource]="listOfPeriodObservableArray" id="Period" [placeholder]="'Period...'" [displayMemberPath]="'Period'"
+                                                [(selectedIndex)]="periodOrderSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                [selectedValuePath]="'Period'" [(selectedValue)]="periodSelectedValue" (selectedIndexChanged)="cboPeriodSelectedIndex()"
+                                                style="width: 100%; border-radius: 0px;" disabled="true">
+                                            </wj-auto-complete>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="StockInDate" class="control-label col-sm-4">Stock-In Date</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i> </span>
+                                                <wj-input-date [(value)]="StockInDate" [isRequired]="false" (valueChanged)="expiryDateChangeValue()" [format]="'MMM dd, yyyy'"
+                                                    style="border-radius: 0px;">
+                                                </wj-input-date>
+                                                <input type="hidden" class="form-control" id="StockInDate" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Supplier" class="control-label col-sm-4">Supplier</label>
+                                        <div class="col-sm-8">
+                                            <wj-auto-complete [itemsSource]="listOfSupplierObservableArray" id="Supplier" [placeholder]="'Supplier...'" [displayMemberPath]="'Supplier'"
+                                                [(selectedIndex)]="supplierSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                [selectedValuePath]="'Supplier'" [(selectedValue)]="supplierSelectedValue" (selectedIndexChanged)="cboSupplierSelectedIndex()"
+                                                style="width: 100%; border-radius: 0px;">
+                                            </wj-auto-complete>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="UserCardNumber" class="control-label col-sm-4">PO No.</label>
+                                        <div class="col-sm-8">
+                                            <wj-auto-complete [itemsSource]="listOfPurchaseOrderObservableArray" id="Supplier" [placeholder]="'Purchase Order...'" [displayMemberPath]="'PurchaseOrderNumberAndDate'"
+                                                [(selectedIndex)]="purchaseOrderSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                [selectedValuePath]="'PurchaseOrderNumberAndDate'" [(selectedValue)]="purchaseOrderSelectedValue"
+                                                (selectedIndexChanged)="cboPurchaseOrderSelectedIndex()" style="width: 100%; border-radius: 0px;">
+                                            </wj-auto-complete>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Remarks" class="control-label col-sm-4">Remarks</label>
+                                        <div class="col-sm-8">
+                                            <textarea type="text" [(ngModel)]="Remarks" id="Remarks" name="Remarks" class="form-control" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="IsReturn" class="control-label col-sm-4">Return</label>
+                                        <div class="col-sm-8">
+                                            <input type="checkbox" [(ngModel)]="IsReturn" name="IsReturn" id="IsReturn" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Password" class="control-label col-sm-4">Return OR No.</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <!--<input type="password" [(ngModel)]="Password" name="Password" id="Password" class="form-control" />-->
+                                                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                                                <span class="input-group-addon" id="basic-addon3">samplename</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Password" class="control-label col-sm-4">Return Sales Invoice</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <!--<input type="password" [(ngModel)]="Password" name="Password" id="Password" class="form-control" />-->
+                                                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                                                <span class="input-group-addon" id="basic-addon3">samplename</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Prepared" class="control-label col-sm-4">Prepared By</label>
+                                        <div class="col-sm-8">
+                                            <!-- <input type="text" [(ngModel)]="Prepared" name="Prepared" id="Prepared" class="form-control" disabled="true" /> -->
+                                            <wj-auto-complete [itemsSource]="listOfPreparedByObservableArray" id="UserName" [placeholder]="'Period...'" [displayMemberPath]="'UserName'"
+                                                [(selectedIndex)]="preparedBySelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                [selectedValuePath]="'UserName'" [(selectedValue)]="preparedBySelectedValue"
+                                                (selectedIndexChanged)="cboPreparedBySelectedIndex()" style="width: 100%; border-radius: 0px;"
+                                                disabled="true">
+                                            </wj-auto-complete>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CheckedBy" class="control-label col-sm-4">Checked By</label>
+                                        <div class="col-sm-8">
+                                            <wj-auto-complete [itemsSource]="listOfCheckedByObservableArray" id="CheckedBy" [placeholder]="'Checked By...'" [displayMemberPath]="'UserName'"
+                                                [(selectedIndex)]="checkedBySelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                [selectedValuePath]="'UserName'" [(selectedValue)]="checkedBySelectedValue" (selectedIndexChanged)="cboCheckBySelectedIndex()"
+                                                style="width: 100%; border-radius: 0px;">
+                                            </wj-auto-complete>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ApprovedBy" class="control-label col-sm-4">Approved By</label>
+                                        <div class="col-sm-8">
+                                            <wj-auto-complete [itemsSource]="listOfApprovedByObservableArray" id="ApprovedBy" [placeholder]="'Approved By...'" [displayMemberPath]="'UserName'"
+                                                [(selectedIndex)]="approvedBySelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                [selectedValuePath]="'UserName'" [(selectedValue)]="approvedBySelectedValue"
+                                                (selectedIndexChanged)="cboApprovedBySelectedIndex()" style="width: 100%; border-radius: 0px;">
+                                            </wj-auto-complete>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Category" class="control-label col-sm-4">Download the items <br/> from the category</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <wj-auto-complete [itemsSource]="listOfCategoryObservableArray" id="Category" [placeholder]="'Select Category'" [displayMemberPath]="'Category'"
+                                                    [(selectedIndex)]="categorySelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                    [selectedValuePath]="'Category'" [(selectedValue)]="categorySelectedValue"
+                                                    (selectedIndexChanged)="cboCategoryItemSelectedIndex()" style="width: auto; border-radius: 0px; height:60px;">
+                                                </wj-auto-complete>
+                                                <span class="btn btn-info input-group-addon" id="basic-addon3" style="color:white;">DOWNLOAD</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-12" align="right">
+                    <div class="">
+                        <button class="btn btn-lg btn-primary" (click)="btnModalSTLine()"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <wj-flex-grid class="grid" [itemsSource]="" [selectionMode]="3" [headersVisibility]="1">
+                <!--<wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                <button class="btn btn-primary btn-xs btn-md btn-block" (click)="btnEditItem()">
+                                                    <i class="fa fa-edit fa-fw"></i> Edit
+                                                </button>
+                            </template>
+                        </wj-flex-grid-column>-->
+                <wj-flex-grid-column [header]="''" [binding]="''" [isReadOnly]="true" [width]="100">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                        <button class="btn btn-danger btn-xs btn-block" (click)="btnDeleteStockInLineModal()">
+                                                    <i class="fa fa-trash fa-fw"></i> Delete
+                                                </button>
+                    </template>
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Item'" [binding]="''" [isReadOnly]="true" [width]="450" align="center">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Unit'" [binding]="'CanAdd'" [isReadOnly]="true" [width]="120" align="center">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Cost'" [binding]="'CanEdit'" [isReadOnly]="true" [width]="120" align="center">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Quantity'" [binding]="'CanDelete'" [isReadOnly]="true" [width]="120" align="center">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Amount'" [binding]="'CanLock'" [isReadOnly]="true" [width]="150" align="center">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Selling Price'" [binding]="'CanUnlock'" [isReadOnly]="true" [width]="150" align="center">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Expiry Date'" [binding]="'CanPrint'" [isReadOnly]="true" [width]="120" align="center">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Lot Number'" [binding]="'CanPreview'" [isReadOnly]="true" [width]="120" align="center">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Asset Account'" [binding]="'CanView'" [isReadOnly]="true" [width]="120" align="center">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'IMPORT XLS'" [binding]="''" [isReadOnly]="true" [width]="100">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                        <button class="btn btn-info btn-xs btn-md btn-block" (click)="getUserFormListById()" align="center">
+                                                    <i class="fa fa-edit fa-fw"></i> IMPORT XLS
+                                                </button>
+                    </template>
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'EXPORT XLS'" [binding]="''" [isReadOnly]="true" [width]="100" align="center">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                        <button class="btn btn-info btn-xs btn-md btn-block" (click)="getUserFormListById()">
+                                                    <i class="fa fa-edit fa-fw"></i> EXPORT XLS
+                                                </button>
+                    </template>
+                </wj-flex-grid-column>
+            </wj-flex-grid>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-12 btn-group group-button" id="">
+                    <button type="button" class="btn btn-default" (click)="moveItemToFirstPage()">
+                                                    <span class="fa fa-fast-backward"></span> 
+                                                </button>
+                    <button type="button" class="btn btn-default" (click)="moveItemToPreviousPage()">
+                                                    <span class="fa fa-step-backward"></span> 
+                                                </button>
+                    <button type="button" class="btn btn-default" disabled style="width:100px">
+                                                    {{ indexItem }}
+                                                </button>
+                    <button type="button" class="btn btn-default" (click)="moveItemToNextPage()">
+                                                     <span class="fa fa-step-forward"></span>
+                                                </button>
+                    <button type="button" class="btn btn-default" (click)="moveItemToLastPage()">
+                                                     <span class="fa fa-fast-forward"></span>
+                                                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--MODAL FOR STOCK IN LINE-->
+<div class="modal fade" id="modal-for-addRights" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content panel-danger">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <ul class="nav nav-tabs">
+                <li><a data-toggle="tab" href="#menu2">User Rights</a></li>
+                <li><a data-toggle="tab" href="#menu1">Advance User Rights</a></li>
+            </ul>
+            <div class="modal-body panel-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-md-pull-1">
+                            <div class="tab-content">
+                                <div id="menu2" class="tab-pane fade in active">
+                                    <form action="" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="FormDescription" class="control-label col-sm-4">Item</label>
+                                            <div class="col-sm-8">
+                                                <wj-combo-box [itemsSource]="listOfItemObservableArray" [placeholder]="'Select...'" [displayMemberPath]="'ItemDescription'"
+                                                    [(selectedIndex)]="itemSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                    [selectedValuePath]="'ItemDescription'" [(selectedValue)]="itemSelectedValue"
+                                                    (selectedIndexChanged)="cboItemSelectedIndex()" style="width: 100%; border-radius: 0px;">
+                                                </wj-combo-box>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="FormDescription" class="control-label col-sm-4">Unit</label>
+                                            <div class="col-sm-8">
+                                                <wj-combo-box [itemsSource]="listOfUnitObservableArray" [placeholder]="'Select...'" [displayMemberPath]="'Unit'" [(selectedIndex)]="unitSelectedIndex"
+                                                    [isEditable]="false" [isRequired]="true" [selectedValuePath]="'Unit'" [(selectedValue)]="unitSelectedValue"
+                                                    (selectedIndexChanged)="cboUnitSelectedIndex()" style="width: 100%; border-radius: 0px;">
+                                                </wj-combo-box>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Cost" class="control-label col-sm-4">Cost</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" [(ngModel)]="Cost" id="Cost" name="Cost" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Quantity" class="control-label col-sm-4">Quantity</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="text" [(ngModel)]="Quantity" id="Quantity" name="Quantity" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Amount" class="control-label col-sm-4">Amount</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="text" [(ngModel)]="Amount" id="Amount" name="Amount" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanLock" class="control-label col-sm-4">Selling Price</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="text" [(ngModel)]="CanLock" id="CanLock" name="CanLock" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ExpiryDate" class="control-label col-sm-4">Expiry Date</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i> </span>
+                                                    <wj-input-date [(value)]="ExpiryDate" [isRequired]="false" (valueChanged)="expiryDateChangeValue()" [format]="'MMM dd, yyyy'"
+                                                        style="border-radius: 0px;">
+                                                    </wj-input-date>
+                                                    <input type="hidden" class="form-control" id="ExpiryDate" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="menu1" class="tab-pane fade">
+                                    <form action="" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="LotNumber" class="control-label col-sm-4">Lot Number</label>
+                                            <div class="col-sm-8">
+                                                <input type="checkbox" [(ngModel)]="LotNumber" id="LotNumber" name="LotNumber" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="FormDescription" class="control-label col-sm-4">Asset Account</label>
+                                            <div class="col-sm-8">
+                                                <wj-combo-box [itemsSource]="listOfAccountObservableArray" [placeholder]="'Select...'" [displayMemberPath]="'Account'" [(selectedIndex)]="accountSelectedIndex"
+                                                    [isEditable]="false" [isRequired]="true" [selectedValuePath]="'Account'"
+                                                    [(selectedValue)]="accountSelectedValue" (selectedIndexChanged)="cboAccountSelectedIndex()"
+                                                    style="width: 100%; border-radius: 0px;">
+                                                </wj-combo-box>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button class="btn btn-primary" data-dismiss="modal" id="btnSaveEdit" (click)="saveStockInLine()"><i class="fa fa-trash fa-fw"></i> Save</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DELETE MODAL WARNING -->
+<div class="modal fade" id="delete-modal-warning" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content panel-danger">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <i class="fa fa-exclamation-triangle"></i>
+            </div>
+            <div class="modal-body panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        Delete Record?
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button type="button" id="btnCloseSupport" class="btn btn-warning" data-dismiss="modal" (click)="btnDeleteStockInLine()"><i class="fa fa-trash fa-fw"></i> Delete</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal" (click)="ClearAfterSave()"><i class="fa fa-close fa-fw"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<shared-footer></shared-footer>
+<!--<button id="btn-hidden-lock-item" [hidden]="true" (click)="startLoading()"></button>-->
+<!--<button id="set-value-fields" [hidden]="true" (click)="setFieldValues()"></button>
+<button id="set-value-fields-userform" [hidden]="true" (click)="setFieldValuesUserForm()"></button>-->
+<button id="modalStockInLine" [hidden]="true" data-toggle="modal" data-target="#modal-for-addRights"></button>
+<button id="deleteStockInLine" [hidden]="true" data-toggle="modal" data-target="#delete-modal-warning"></button>
+<button id="refreshGrid" (click)="getUserFormList()" [hidden]="true"></button>
+<button id="set-value-fields" [hidden]="true" (click)="setFieldValues()"></button>
+<button id="clear-fields" [hidden]="true" (click)="ClearAfterSave()"></button>

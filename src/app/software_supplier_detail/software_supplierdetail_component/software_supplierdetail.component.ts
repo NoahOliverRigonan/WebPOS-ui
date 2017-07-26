@@ -136,7 +136,6 @@ export class Software_SupplierDetail_Component implements OnInit {
     public btnSaveEditItem() {
         let toastr: ToastsManager;
         this.softwareSupplierDetailService.putSupplierData(this.getIdUrlParameter(), this.getDataSupplierObject(), toastr);
-        console.log(this.getDataSupplierObject());
     }
 
     //value 
@@ -146,12 +145,12 @@ export class Software_SupplierDetail_Component implements OnInit {
 
     //LOCK FIELDS
     public LockDataItem() {
-        (<HTMLButtonElement>document.getElementById("Supplier")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("Address")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("TelephoneNumber")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("CellphoneNumber")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("FaxNumber")).disabled = true;
-        (<HTMLButtonElement>document.getElementById("TIN")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("Supplier")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("Address")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("TelephoneNumber")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("CellphoneNumber")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("FaxNumber")).disabled = true;
+            (<HTMLButtonElement>document.getElementById("TIN")).disabled = true;
     }
 
     public ngOnInit(): any {
@@ -159,6 +158,6 @@ export class Software_SupplierDetail_Component implements OnInit {
             this.router.navigate(['security_login']);
         }
         this.itemCollectionView = new wijmo.collections.CollectionView(this.softwareSupplierDetailService.getSupplierList(this.getIdUrlParameter()));
+        console.log(this.LockDataItem());
     }
-
 }

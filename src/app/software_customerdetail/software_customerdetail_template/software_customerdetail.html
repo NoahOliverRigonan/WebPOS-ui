@@ -1,0 +1,206 @@
+<div class="section-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postouch-header">
+                    <h1 class="software-h1"><i class=""></i> Discount Detail</h1>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</div>
+<div class="section-heading2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a routerLink="/discount">Discount</a>                    &nbsp;&nbsp; / &nbsp;&nbsp; Discount Detail</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="" style="float:right;">
+                        <button class="btn btn-primary btn-lg " (click)="btnSaveEdit()">Lock</button>
+                        <button class="btn btn-primary btn-lg " routerLink=''>Unlock</button>
+                        <button class="btn btn-danger btn-lg " routerLink='/discount'>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row-fluid">
+                <form class="form-horizontal">
+                    <div class="span6">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Customer" class="control-label col-sm-4">Customer</label>
+                                <div class="col-sm-8">
+                                    <input type="text" [(ngModel)]="Customer" name="Customer" id="Customer" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Address" class="control-label col-sm-4">Address</label>
+                                <div class="col-sm-8">
+                                    <textarea type="text" [(ngModel)]="Address" id="Address" name="Address" class="form-control" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ContactPerson" class="control-label col-sm-4">Contact Person</label>
+                                <div class="col-sm-8">
+                                    <input type="text" [(ngModel)]="ContactPerson" name="ContactPerson" id="ContactPerson" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ContactNumber" class="control-label col-sm-4">ContactNumber</label>
+                                <div class="col-sm-8">
+                                    <input type="text" [(ngModel)]="ContactNumber" name="ContactNumber" id="ContactNumber" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="CreditLimit" class="control-label col-sm-4">CreditLimit</label>
+                                <div class="col-sm-8">
+                                    <input type="text" [(ngModel)]="CreditLimit" name="CreditLimit" id="CreditLimit" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="UserCardNumber" class="control-label col-sm-4">Term</label>
+                                <div class="col-sm-8">
+                                    <wj-auto-complete [itemsSource]="listOfTermObservableArray"  [placeholder]="'...'" [displayMemberPath]="'Term'"
+                                        [(selectedIndex)]="termSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                        [selectedValuePath]="'Term'" [(selectedValue)]="termSelectedValue"
+                                        (selectedIndexChanged)="cboTermSelectedIndex()" style="width: 100%; border-radius: 0px;">
+                                    </wj-auto-complete>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="TIN" class="control-label col-sm-4">TIN</label>
+                                <div class="col-sm-8">
+                                    <input type="text" [(ngModel)]="TIN" name="TIN" id="TIN" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="UserCardNumber" class="control-label col-sm-4">AR Account</label>
+                                <div class="col-sm-8">
+                                    <wj-auto-complete [itemsSource]="listOfAccountObservableArray"  [placeholder]="'...'" [displayMemberPath]="'Account'"
+                                        [(selectedIndex)]="accountSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                        [selectedValuePath]="'Account'" [(selectedValue)]="accountSelectedValue"
+                                        (selectedIndexChanged)="cboAccountSelectedIndex()" style="width: 100%; border-radius: 0px;">
+                                    </wj-auto-complete>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="WithReward" class="control-label col-sm-4">With Reward</label>
+                                <div class="col-sm-8">
+                                    <input type="checkbox" [(ngModel)]="WithReward" name="WithReward" id="WithReward" class=" " />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="RewardNumber" class="control-label col-sm-4">Reward Number</label>
+                                <div class="col-sm-8">
+                                    <input type="text" [(ngModel)]="RewardNumber" name="RewardNumber" id="RewardNumber" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="RewardConversion" class="control-label col-sm-4">Reward Conversion</label>
+                                <div class="col-sm-8">
+                                    <input type="text" [(ngModel)]="RewardConversion" name="RewardConversion" id="RewardConversion" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="UserCardNumber" class="control-label col-sm-4">PO No.</label>
+                                <div class="col-sm-8">
+                                    <wj-auto-complete [itemsSource]="listOfItemPriceObservableArray" [placeholder]="'...'" [displayMemberPath]="'PriceDescription'"
+                                        [(selectedIndex)]="itemPriceSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                        [selectedValuePath]="'PriceDescription'" [(selectedValue)]="itemPriceSelectedValue"
+                                        (selectedIndexChanged)="cboItemPriceSelectedIndex()" style="width: 100%; border-radius: 0px;">
+                                    </wj-auto-complete>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-footer"></div>
+    </div>
+</div>
+
+<!-- item discount  detail modal -->
+<div class="modal fade" id="itemdiscount-detail-modal" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Item Discount</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Item Code</label>
+                                <div class="col-sm-8">
+                                    <button id="error1" [hidden]="true"></button>
+                                    <wj-combo-box [itemsSource]="listOfItemCodeObservableArray" [placeholder]="'Select Item Code'" [displayMemberPath]="'ItemCode'"
+                                        [isEditable]="false" [isRequired]="true" [(selectedIndex)]="itemCodeSelectedIndex" (selectedIndexChanged)="cboItemCodeSelectedIndex()"
+                                        style="width: 100%; border-radius: 0px;">
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Item</label>
+                                <div class="col-sm-8">
+                                    <button id="error1" [hidden]="true"></button>
+                                    <wj-combo-box [itemsSource]="listOfItemDescriptionObservableArray" [placeholder]="'Select Item'" [displayMemberPath]="'ItemDescription'"
+                                        [isEditable]="false" [isRequired]="true" [(selectedIndex)]="itemDescriptionSelectedIndex"
+                                        (selectedIndexChanged)="cboItemDescriptionSelectedIndex()" style="width: 100%; border-radius: 0px;"
+                                        disabled>
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">A</label>
+                                <div class="col-sm-8">
+                                    <input type="checkbox" id="" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button type="button" id="btnSaveSupport" class="btn btn-primary" data-dismiss="modal" (click)="addItemDiscount()"><i class="fa fa-save fa-fw"></i> Save</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DELETE MODAL WARNING -->
+<div class="modal fade" id="delete-modal-warning" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content panel-danger">
+            <div class="modal-body panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        Delete Record?
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button type="button" id="btnCloseSupport" class="btn btn-warning" data-dismiss="modal" (click)="deleteDiscount()"><i class="fa fa-trash fa-fw"></i> Delete</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<shared-footer></shared-footer>
+<button id="set-fields-values" [hidden]="true" (click)="setFieldValues()"></button>
+<button id="btn-hidden-add-detail-modal" [hidden]="true" data-toggle="modal" data-target="#itemdiscount-detail-modal"></button>
+<button id="deleteModal" [hidden]="true" data-toggle="modal" data-target="#delete-modal-warning"></button>
+<!-- <button id="refreshGrid" (click)="getDiscountItem()" [hidden]="true"></button> -->

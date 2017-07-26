@@ -26,22 +26,6 @@ var Software_Itemdetail_Service = (function () {
         this.options = new http_1.RequestOptions({ headers: this.headers });
         // this.toastr.setRootViewContainerRef(vcRef);
     }
-    // UPLOAD IMAGE
-    // public getUnittById(unitId: number) {
-    //     let url = "http://localhost:2558/api/item/list/1" + unitId;
-    //     this.http.get(url, this.options).subscribe(
-    //         response => {
-    //             if (response.json() != null) {
-    //                 (<HTMLInputElement>document.getElementById("unitSelectedValue")).value = response.json().listUnit;
-    //                 document.getElementById("btn-hidden-selectedValue-data").click();
-    //                 document.getElementById("btn-hidden-complete-loading").click();
-    //             } else {
-    //                 alert("No Data");
-    //                 this.router.navigate(["/itemDetail"]);
-    //             }
-    //         }
-    //     );
-    // }
     //GET ITEM UNIT
     Software_Itemdetail_Service.prototype.getItemDetail = function (Id) {
         var itemObservableArray = new wijmo.collections.ObservableArray();
@@ -108,7 +92,7 @@ var Software_Itemdetail_Service = (function () {
         var _this = this;
         var url = "http://localhost:2558/api/item/put/" + id;
         this.http.put(url, JSON.stringify(itemObject), this.options).subscribe(function (response) {
-            _this.toastr.success('', 'Edit Successful');
+            _this.toastr.success('', 'Successful');
             setTimeout(function () {
                 _this.router.navigate(['/item']);
             }, 1000);
@@ -126,4 +110,70 @@ Software_Itemdetail_Service = __decorate([
         router_1.ActivatedRoute])
 ], Software_Itemdetail_Service);
 exports.Software_Itemdetail_Service = Software_Itemdetail_Service;
+var Software_ItemPrice_Service = (function () {
+    function Software_ItemPrice_Service(router, http, toastr, activateroute) {
+        this.router = router;
+        this.http = http;
+        this.toastr = toastr;
+        this.activateroute = activateroute;
+        //  Global Variables
+        this.headers = new http_1.Headers({
+            'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+            'Content-Type': 'application/json'
+        });
+        this.options = new http_1.RequestOptions({ headers: this.headers });
+    }
+    //GET USER FORM
+    Software_ItemPrice_Service.prototype.getItemPriceById = function (itemPriceId) {
+        var itemPriceObservableArray = new wijmo.collections.ObservableArray();
+        var url = "http://localhost:2558/api/itemPrice/get/" + itemPriceId;
+        this.http.get(url, this.options).subscribe(function (response) {
+            var results = response.json();
+            if (results.length > 0) {
+                for (var i = 0; i <= results.length - 1; i++) {
+                    itemPriceObservableArray.push({
+                        Id: results[i].Id,
+                        ItemId: results[i].ItemId,
+                        PriceDescription: results[i].PriceDescription,
+                        Price: results[i].Price,
+                        TriggerQuantity: results[i].TriggerQuantity,
+                    });
+                }
+            }
+        });
+        return itemPriceObservableArray;
+    };
+    Software_ItemPrice_Service.prototype.postItemPrice = function (itemPriceObject, toastr) {
+        var _this = this;
+        var url = "http://localhost:2558/api/itemPrice/post";
+        this.http.post(url, JSON.stringify(itemPriceObject), this.options).subscribe(function (response) {
+            _this.toastr.success('', 'Success');
+            document.getElementById('refreshGrid').click();
+            document.getElementById('clear-fields').click();
+        }, function (error) {
+            _this.toastr.error('', 'Bad Request');
+        });
+    };
+    Software_ItemPrice_Service.prototype.deleteItemPrice = function (id, toastr) {
+        var _this = this;
+        var url = "http://localhost:2558/api/itemPrice/delete/" + id;
+        this.http.delete(url, this.options).subscribe(function (response) {
+            _this.toastr.info('', 'Successfully Deleted');
+            setTimeout(function () {
+                document.getElementById("refreshGrid").click();
+            }, 1000);
+        }, function (error) {
+            _this.toastr.error(' ', 'Bad Request');
+        });
+    };
+    return Software_ItemPrice_Service;
+}());
+Software_ItemPrice_Service = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [router_1.Router,
+        http_1.Http,
+        ng2_toastr_1.ToastsManager,
+        router_1.ActivatedRoute])
+], Software_ItemPrice_Service);
+exports.Software_ItemPrice_Service = Software_ItemPrice_Service;
 //# sourceMappingURL=software_itemdetail.service.js.map

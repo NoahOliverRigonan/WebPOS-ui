@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Software_User_Service } from '../software_user_service/software_user.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -17,9 +17,10 @@ export class Software_User_Component implements OnInit {
     constructor(
         private router: Router,
         private softwareUserService: Software_User_Service,
-        private toastr : ToastsManager,
-        private vcRef : ViewContainerRef,
-    ) { 
+        private toastr: ToastsManager,
+        private vcRef: ViewContainerRef,
+        private errorToastr: ToastsManager
+    ) {
         this.toastr.setRootViewContainerRef(vcRef);
     }
 
@@ -44,9 +45,25 @@ export class Software_User_Component implements OnInit {
         this.router.navigate(['/userdetail', currentSelectedItem.Id]);
     }
 
+
     public btnAddUser(): void {
-        if (this.lock != true) {
             this.softwareUserService.postUserData(null, this.toastr);
+    }
+
+    public btnDeleteItemModal() {
+            (<HTMLButtonElement>document.getElementById("deleteUserModal")).click();
+    }
+
+    public btnDeleteItem() {
+        let errorToastr: ToastsManager;
+        let toastr: ToastsManager;
+        let currentSelectedItem = this.listMstUser.currentItem;
+        if (currentSelectedItem.IsLocked == true) {
+            this.errorToastr.error('', 'You cant delete Lock Item');
+        }
+        else {
+            // (<HTMLButtonElement>document.getElementById("btn-hidden-start-loading")).click();
+            this.softwareUserService.deleteUserData(currentSelectedItem.Id, toastr);
         }
     }
 }

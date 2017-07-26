@@ -24,78 +24,42 @@ var Software_Discountdetail_Service = (function () {
         });
         this.options = new http_1.RequestOptions({ headers: this.headers });
     }
-    // UPLOAD IMAGE
-    // public getUnittById(unitId: number) {
-    //     let url = "http://localhost:2558/api/item/list/1" + unitId;
-    //     this.http.get(url, this.options).subscribe(
-    //         response => {
-    //             if (response.json() != null) {
-    //                 (<HTMLInputElement>document.getElementById("unitSelectedValue")).value = response.json().listUnit;
-    //                 document.getElementById("btn-hidden-selectedValue-data").click();
-    //                 document.getElementById("btn-hidden-complete-loading").click();
-    //             } else {
-    //                 alert("No Data");
-    //                 this.router.navigate(["/itemDetail"]);
-    //             }
-    //         }
-    //     );
-    // }
-    //GET ITEM UNIT
-    Software_Discountdetail_Service.prototype.getItemDiscountDetail = function () {
-        var discountItemObservableArray = new wijmo.collections.ObservableArray();
-        var url = "http://localhost:2558/api/discountitem/list";
-        this.http.get(url, this.options).subscribe(function (response) {
-            var results = response.json();
-            if (results.length > 0) {
-                discountItemObservableArray.push({
-                    Id: results[0].Id,
-                    ItemId: results[0].ItemId,
-                    DiscountId: results[0].DiscountId,
-                    ItemCode: results[0].ItemCode,
-                    Item: results[0].Item,
-                    listOfItemCode: results[0].listOfItemCode,
-                    listOfItemDescription: results[0].listOfItemDescription,
-                });
-                document.getElementById("set-value-fields-item").click();
-            }
-            else {
-                console.log("No data");
-            }
-        });
-        return discountItemObservableArray;
-    };
     Software_Discountdetail_Service.prototype.getDiscountDetail = function (id) {
         var discountObservableArray = new wijmo.collections.ObservableArray();
         var url = "http://localhost:2558/api/discount/get/" + id;
         this.http.get(url, this.options).subscribe(function (response) {
             var results = response.json();
             if (results.length > 0) {
-                discountObservableArray.push({
-                    Id: results[0].Id,
-                    Discount: results[0].Discount,
-                    DiscountRate: results[0].DiscountRate,
-                    IsVatExempt: results[0].IsVatExempt,
-                    IsDateScheduled: results[0].IsDateScheduled,
-                    DateStart: results[0].DateStart,
-                    DateEnd: results[0].DateEnd,
-                    IsTimeScheduled: results[0].IsTimeScheduled,
-                    TimeStart: results[0].TimeStart,
-                    TimeEnd: results[0].TimeEnd,
-                    IsDayScheduled: results[0].IsDayScheduled,
-                    DayMon: results[0].DayMon,
-                    DayTue: results[0].DayTue,
-                    DayWed: results[0].DayWed,
-                    DayThu: results[0].DayThu,
-                    DayFri: results[0].DayFri,
-                    DaySat: results[0].DaySat,
-                    DaySun: results[0].DaySun,
-                    EntryUserId: results[0].EntryUserId,
-                    EntryDateTime: results[0].EntryDateTime,
-                    UpdateUserId: results[0].UpdateUserId,
-                    UpdateDateTime: results[0].UpdateDateTime,
-                    IsLocked: results[0].IsLocked,
-                });
-                document.getElementById("set-value-fields-discountdetail").click();
+                for (var i = 0; i < results.length; i++) {
+                    discountObservableArray.push({
+                        Id: results[i].Id,
+                        Discount: results[i].Discount,
+                        DiscountRate: results[i].DiscountRate,
+                        IsVatExempt: results[i].IsVatExempt,
+                        IsDateScheduled: results[i].IsDateScheduled,
+                        DateStart: results[i].DateStart,
+                        DateEnd: results[i].DateEnd,
+                        IsTimeScheduled: results[i].IsTimeScheduled,
+                        TimeStart: results[i].TimeStart,
+                        TimeEnd: results[i].TimeEnd,
+                        IsDayScheduled: results[i].IsDayScheduled,
+                        DayMon: results[i].DayMon,
+                        DayTue: results[i].DayTue,
+                        DayWed: results[i].DayWed,
+                        DayThu: results[i].DayThu,
+                        DayFri: results[i].DayFri,
+                        DaySat: results[i].DaySat,
+                        DaySun: results[i].DaySun,
+                        EntryUserId: results[i].EntryUserId,
+                        EntryDateTime: results[i].EntryDateTime,
+                        UpdateUserId: results[i].UpdateUserId,
+                        UpdateDateTime: results[i].UpdateDateTime,
+                        IsLocked: results[i].IsLocked,
+                        listOfItemCode: results[i].listOfItemCode,
+                        listOfItemDescription: results[i].listOfItemDescription,
+                    });
+                }
+                document.getElementById("set-value-fields-item").click();
             }
             else {
                 console.log("No data");
@@ -118,6 +82,17 @@ var Software_Discountdetail_Service = (function () {
             document.getElementById("delete-modal-warning-id").click();
         });
     };
+    // PUT DISCOUNT
+    Software_Discountdetail_Service.prototype.putDiscountData = function (id, discountObject, toastr) {
+        var _this = this;
+        var url = "http://localhost:2558/api/discount/put/" + id;
+        this.http.put(url, JSON.stringify(discountObject), this.options).subscribe(function (response) {
+            _this.toastr.success('', 'Save Successful');
+            _this.router.navigate(['/discount']);
+        }, function (error) {
+            alert("Error");
+        });
+    };
     return Software_Discountdetail_Service;
 }());
 Software_Discountdetail_Service = __decorate([
@@ -127,4 +102,72 @@ Software_Discountdetail_Service = __decorate([
         ng2_toastr_1.ToastsManager])
 ], Software_Discountdetail_Service);
 exports.Software_Discountdetail_Service = Software_Discountdetail_Service;
+var Software_DiscountItem_Service = (function () {
+    function Software_DiscountItem_Service(router, http, toastr, activateroute) {
+        this.router = router;
+        this.http = http;
+        this.toastr = toastr;
+        this.activateroute = activateroute;
+        //  Global Variables
+        this.headers = new http_1.Headers({
+            'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+            'Content-Type': 'application/json'
+        });
+        this.options = new http_1.RequestOptions({ headers: this.headers });
+    }
+    //GET DISCOUNT ITEM
+    Software_DiscountItem_Service.prototype.getItemDiscountDetail = function (id) {
+        var discountItemObservableArray = new wijmo.collections.ObservableArray();
+        var url = "http://localhost:2558/api/discountitem/get/" + id;
+        this.http.get(url, this.options).subscribe(function (response) {
+            var results = response.json();
+            if (results.length > 0) {
+                for (var i = 0; i < results.length; i++) {
+                    discountItemObservableArray.push({
+                        Id: results[i].Id,
+                        ItemId: results[i].ItemId,
+                        DiscountId: results[i].DiscountId,
+                        ItemCode: results[i].ItemCode,
+                        Item: results[i].Item,
+                    });
+                }
+            }
+            else {
+                console.log("No data");
+            }
+        });
+        return discountItemObservableArray;
+    };
+    Software_DiscountItem_Service.prototype.postDiscountItem = function (discountItemObject, toastr) {
+        var _this = this;
+        var url = "http://localhost:2558/api/discountitem/post";
+        this.http.post(url, JSON.stringify(discountItemObject), this.options).subscribe(function (response) {
+            _this.toastr.success('', 'Success');
+            document.getElementById('refreshGrid').click();
+        }, function (error) {
+            _this.toastr.error('', 'Bad Request');
+        });
+    };
+    Software_DiscountItem_Service.prototype.deleteDiscountItem = function (id, toastr) {
+        var _this = this;
+        var url = "http://localhost:2558/api/discountitem/delete/" + id;
+        this.http.delete(url, this.options).subscribe(function (response) {
+            _this.toastr.info('', 'Successfully Deleted');
+            setTimeout(function () {
+                document.getElementById("refreshGrid").click();
+            }, 1000);
+        }, function (error) {
+            _this.toastr.error(' ', 'Bad Request');
+        });
+    };
+    return Software_DiscountItem_Service;
+}());
+Software_DiscountItem_Service = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [router_1.Router,
+        http_1.Http,
+        ng2_toastr_1.ToastsManager,
+        router_1.ActivatedRoute])
+], Software_DiscountItem_Service);
+exports.Software_DiscountItem_Service = Software_DiscountItem_Service;
 //# sourceMappingURL=software_discountdetail.service.js.map

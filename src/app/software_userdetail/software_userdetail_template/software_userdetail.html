@@ -25,9 +25,8 @@
             <div class="row">
                 <div class="col-md-12" align="right">
                     <div class="">
-                        <button class="btn btn-lg btn-primary" (click)="LockDataItem()">Lock</button>
+                        <button class="btn btn-lg btn-primary" (click)="btnSaveEditItem()">Lock</button>
                         <button class="btn btn-lg btn-primary">Unlock</button>
-                        <button class="btn btn-lg btn-primary" (click)="btnSaveEditItem()">Save</button>
                         <button class="btn btn-lg btn-danger " routerLink='/user'>Close</button>
                     </div>
                 </div>
@@ -64,16 +63,6 @@
                                             <input type="text" [(ngModel)]="UserCardNumber" name="UserCardNumber" id="UserCardNumber" class="form-control" />
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="Unit" class="control-label col-sm-4">Copy the rights of..</label>
-                                        <div class="col-sm-8">
-                                            <wj-combo-box [itemsSource]="listOfCopyRightUserObservableArray" id="UserName" [placeholder]="'Select...'" [displayMemberPath]="'UserName'"
-                                                [(selectedIndex)]="copyRightUserSelectedIndex" [isEditable]="false" [isRequired]="true"
-                                                [selectedValuePath]="'UserName'" [(selectedValue)]="copyRightSelectedValue" (selectedIndexChanged)="cboMstUserSelectedIndexChanged()"
-                                                style="width: 100%; border-radius: 0px;">
-                                            </wj-combo-box>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -81,109 +70,276 @@
                 </div>
             </div>
         </div>
-        <div class="panel-footer">
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-12" align="right">
+                    <div class="">
+                        <button class="btn btn-lg btn-primary" (click)="btnModalCopyRight()">Copy Rights of..</button>
+                        <button class="btn btn-lg btn-primary" (click)="btnModalAddRight()"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="panel-body">
+            <wj-flex-grid class="grid" [itemsSource]="userFormCollectionView" [selectionMode]="3" [headersVisibility]="1">
+                <!--<wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                <button class="btn btn-primary btn-xs btn-md btn-block" (click)="btnEditItem()">
+                                                    <i class="fa fa-edit fa-fw"></i> Edit
+                                                </button>
+                            </template>
+                        </wj-flex-grid-column>-->
+                <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                        <button class="btn btn-danger btn-xs btn-block" (click)="btnDeleteUserFormModal()">
+                                                    <i class="fa fa-trash fa-fw"></i> Delete
+                                                </button>
+                    </template>
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Form/Description'" [binding]="'FormDescription'" [isReadOnly]="true" [width]="250">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Add'" [binding]="'CanAdd'" [isReadOnly]="true" [width]="120">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Edit'" [binding]="'CanEdit'" [isReadOnly]="true" [width]="120">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Delete'" [binding]="'CanDelete'" [isReadOnly]="true" [width]="120">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Lock'" [binding]="'CanLock'" [isReadOnly]="true" [width]="120">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Unlock'" [binding]="'CanUnlock'" [isReadOnly]="true" [width]="120">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Print'" [binding]="'CanPrint'" [isReadOnly]="true" [width]="120">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Preview'" [binding]="'CanPreview'" [isReadOnly]="true" [width]="120">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'View'" [binding]="'CanView'" [isReadOnly]="true" [width]="120">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Detail'" [binding]="''" [isReadOnly]="true" [width]="100">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                        <button class="btn btn-info btn-xs btn-md btn-block" (click)="getUserFormListById()">
+                                                    <i class="fa fa-edit fa-fw"></i> ADVANCE
+                                                </button>
+                    </template>
+                </wj-flex-grid-column>
+            </wj-flex-grid>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-12 btn-group group-button" id="">
+                    <button type="button" class="btn btn-default" (click)="moveItemToFirstPage()">
+                                                    <span class="fa fa-fast-backward"></span> 
+                                                </button>
+                    <button type="button" class="btn btn-default" (click)="moveItemToPreviousPage()">
+                                                    <span class="fa fa-step-backward"></span> 
+                                                </button>
+                    <button type="button" class="btn btn-default" disabled style="width:100px">
+                                                    {{ indexItem }}
+                                                </button>
+                    <button type="button" class="btn btn-default" (click)="moveItemToNextPage()">
+                                                     <span class="fa fa-step-forward"></span>
+                                                </button>
+                    <button type="button" class="btn btn-default" (click)="moveItemToLastPage()">
+                                                     <span class="fa fa-fast-forward"></span>
+                                                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL FOR LIST OF  SYSFORM-->
+<div class="modal fade" id="modal-for-rights" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content panel-danger">
+            <!--<div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <i class="fa fa-exclamation-triangle"></i>
+            </div>-->
+            <div class="modal-body panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="UserName" class="control-label col-sm-4">Copy the rights of..</label>
+                            <div class="col-sm-8">
+                                <wj-combo-box [itemsSource]="listOfCopyRightUserObservableArray" id="UserName" [placeholder]="'Select...'" [displayMemberPath]="'UserName'"
+                                    [(selectedIndex)]="copyRightUserSelectedIndex" [isEditable]="false" [isRequired]="true" [selectedValuePath]="'UserName'"
+                                    [(selectedValue)]="copyRightSelectedValue" (selectedIndexChanged)="cboMstUserSelectedIndexChanged()"
+                                    style="width: 100%; border-radius: 0px;">
+                                </wj-combo-box>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button type="button" id="btnCloseSupport" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-trash fa-fw"></i> Save</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL FOR USER RIGHTS-->
+<div class="modal fade" id="modal-for-addRights" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content panel-danger">
+            <!--<div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>-->
+            <ul class="nav nav-tabs">
+                <!--<li class="active"><a data-toggle="tab" href="#home">User Rights</a></li>-->
+                <li><a data-toggle="tab" href="#menu2">User Rights</a></li>
+                <li><a data-toggle="tab" href="#menu1">Advance User Rights</a></li>
+                <!--<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
+            </ul>
+            <div class="modal-body panel-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-md-pull-1">
+                            <div class="tab-content">
+                                <div id="menu2" class="tab-pane fade in active">
+                                    <form action="" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="FormDescription" class="control-label col-sm-4">Forms/Description</label>
+                                            <div class="col-sm-8">
+                                                <wj-combo-box [itemsSource]="listOfFormsReportsObservableArray" id="FormDescription" [placeholder]="'Select...'" [displayMemberPath]="'FormDescription'"
+                                                    [(selectedIndex)]="formsReportSelectedIndex" [isEditable]="false" [isRequired]="true"
+                                                    [selectedValuePath]="'FormDescription'" [(selectedValue)]="formsReportSelectedValue"
+                                                    (selectedIndexChanged)="cboSysFormSelectedIndexChanged()" style="width: 100%; border-radius: 0px;">
+                                                </wj-combo-box>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanAdd" class="control-label col-sm-4">Add</label>
+                                            <div class="col-sm-8">
 
-        <!--<div class="panel-body">
-            <div class="form-group">
-                <label for="UserName" class="control-label col-sm-4">User Name</label>
-                <div class="col-sm-8">
-                    <input type="text" [(ngModel)]="UserName" name="UserName" id="UserName" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="Password" class="control-label col-sm-4">Password</label>
-                <div class="col-sm-8">
-                    <input type="password" [(ngModel)]="Password" name="Password" id="Password" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="FullName" class="control-label col-sm-4">Full Name</label>
-                <div class="col-sm-8">
-                    <textarea type="text" [(ngModel)]="FullName" name="FullName" id="FullName" class="form-control" rows="5"></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="UserCardNumber" class="control-label col-sm-4">User Card Number</label>
-                <div class="col-sm-8">
-                    <input type="text" [(ngModel)]="UserCardNumber" name="UserCardNumber" id="UserCardNumber" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="UserName" class="control-label col-sm-4">User Name</label>
-                <div class="col-sm-8">
-                    <input type="text" [(ngModel)]="UserName" name="UserName" id="UserName" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="Password" class="control-label col-sm-4">Password</label>
-                <div class="col-sm-8">
-                    <input type="password" [(ngModel)]="Password" name="Password" id="Password" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="FullName" class="control-label col-sm-4">Full Name</label>
-                <div class="col-sm-8">
-                    <textarea type="text" [(ngModel)]="FullName" name="FullName" id="FullName" class="form-control" rows="5"></textarea>
-                </div>
-            </div>
+                                                <input type="checkbox" [(ngModel)]="CanAdd" id="CanAdd" name="CanAdd" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanEdit" class="control-label col-sm-4">Edit</label>
+                                            <div class="col-sm-8">
 
-            <div class="container">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Forms/Reports</th>
-                            <th>Add</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                            <th>Lock</th>
-                            <th>Unlock</th>
-                            <th>Print</th>
-                            <th>Preview</th>
-                            <th>View</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    <div class="col-sm-8">
-                                        <input type="text" [(ngModel)]="UserCardNumber" name="UserCardNumber" id="UserCardNumber" class="form-control" />
-                                    </div>
+                                                <input type="checkbox" [(ngModel)]="CanEdit" id="CanEdit" name="CanEdit" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanDelete" class="control-label col-sm-4">Delete</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="checkbox" [(ngModel)]="CanDelete" id="CanDelete" name="CanDelete" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanLock" class="control-label col-sm-4">Lock</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="checkbox" [(ngModel)]="CanLock" id="CanLock" name="CanLock" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanUnlock" class="control-label col-sm-4">Unlock</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="checkbox" [(ngModel)]="CanUnlock" id="CanUnlock" name="CanUnlock" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanPrint" class="control-label col-sm-4">Print</label>
+                                            <div class="col-sm-8">
+                                                <input type="checkbox" [(ngModel)]="CanPrint" id="CanPrint" name="CanPrint" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanPreview" class="control-label col-sm-4">Preview</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="checkbox" [(ngModel)]="CanPreview" id="CanPreview" name="CanPreview" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanView" class="control-label col-sm-4">View</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="checkbox" [(ngModel)]="CanView" id="CanView" name="CanView" />
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                <div id="menu1" class="tab-pane fade">
+                                    <form action="" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="CanTender" class="control-label col-sm-4">Tender</label>
+                                            <div class="col-sm-8">
+                                                <input type="checkbox" [(ngModel)]="CanTender" id="CanTender" name="CanTender" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanDiscount" class="control-label col-sm-4">Discount</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="checkbox" [(ngModel)]="CanDiscount" id="CanDiscount" name="CanDiscount" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanSplit" class="control-label col-sm-4">Split</label>
+                                            <div class="col-sm-8">
+                                                <input type="checkbox" [(ngModel)]="CanSplit" id="CanSplit" name="CanSplit" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanCancel" class="control-label col-sm-4">Cancel</label>
+                                            <div class="col-sm-8">
+                                                <input type="checkbox" [(ngModel)]="CanCancel" id="CanCancel" name="CanCancel" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="CanReturn" class="control-label col-sm-4">Return</label>
+                                            <div class="col-sm-8">
+                                                <input type="checkbox" [(ngModel)]="CanReturn" id="CanReturn" name="CanReturn" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>-->
+            <div class="modal-footer" align="right">
+                <button class="btn btn-primary" data-dismiss="modal" (click)="saveUserFormRight()" id="btnSaveEdit"><i class="fa fa-trash fa-fw"></i> Save</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal" (click)="Clear()"><i class="fa fa-close fa-fw"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--DELETE MODAL WARNING -->
+<div class="modal fade" id="delete-modal-warning" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content panel-danger">
+            <!--<div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <i class="fa fa-exclamation-triangle"></i>
+            </div>-->
+            <div class="modal-body panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        Delete Record?
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button type="button" id="btnCloseSupport" class="btn btn-warning" data-dismiss="modal" (click)="btnDeleteUserForm()"><i class="fa fa-trash fa-fw"></i> Delete</button>
+                <button type="button" id="btnCloseSupport" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> Close</button>
+            </div>
+        </div>
     </div>
 </div>
 <shared-footer></shared-footer>
 <!--<button id="btn-hidden-lock-item" [hidden]="true" (click)="startLoading()"></button>-->
-<button id="set-value-fields" [hidden]="true" (click)="setFieldValuesUnit()"></button>
-<!--<button id="refreshGrid" (click)="getSupplier()" [hidden]="true"></button>-->
+<button id="set-value-fields" [hidden]="true" (click)="setFieldValues()"></button>
+<button id="set-value-fields-userform" [hidden]="true" (click)="setFieldValuesUserForm()"></button>
+<button id="modalRights" [hidden]="true" data-toggle="modal" data-target="#modal-for-rights"></button>
+<button id="modalAddRights"  [hidden]="true" data-toggle="modal" data-target="#modal-for-addRights"></button>
+<button id="deleteUserFormModal" [hidden]="true" data-toggle="modal" data-target="#delete-modal-warning"></button>
+<button id="refreshGrid" (click)="getUserFormList()" [hidden]="true"></button>

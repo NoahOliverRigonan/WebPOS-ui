@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Software_Discountdetail_Service } from '../software_discountdetail_service/software_discountdetail.service';
+import { Software_DiscountItem_Service } from '../software_discountdetail_service/software_discountdetail.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
@@ -46,10 +47,14 @@ export class Software_Discountdetail_Component implements OnInit {
 
     constructor(
         private router: Router,
-        private softwareDiscountItemService: Software_Discountdetail_Service,
+        private softwareDiscountDetailService: Software_Discountdetail_Service,
+        private softwareDiscountItemService: Software_DiscountItem_Service,
         private activatedRoute: ActivatedRoute,
-        private toastr: ToastsManager
-    ) { }
+        private toastr: ToastsManager,
+        private vcRef: ViewContainerRef,
+    ) {
+        this.toastr.setRootViewContainerRef(vcRef);
+    }
 
     public getIdUrlParameter() {
         this.activatedRoute.params.subscribe(params => {
@@ -58,93 +63,58 @@ export class Software_Discountdetail_Component implements OnInit {
         return this.discountId;
     }
 
-    public ngOnInit(): any {
-        if (!localStorage.getItem('access_token')) {
-            this.router.navigate(['security_login']);
-        }
-        
-        this.itemDiscountCollectionView = new wijmo.collections.CollectionView(this.softwareDiscountItemService.getItemDiscountDetail());
-        this.DiscountCollectionView = new wijmo.collections.CollectionView(this.softwareDiscountItemService.getDiscountDetail(this.getIdUrlParameter()));
+    public getDiscountItem() {
+        this.itemDiscountCollectionView = new wijmo.collections.CollectionView(this.softwareDiscountItemService.getItemDiscountDetail(this.getIdUrlParameter()));
+        this.itemDiscountCollectionView.pageSize = 15;
     }
 
     public setFieldValuesItemDiscount() {
-
-        if (this.itemDiscountCollectionView.items.length > 0) {
-            this.listOfItemCodeObservableArray = this.itemDiscountCollectionView.items[0].listOfItemCode;
-            this.listOfItemCodeCollectionView = new wijmo.collections.CollectionView(this.listOfItemCodeObservableArray);
-            if (this.itemDiscountCollectionView.items.length > 0) {
-                this.listOfItemCodeCollectionView.items[0].listOfItemCode = this.itemDiscountCollectionView.items[0].listOfItemCode;
-            }
-
-            this.listOfItemDescriptionObservableArray = this.itemDiscountCollectionView.items[0].listOfItemDescription;
-            this.listOfItemDescriptionCollectionView = new wijmo.collections.CollectionView(this.listOfItemDescriptionObservableArray);
-            if (this.itemDiscountCollectionView.items.length > 0) {
-                this.listOfItemDescriptionCollectionView.items[0].listOfItemDescription = this.itemDiscountCollectionView.items[0].listOfItemDescription;
-            }
-
-
-        }
-
-
-    }
-
-    public setFieldValuesDiscount() {
-
         if (this.DiscountCollectionView.items.length > 0) {
             (<HTMLInputElement>document.getElementById("Discount")).value = this.DiscountCollectionView.items[0].Discount;
             (<HTMLInputElement>document.getElementById("DiscountRate")).value = this.DiscountCollectionView.items[0].DiscountRate;
-            (<HTMLInputElement>document.getElementById("VatExempt")).checked = this.DiscountCollectionView.items[0].IsVatExempt;
-            (<HTMLInputElement>document.getElementById("DateSchedule")).checked = this.DiscountCollectionView.items[0].IsDateScheduled;
+            (<HTMLInputElement>document.getElementById("IsVatExempt")).checked = this.DiscountCollectionView.items[0].IsVatExempt;
+            (<HTMLInputElement>document.getElementById("IsDateScheduled")).checked = this.DiscountCollectionView.items[0].IsDateScheduled;
             this.DateStart = this.DiscountCollectionView.items[0].DateStart;
             this.DateEnd = this.DiscountCollectionView.items[0].DateEnd;
-            (<HTMLInputElement>document.getElementById("DayScheduled")).checked = this.DiscountCollectionView.items[0].IsDayScheduled;
-            (<HTMLInputElement>document.getElementById("Mon")).checked = this.DiscountCollectionView.items[0].DayMon;
-            (<HTMLInputElement>document.getElementById("Tue")).checked = this.DiscountCollectionView.items[0].DayTue;
-            (<HTMLInputElement>document.getElementById("Wed")).checked = this.DiscountCollectionView.items[0].DayWed;
-            (<HTMLInputElement>document.getElementById("Thu")).checked = this.DiscountCollectionView.items[0].DayThu;
-            (<HTMLInputElement>document.getElementById("Fri")).checked = this.DiscountCollectionView.items[0].DayFri;
-            (<HTMLInputElement>document.getElementById("Sat")).checked = this.DiscountCollectionView.items[0].DaySat;
-            (<HTMLInputElement>document.getElementById("Sun")).checked = this.DiscountCollectionView.items[0].DaySun;
-            (<HTMLInputElement>document.getElementById("TimeScheduled")).checked = this.DiscountCollectionView.items[0].IsTimeScheduled;
-            (<HTMLInputElement>document.getElementById("TimeStart")).value = this.DiscountCollectionView.items[0].TimeStart;
-            (<HTMLInputElement>document.getElementById("TimeEnd")).value = this.DiscountCollectionView.items[0].TimeEnd;
-        } else {
-            // (<HTMLInputElement>document.getElementById("Discount")).value;
-            // (<HTMLInputElement>document.getElementById("DiscountRate")).value;
-            // (<HTMLInputElement>document.getElementById("VatExempt")).checked;
-            // (<HTMLInputElement>document.getElementById("DateSchedule")).checked;
-            // this.DateStart = this.DiscountCollectionView.items[0].DateStart;
-            // this.DateEnd = this.DiscountCollectionView.items[0].DateEnd;
-            // (<HTMLInputElement>document.getElementById("DayScheduled")).checked;
-            // (<HTMLInputElement>document.getElementById("Mon")).checked;
-            // (<HTMLInputElement>document.getElementById("Tue")).checked;
-            // (<HTMLInputElement>document.getElementById("Wed")).checked;
-            // (<HTMLInputElement>document.getElementById("Thu")).checked;
-            // (<HTMLInputElement>document.getElementById("Fri")).checked;
-            // (<HTMLInputElement>document.getElementById("Sat")).checked;
-            // (<HTMLInputElement>document.getElementById("Sun")).checked;
-            // (<HTMLInputElement>document.getElementById("TimeScheduled")).checked;
-            // (<HTMLInputElement>document.getElementById("TimeStart")).value;
-            // (<HTMLInputElement>document.getElementById("TimeEnd")).value;
+            (<HTMLInputElement>document.getElementById("IsDayScheduled")).checked = this.DiscountCollectionView.items[0].IsDayScheduled;
+            (<HTMLInputElement>document.getElementById("DayMon")).checked = this.DiscountCollectionView.items[0].DayMon;
+            (<HTMLInputElement>document.getElementById("DayTue")).checked = this.DiscountCollectionView.items[0].DayTue;
+            (<HTMLInputElement>document.getElementById("DayWed")).checked = this.DiscountCollectionView.items[0].DayWed;
+            (<HTMLInputElement>document.getElementById("DayThu")).checked = this.DiscountCollectionView.items[0].DayThu;
+            (<HTMLInputElement>document.getElementById("DayFri")).checked = this.DiscountCollectionView.items[0].DayFri;
+            (<HTMLInputElement>document.getElementById("DaySat")).checked = this.DiscountCollectionView.items[0].DaySat;
+            (<HTMLInputElement>document.getElementById("DaySun")).checked = this.DiscountCollectionView.items[0].DaySun;
+            (<HTMLInputElement>document.getElementById("IsTimeScheduled")).checked = this.DiscountCollectionView.items[0].IsTimeScheduled;
+            (<HTMLInputElement>document.getElementById("TimeStart")).valueAsDate = this.DiscountCollectionView.items[0].TimeStart;
+            (<HTMLInputElement>document.getElementById("TimeEnd")).valueAsDate = this.DiscountCollectionView.items[0].TimeEnd;
+
+            this.listOfItemCodeObservableArray = this.DiscountCollectionView.items[0].listOfItemCode;
+            this.listOfItemCodeCollectionView = new wijmo.collections.CollectionView(this.listOfItemCodeObservableArray);
+            this.listOfItemCodeCollectionView.items[0].listOfItemCode = this.DiscountCollectionView.items[0].listOfItemCode;
+
+            this.listOfItemDescriptionObservableArray = this.DiscountCollectionView.items[0].listOfItemDescription;
+            this.listOfItemDescriptionCollectionView = new wijmo.collections.CollectionView(this.listOfItemDescriptionObservableArray);
+            this.listOfItemDescriptionCollectionView.items[0].listOfItemDescription = this.DiscountCollectionView.items[0].listOfItemDescription;
+
         }
+
+
     }
 
     public cboItemCodeSelectedIndex() {
-        this.itemDiscountCollectionView.items[0].listOfItemCode[this.itemCodeSelectedIndex].Id;
+        this.DiscountCollectionView.items[0].listOfItemCode[this.itemCodeSelectedIndex].Id;
         console.log(this.listOfItemCodeCollectionView.items[0].listOfItemCode[this.itemCodeSelectedIndex].Id);
     }
 
     public cboItemDescriptionSelectedIndex() {
-        this.itemDiscountCollectionView.items[0].listOfItemDescription[this.itemDescriptionSelectedIndex].Id;
+        this.DiscountCollectionView.items[0].listOfItemDescription[this.itemDescriptionSelectedIndex].Id;
         console.log(this.listOfItemDescriptionCollectionView.items[0].listOfItemDescription[this.itemDescriptionSelectedIndex].Id);
     }
 
     public deleteDiscountItems() {
         let toastr: ToastsManager;
-        let currentDiscountSelectedItem = this.itemDiscountCollectionView.currentItem;
-        if (currentDiscountSelectedItem.Discount == "n/a" || currentDiscountSelectedItem.DiscountRate == 0 || currentDiscountSelectedItem.IsVatExempt == false) {
-            this.softwareDiscountItemService.deleteDiscountItem(currentDiscountSelectedItem.Id , toastr);
-        }
+        let currentDiscountSelectedItem = this.DiscountCollectionView.currentItem;
+        this.softwareDiscountItemService.deleteDiscountItem(currentDiscountSelectedItem.Id, toastr);
     }
 
 
@@ -172,34 +142,74 @@ export class Software_Discountdetail_Component implements OnInit {
         this.DateStart = new Date((<HTMLInputElement>document.getElementById("dateStart")).value.toString());
         this.DateEnd = new Date((<HTMLInputElement>document.getElementById("dateEnd")).value.toString());
     }
-    // public getDiscountItemObjecet(){
 
-    //     let dataObject = 
-    //     {
-    //         Discount:
-    //         DiscountRate:
-    //         IsVatExempt:
-    //         IsDateScheduled:
-    //         DateStart:
-    //         DateEnd:
-    //         IsTimeScheduled:
-    //         TimeStart:
-    //         TimeEnd:
-    //         IsDayScheduled:
-    //         DayMon:
-    //         DayTue:
-    //         DayWed:
-    //         DayThu:
-    //         DayFri:
-    //         DaySat:
-    //         DaySun:
-    //         EntryUserId:
-    //         EntryDateTime:
-    //         UpdateUserId:
-    //         UpdateDateTime:
-    //         IsLocked:
+    public getDiscountObject() {
+        let dataObject =
+            {
+                Discount: (<HTMLInputElement>document.getElementById("Discount")).value,
+                DiscountRate: (<HTMLInputElement>document.getElementById("DiscountRate")).value,
+                IsVatExempt: (<HTMLInputElement>document.getElementById("IsVatExempt")).checked,
+                IsDateScheduled: (<HTMLInputElement>document.getElementById("IsDateScheduled")).checked,
+                DateStart: this.DateStart,
+                DateEnd: this.DateEnd,
+                IsTimeScheduled: (<HTMLInputElement>document.getElementById("IsTimeScheduled")).checked,
+                TimeStart: (<HTMLInputElement>document.getElementById("TimeStart")).value,
+                TimeEnd: (<HTMLInputElement>document.getElementById("TimeEnd")).value,
+                IsDayScheduled: (<HTMLInputElement>document.getElementById("IsDateScheduled")).checked,
+                DayMon: (<HTMLInputElement>document.getElementById("DayMon")).checked,
+                DayTue: (<HTMLInputElement>document.getElementById("DayTue")).checked,
+                DayWed: (<HTMLInputElement>document.getElementById("DayWed")).checked,
+                DayThu: (<HTMLInputElement>document.getElementById("DayThu")).checked,
+                DayFri: (<HTMLInputElement>document.getElementById("DayFri")).checked,
+                DaySat: (<HTMLInputElement>document.getElementById("DaySat")).checked,
+                DaySun: (<HTMLInputElement>document.getElementById("DaySun")).checked,
+                EntryUserId: this.DiscountCollectionView.items[0].EntryUserId,
+                EntryDateTime: this.DiscountCollectionView.items[0].EntryDateTime,
+                UpdateUserId: this.DiscountCollectionView.items[0].UpdateUserId,
+                UpdateDateTime: this.DiscountCollectionView.items[0].UpdateDateTime,
+                IsLocked: this.DiscountCollectionView.items[0].IsLocked,
+            }
+        return dataObject;
+    }
 
-    //     }
+    public btnSaveEdit() {
+        let toastr: ToastsManager;
+        this.softwareDiscountDetailService.putDiscountData(this.getIdUrlParameter(), this.getDiscountObject(), toastr);
+    }
 
-    // }
+    //
+    //FOR DISCOUNT ITEM 
+    //
+
+    public getDiscountItemObject() {
+        let dataObject = {
+            DiscountId: this.getIdUrlParameter(),
+            ItemId: this.DiscountCollectionView.items[0].listOfItemCode[this.itemCodeSelectedIndex].Id,
+        }
+        return dataObject;
+    }
+
+    public addItemDiscount() {
+        let toastr: ToastsManager;
+        this.softwareDiscountItemService.postDiscountItem(this.getDiscountItemObject(), toastr);
+        console.log(this.getDiscountItemObject());
+    }
+
+    public deleteDiscountModal() {
+        (<HTMLButtonElement>document.getElementById("deleteModal")).click();
+    }
+
+    public deleteDiscount() {
+        let toastr: ToastsManager;
+        let currentDiscountItem = this.itemDiscountCollectionView.currentItem;
+        this.softwareDiscountItemService.deleteDiscountItem(currentDiscountItem.Id, toastr)
+    }
+
+    public ngOnInit(): any {
+        if (!localStorage.getItem('access_token')) {
+            this.router.navigate(['security_login']);
+        }
+        this.DiscountCollectionView = new wijmo.collections.CollectionView(this.softwareDiscountDetailService.getDiscountDetail(this.getIdUrlParameter()));
+        this.getDiscountItem();
+    }
 }

@@ -88,7 +88,6 @@ var Software_SupplierDetail_Component = (function () {
     Software_SupplierDetail_Component.prototype.btnSaveEditItem = function () {
         var toastr;
         this.softwareSupplierDetailService.putSupplierData(this.getIdUrlParameter(), this.getDataSupplierObject(), toastr);
-        console.log(this.getDataSupplierObject());
     };
     //value 
     Software_SupplierDetail_Component.prototype.expiryDateChangeValue = function () {
@@ -107,6 +106,7 @@ var Software_SupplierDetail_Component = (function () {
             this.router.navigate(['security_login']);
         }
         this.itemCollectionView = new wijmo.collections.CollectionView(this.softwareSupplierDetailService.getSupplierList(this.getIdUrlParameter()));
+        console.log(this.LockDataItem());
     };
     return Software_SupplierDetail_Component;
 }());

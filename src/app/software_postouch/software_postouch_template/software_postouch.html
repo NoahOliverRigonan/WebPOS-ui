@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp;  Pos Touch </p>
+                <p><a routerLink='/dashboard'>Dashboard</a> &nbsp;&nbsp; / &nbsp;&nbsp; Pos Touch </p>
             </div>
         </div>
     </div>
@@ -26,12 +26,32 @@
                 <div class="">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <!--<div class="panel-heading">
-                                    <h4 id="currentDateTime" style="color:black;">
-                                    </h4>
-                                </div>-->
-                                <div class="panel-heading">
+                            <div class="panel panel-default style-panel-default">
+                                <div class="panel-heading style-panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <!-- <button class="btn btn-info btn-lg form-control">Arrange Floor</button> -->
+                                        </div>
+                                        <div class="col-md-3">
+                                            <!-- <button class="btn btn-info btn-lg form-control">Scroll</button> -->
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <button class="form-control"><i class="fa fa-minus"></i></button>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h4 id="currentDateTime" style="color:#fff; text-align:center;">
+                                                    </h4>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button class="form-control" ><i class="fa fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-heading style-panel-heading">
                                     <div class="row">
                                         <div class="col-md-1">
                                             <button type="button" style="height: 88px;" class="btn btn-lg btn-primary btn-block pos-btn" (click)="tableGroupMoveToFirstPage()">
@@ -90,23 +110,8 @@
                                                 </button>
                                         </div>
                                     </div>
-                                    <!--<table style="width: 100%" class="table-responsive table">
-                                        <tr>
-                                            <td style="width: 10%">
-
-                                            </td>
-                                            <td style="width: 2%"></td>
-                                            <td style="width: 76%">
-
-                                            </td>
-                                            <td style="width: 2%"></td>
-                                            <td style="width: 10%">
-
-                                            </td>
-                                        </tr>
-                                    </table>-->
                                 </div>
-                                <div class="panel-body">
+                                <div class="panel-body style-panel-body">
                                     <div class="row">
                                         <div class="col-md-1">
                                             <button type="button" style="height: 432px;" class="btn btn-lg btn-primary btn-block pos-btn" (click)="tableMoveToPreviousPage()">
@@ -116,8 +121,8 @@
                                         <div class="col-md-10">
                                             <div *ngIf="isLoading" align="center"></div>
                                             <div *ngIf="isFinishLoading">
-                                                <wj-flex-grid style="height: 432px;" [allowMerging]="1" [itemFormatter]="itemFormatter" [itemsSource]="tableGroupCollectionView" [selectionMode]="1" [headersVisibility]="0"
-                                                    id="tablePostouchSaleFlexGrid">
+                                                <wj-flex-grid style="height: 432px;" [allowMerging]="1" [itemFormatter]="itemFormatter" [itemsSource]="tableGroupCollectionView"
+                                                    [selectionMode]="1" [headersVisibility]="0" id="tablePostouchSaleFlexGrid">
                                                     <wj-flex-grid-column [header]="'Detail'" [binding]="'tableNo1'" [isReadOnly]="true" [width]="'*'">
                                                         <template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
                                                             <button class="btn btn-primary btn-responsive btn-md btn-block pos-btn" (click)="btnTableList1()">
@@ -171,7 +176,7 @@
                                     </div>
                                 </div>
 
-                                <div class="panel-footer">
+                                <div class="panel-footer style-panel-footer">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <!--<wj-flex-grid [itemsSource]="tableGroupWalkInDeliveryCollectionView" [selectionMode]="1" [headersVisibility]="0" id="tablePostouchSaleFlexGrid">
@@ -201,37 +206,50 @@
                 <div class="">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#home">Open</a></li>
-                                <li><a data-toggle="tab" href="#menu1">Billed Out</a></li>
-                                <li><a data-toggle="tab" href="#menu2">Collected</a></li>
+                            <ul class="nav nav-tabs style-nav">
+                                <li class="active"><a data-toggle="tab" href="#home" (click)="getTableSale()">Open</a></li>
+                                <li><a data-toggle="tab" href="#menu1" (click)="getTableSale()">Billed Out</a></li>
+                                <li><a data-toggle="tab" href="#menu2" (click)="getTableSale()">Collected</a></li>
                             </ul>
                             <br />
-                            <wj-flex-grid [itemsSource]="tablePostouchSaleCollectionView" [selectionMode]="3" [headersVisibility]="1">
-                                <wj-flex-grid-column [header]="'Sales No.'" [binding]="'SalesNumber'" [isReadOnly]="true" [width]="170">
-                                </wj-flex-grid-column>
-                                <wj-flex-grid-column [header]="'Amount'" [binding]="'Amount'" [isReadOnly]="true" [width]="150">
-                                </wj-flex-grid-column>
-                                <wj-flex-grid-column [header]="'Table'" [binding]="'TableCode'" [isReadOnly]="true" [width]="50">
-                                </wj-flex-grid-column>
-                                <wj-flex-grid-column [header]="'User'" [binding]="'AccountName'" [isReadOnly]="true" [width]="370">
-                                </wj-flex-grid-column>
-                            </wj-flex-grid>
-                            <!--<div class="tab-content">
-                        <div id="home" class="tab-pane fade in active">
-                            <h3>Open</h3>
-                        </div>
-                        <div id="menu1" class="tab-pane fade">
-                            <h3>Billed Out</h3>
-                        </div>
-                        <div id="menu2" class="tab-pane fade">
-                            <h3>Collected</h3>
-                        </div>
-                        <div id="menu3" class="tab-pane fade">
-                            <h3>Menu 3</h3>
-                            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                        </div>
-                    </div>-->
+                            <div class="tab-content">
+                                <div id="home" class="tab-pane fade in active">
+                                    <wj-flex-grid [itemsSource]="tablePostouchSaleCollectionView" [selectionMode]="3" [headersVisibility]="1" align="center">
+                                        <wj-flex-grid-column [header]="'Sales No.'" [binding]="'SalesNumber'" [isReadOnly]="true" [width]="170">
+                                        </wj-flex-grid-column>
+                                        <wj-flex-grid-column [header]="'Amount'" [binding]="'Amount'" [isReadOnly]="true" [width]="150">
+                                        </wj-flex-grid-column>
+                                        <wj-flex-grid-column [header]="'Table'" [binding]="'TableCode'" [isReadOnly]="true" [width]="90">
+                                        </wj-flex-grid-column>
+                                        <wj-flex-grid-column [header]="'User'" [binding]="'SalesAgentName'" [isReadOnly]="true" [width]="370">
+                                        </wj-flex-grid-column>
+                                    </wj-flex-grid>
+                                </div>
+                                <div id="menu1" class="tab-pane fade">
+                                    <wj-flex-grid [itemsSource]="tablePostouchSaleCollectionView" [selectionMode]="3" [headersVisibility]="1" align="center">
+                                        <wj-flex-grid-column [header]="'Sales No.'" [binding]="'SalesNumber'" [isReadOnly]="true" [width]="170">
+                                        </wj-flex-grid-column>
+                                        <wj-flex-grid-column [header]="'Amount'" [binding]="'Amount'" [isReadOnly]="true" [width]="150">
+                                        </wj-flex-grid-column>
+                                        <wj-flex-grid-column [header]="'Table'" [binding]="'TableCode'" [isReadOnly]="true" [width]="90">
+                                        </wj-flex-grid-column>
+                                        <wj-flex-grid-column [header]="'User'" [binding]="'SalesAgentName'" [isReadOnly]="true" [width]="370">
+                                        </wj-flex-grid-column>
+                                    </wj-flex-grid>
+                                </div>
+                                <div id="menu2" class="tab-pane fade">
+                                    <wj-flex-grid [itemsSource]="tablePostouchSaleCollectionView" [selectionMode]="3" [headersVisibility]="1" align="center">
+                                        <wj-flex-grid-column [header]="'Sales No.'" [binding]="'SalesNumber'" [isReadOnly]="true" [width]="170">
+                                        </wj-flex-grid-column>
+                                        <wj-flex-grid-column [header]="'Amount'" [binding]="'Amount'" [isReadOnly]="true" [width]="150">
+                                        </wj-flex-grid-column>
+                                        <wj-flex-grid-column [header]="'Table'" [binding]="'TableCode'" [isReadOnly]="true" [width]="90">
+                                        </wj-flex-grid-column>
+                                        <wj-flex-grid-column [header]="'User'" [binding]="'SalesAgentName'" [isReadOnly]="true" [width]="370">
+                                        </wj-flex-grid-column>
+                                    </wj-flex-grid>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -268,4 +286,5 @@
 <button id="load-table-data" (click)="getTable()" [hidden]="true"></button>
 <button id="delivery-modal" (click)="btnModalForDelivery()" [hidden]="true"></button>
 <button id="refresh-table-group" (click)="refreshTableGroup()" [hidden]="true"></button>
+<!-- <button id="refreshGrid" (click)="getTableSale()" [hidden]="true"></button> -->
 <shared-footer></shared-footer>

@@ -11,11 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var software_postouch_service_1 = require("../software_postouch_service/software_postouch.service");
 var router_1 = require("@angular/router");
+var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_Postouch_Component = (function () {
-    function Software_Postouch_Component(router, softwarePostouchService, activatedRoute) {
+    function Software_Postouch_Component(router, softwarePostouchService, activatedRoute, vcRef, toastr) {
         this.router = router;
         this.softwarePostouchService = softwarePostouchService;
         this.activatedRoute = activatedRoute;
+        this.vcRef = vcRef;
+        this.toastr = toastr;
         this.filterTableSaleNoGroupSelectedValue = "1";
         this.filterTableUserGroupSelectedValue = "1";
         this.filterTableCodeSelectedValue = "1";
@@ -25,6 +28,7 @@ var Software_Postouch_Component = (function () {
         this.isTableGroupSelected = false;
         this.tableIndex = " ";
         this.tableGroupIndex = " ";
+        this.toastr.setRootViewContainerRef(vcRef);
     }
     Software_Postouch_Component.prototype.filterTableGroupSelectedIndexChanged = function () {
         if (this.isTableGroupSelected) {
@@ -74,12 +78,9 @@ var Software_Postouch_Component = (function () {
     };
     //Table Postouch For Sale Collection View
     Software_Postouch_Component.prototype.getTableSale = function () {
-        this.tablePostouchSaleCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTableSale(this.filterTableSaleNoGroupSelectedValue, this.filterTableUserGroupSelectedValue, this.filterTableCodeSelectedValue));
-        this.tablePostouchSaleCollectionView.pageSize = 5;
+        this.tablePostouchSaleCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTableSaleOpen());
+        this.tablePostouchSaleCollectionView.pageSize = 15;
         this.tablePostouchSaleCollectionView.trackChanges = true;
-        // setTimeout(() => {
-        //     this.tableIndex = (this.tableGroupCollectionView.pageIndex + 1) + " / " + this.tableGroupCollectionView.pageCount;
-        // }, 200);
     };
     //Table Group Collection View
     Software_Postouch_Component.prototype.getTable = function (tableGroupId) {
@@ -95,31 +96,37 @@ var Software_Postouch_Component = (function () {
     Software_Postouch_Component.prototype.btnTableList1 = function () {
         var currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo1Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     };
     //NAVIGATE TO POSTOUCH DETAIL ROW : 2
     Software_Postouch_Component.prototype.btnTableList2 = function () {
         var currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo2Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     };
     //NAVIGATE TO POSTOUCH DETAIL ROW : 3
     Software_Postouch_Component.prototype.btnTableList3 = function () {
         var currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo3Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     };
     //NAVIGATE TO POSTOUCH DETAIL ROW : 4
     Software_Postouch_Component.prototype.btnTableLis4 = function () {
         var currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo4Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     };
     //NAVIGATE TO POSTOUCH DETAIL ROW : 5
     Software_Postouch_Component.prototype.btnTableLis5 = function () {
         var currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo5Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     };
     //NAVIGATE TO POSTOUCH DETAIL ROW : 6
     Software_Postouch_Component.prototype.btnTableLis6 = function () {
         var currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo6Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     };
     Software_Postouch_Component.prototype.tableMoveToFirstPage = function () {
         this.tableGroupCollectionView.moveToFirstPage();
@@ -140,21 +147,12 @@ var Software_Postouch_Component = (function () {
     Software_Postouch_Component.prototype.setCurrentDate = function () {
         return new Date();
     };
-    Software_Postouch_Component.prototype.ngOnInit = function () {
-        if (!localStorage.getItem('access_token')) {
-            this.router.navigate(['security_login']);
-        }
-        // this.getTableSale();
-        // this.gridItemFormatter();
-        this.getTableGroup();
-        this.setTime();
-    };
-    //TIME 
-    Software_Postouch_Component.prototype.setTime = function () {
-        // setInterval(() => {
-        //    (<HTMLButtonElement>document.getElementById("currentDateTime")).innerHTML = this.setCurrentDate().toDateString() + " || " + this.setCurrentDate().toLocaleTimeString();
-        // }, 1000)
-    };
+    //DATETIME 
+    // public setDate() {
+    //     setInterval(() => {
+    //         this.date = (<HTMLButtonElement>document.getElementById("currentDateTime")).innerHTML = this.setCurrentDate().toLocaleDateString() + "  " + this.setCurrentDate().toLocaleTimeString();
+    //     }, 1000)
+    // }
     Software_Postouch_Component.prototype.refreshTableGroup = function () {
         var _this = this;
         setTimeout(function () {
@@ -194,6 +192,31 @@ var Software_Postouch_Component = (function () {
     Software_Postouch_Component.prototype.btnModalForDelivery = function () {
         document.getElementById("delivery").click();
     };
+    // public gridItemFormatter() {
+    //     this.itemFormatter = function (panel: any, r: any, c: any, cell: any) {
+    //         if (panel.cellType == wijmo.grid.CellType.Cell) {
+    //             var flex = panel.grid;
+    //             // flex.rows[r].height = 160;
+    //             // flex.rows[0].allowMerging = true;
+    //             flex.columns[0].allowMerging = true;
+    //             for (var row = 0; row <= 4; row++) {
+    //                 flex.setCellData(row, 0, 'row span 2');
+    //             }
+    //         }
+    //         // for (var col = 1; col <= 4; col++) {
+    //         //     flex.setCellData(0, col, 'col span 4');
+    //         // }
+    //     }
+    // }
+    Software_Postouch_Component.prototype.ngOnInit = function () {
+        if (!localStorage.getItem('access_token')) {
+            this.router.navigate(['security_login']);
+        }
+        // this.gridItemFormatter();
+        this.getTableSale();
+        this.getTableGroup();
+        // this.setDate();
+    };
     return Software_Postouch_Component;
 }());
 Software_Postouch_Component = __decorate([
@@ -203,7 +226,9 @@ Software_Postouch_Component = __decorate([
     }),
     __metadata("design:paramtypes", [router_1.Router,
         software_postouch_service_1.Software_Postouch_Service,
-        router_1.ActivatedRoute])
+        router_1.ActivatedRoute,
+        core_1.ViewContainerRef,
+        ng2_toastr_1.ToastsManager])
 ], Software_Postouch_Component);
 exports.Software_Postouch_Component = Software_Postouch_Component;
 //# sourceMappingURL=software_postouch.component.js.map

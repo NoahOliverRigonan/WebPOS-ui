@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var software_itemdetail_service_1 = require("../software_itemdetail_service/software_itemdetail.service");
+var software_itemdetail_service_2 = require("../software_itemdetail_service/software_itemdetail.service");
 var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_Itemdetail_Component = (function () {
-    function Software_Itemdetail_Component(router, softwareItemDetailService, activatedRoute, toastr, vcRef) {
+    function Software_Itemdetail_Component(router, softwareItemDetailService, softwareItemPriceService, activatedRoute, toastr, vcRef) {
         this.router = router;
         this.softwareItemDetailService = softwareItemDetailService;
+        this.softwareItemPriceService = softwareItemPriceService;
         this.activatedRoute = activatedRoute;
         this.toastr = toastr;
         this.vcRef = vcRef;
@@ -55,39 +57,25 @@ var Software_Itemdetail_Component = (function () {
             this.ExpiryDate = this.itemCollectionView.items[0].ExpiryDate;
             this.listUnitObservableArray = this.itemCollectionView.items[0].listUnit;
             this.unitCollectionView = new wijmo.collections.CollectionView(this.listUnitObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.unitCollectionView.items[0].Unit = this.itemCollectionView.items[0].Unit;
-            }
+            this.unitCollectionView.items[0].listUnit = this.itemCollectionView.items[0].listUnit;
             this.listSupplierObservableArray = this.itemCollectionView.items[0].listSupplier;
             this.supplierCollectionView = new wijmo.collections.CollectionView(this.listSupplierObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.supplierCollectionView.items[0].listSupplier = this.itemCollectionView.items[0].listSupplier;
-            }
+            this.supplierCollectionView.items[0].listSupplier = this.itemCollectionView.items[0].listSupplier;
             this.listSalesAccountObservableArray = this.itemCollectionView.items[0].listSalesAccount;
             this.salesCollectionView = new wijmo.collections.CollectionView(this.listSalesAccountObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.salesCollectionView.items[0].listSalesAccount = this.itemCollectionView.items[0].listSalesAccount;
-            }
+            this.salesCollectionView.items[0].listSalesAccount = this.itemCollectionView.items[0].listSalesAccount;
             this.listAssetAccountObservableArray = this.itemCollectionView.items[0].listAssetAccount;
             this.assetCollectionView = new wijmo.collections.CollectionView(this.listAssetAccountObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.assetCollectionView.items[0].listAssetAccount = this.itemCollectionView.items[0].listAssetAccount;
-            }
+            this.assetCollectionView.items[0].listAssetAccount = this.itemCollectionView.items[0].listAssetAccount;
             this.listCostAccountObservableArray = this.itemCollectionView.items[0].listCostAccount;
             this.costCollectionView = new wijmo.collections.CollectionView(this.listCostAccountObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.costCollectionView.items[0].listCostAccount = this.itemCollectionView.items[0].listCostAccount;
-            }
+            this.costCollectionView.items[0].listCostAccount = this.itemCollectionView.items[0].listCostAccount;
             this.listPurchaseVatTaxObservableArray = this.itemCollectionView.items[0].listPurchaseVatTax;
             this.purchaseVatCollectionView = new wijmo.collections.CollectionView(this.listPurchaseVatTaxObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.purchaseVatCollectionView.items[0].listPurchaseVatTax = this.itemCollectionView.items[0].listPurchaseVatTax;
-            }
+            this.purchaseVatCollectionView.items[0].listPurchaseVatTax = this.itemCollectionView.items[0].listPurchaseVatTax;
             this.listSalesVatTaxObservableArray = this.itemCollectionView.items[0].listSalesVatTax;
             this.salesVatCollectionView = new wijmo.collections.CollectionView(this.listSalesVatTaxObservableArray);
-            if (this.itemCollectionView.items.length > 0) {
-                this.salesVatCollectionView.items[0].listSalesVatTax = this.itemCollectionView.items[0].listSalesVatTax;
-            }
+            this.salesVatCollectionView.items[0].listSalesVatTax = this.itemCollectionView.items[0].listSalesVatTax;
         }
     };
     Software_Itemdetail_Component.prototype.cboUnitSelectedIndexChanged = function () {
@@ -171,49 +159,49 @@ var Software_Itemdetail_Component = (function () {
     Software_Itemdetail_Component.prototype.setDropDownFields = function () {
         this.ExpiryDate = new Date(document.getElementById("ExpiryDate").value.toString());
     };
-    //LOCK FIELDS
-    Software_Itemdetail_Component.prototype.LockDataItem = function () {
-        if (this.itemBoolean == true) {
-            document.getElementById("ItemCode").disabled = true;
-            document.getElementById("BarCode").disabled = true;
-            document.getElementById("ItemDescription").disabled = true;
-            document.getElementById("Alias").disabled = true;
-            document.getElementById("Category").disabled = true;
-            document.getElementById("Cost").disabled = true;
-            document.getElementById("MarkUp").disabled = true;
-            document.getElementById("Price").disabled = true;
-            document.getElementById("StockLevel").disabled = true;
-            document.getElementById("OnHand").disabled = true;
-            document.getElementById("Inventory").disabled = true;
-            document.getElementById("Package").disabled = true;
-            document.getElementById("GenericName").disabled = true;
-            document.getElementById("LotNumber").disabled = true;
-            document.getElementById("Remarks").disabled = true;
-        }
-        else {
-            document.getElementById("ItemCode").disabled = false;
-            document.getElementById("BarCode").disabled = false;
-            document.getElementById("ItemDescription").disabled = false;
-            document.getElementById("Alias").disabled = false;
-            document.getElementById("Category").disabled = false;
-            document.getElementById("Cost").disabled = false;
-            document.getElementById("MarkUp").disabled = false;
-            document.getElementById("Price").disabled = false;
-            document.getElementById("StockLevel").disabled = false;
-            document.getElementById("OnHand").disabled = false;
-            document.getElementById("Inventory").disabled = false;
-            document.getElementById("Package").disabled = false;
-            document.getElementById("GenericName").disabled = false;
-            document.getElementById("LotNumber").disabled = false;
-            document.getElementById("Remarks").disabled = false;
-        }
+    //
+    // FOR MST ITEM PRICE 
+    //
+    Software_Itemdetail_Component.prototype.ClearAfterSave = function () {
+        document.getElementById("PriceDescripton").value = "";
+        document.getElementById("ItemPrice").value = " ";
+        document.getElementById("TriggerQuantity").value = " ";
+    };
+    Software_Itemdetail_Component.prototype.createItemPriceObject = function () {
+        var dataObject = {
+            ItemId: this.getIdUrlParameter(),
+            PriceDescripton: document.getElementById("PriceDescription").value = "",
+            Price: document.getElementById("ItemPrice").value,
+            TriggerQuantity: document.getElementById("TriggerQuantity").value,
+        };
+        return dataObject;
+    };
+    Software_Itemdetail_Component.prototype.getItemPrice = function () {
+        this.itemPriceCollectionView = new wijmo.collections.CollectionView(this.softwareItemPriceService.getItemPriceById(this.getIdUrlParameter()));
+        this.itemPriceCollectionView.pageSize = 15;
+    };
+    Software_Itemdetail_Component.prototype.btnModalItemPrice = function () {
+        document.getElementById("modalStockInLine").click();
+    };
+    Software_Itemdetail_Component.prototype.addItemPrice = function () {
+        var toast;
+        this.itemPriceCollectionView = new wijmo.collections.CollectionView(this.softwareItemPriceService.postItemPrice(this.createItemPriceObject(), toast));
+    };
+    Software_Itemdetail_Component.prototype.btnDeleteItemPriceModal = function () {
+        document.getElementById("deleteItemPriceModal").click();
+    };
+    Software_Itemdetail_Component.prototype.btnDeleteItemPrice = function () {
+        var toastr;
+        var currentSelectedItem = this.itemPriceCollectionView.currentItem;
+        this.softwareItemPriceService.deleteItemPrice(currentSelectedItem.Id, toastr);
+        // (<HTMLButtonElement>document.getElementById("btn-hidden-start-loading")).click();
     };
     Software_Itemdetail_Component.prototype.ngOnInit = function () {
         if (!localStorage.getItem('access_token')) {
             this.router.navigate(['security_login']);
         }
         this.itemCollectionView = new wijmo.collections.CollectionView(this.softwareItemDetailService.getItemDetail(this.getIdUrlParameter()));
-        this.LockDataItem();
+        this.getItemPrice();
     };
     return Software_Itemdetail_Component;
 }());
@@ -224,6 +212,7 @@ Software_Itemdetail_Component = __decorate([
     }),
     __metadata("design:paramtypes", [router_1.Router,
         software_itemdetail_service_1.Software_Itemdetail_Service,
+        software_itemdetail_service_2.Software_ItemPrice_Service,
         router_1.ActivatedRoute,
         ng2_toastr_1.ToastsManager,
         core_1.ViewContainerRef])

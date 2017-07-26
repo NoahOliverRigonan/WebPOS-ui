@@ -22,25 +22,6 @@ export class Software_Itemdetail_Service {
     ) {
         // this.toastr.setRootViewContainerRef(vcRef);
     }
-
-    // UPLOAD IMAGE
-
-    // public getUnittById(unitId: number) {
-    //     let url = "http://localhost:2558/api/item/list/1" + unitId;
-    //     this.http.get(url, this.options).subscribe(
-    //         response => {
-    //             if (response.json() != null) {
-    //                 (<HTMLInputElement>document.getElementById("unitSelectedValue")).value = response.json().listUnit;
-    //                 document.getElementById("btn-hidden-selectedValue-data").click();
-    //                 document.getElementById("btn-hidden-complete-loading").click();
-    //             } else {
-    //                 alert("No Data");
-    //                 this.router.navigate(["/itemDetail"]);
-    //             }
-    //         }
-    //     );
-    // }
-
     //GET ITEM UNIT
     public getItemDetail(Id: number): wijmo.collections.ObservableArray {
         let itemObservableArray = new wijmo.collections.ObservableArray();
@@ -114,7 +95,7 @@ export class Software_Itemdetail_Service {
         let url = "http://localhost:2558/api/item/put/" + id;
         this.http.put(url, JSON.stringify(itemObject), this.options).subscribe(
             response => {
-                this.toastr.success('', 'Edit Successful');
+                this.toastr.success('', 'Successful');
                 setTimeout(() => {
                     this.router.navigate(['/item'])
                 }, 1000)
@@ -125,4 +106,77 @@ export class Software_Itemdetail_Service {
         )
     }
 
+}
+
+@Injectable()
+export class Software_ItemPrice_Service {
+    //  Global Variables
+    private headers = new Headers({
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+        'Content-Type': 'application/json'
+    });
+    private options = new RequestOptions({ headers: this.headers });
+
+    constructor(
+        private router: Router,
+        private http: Http,
+        private toastr: ToastsManager,
+        private activateroute: ActivatedRoute,
+    ) { }
+
+    //GET USER FORM
+    public getItemPriceById(itemPriceId: number): wijmo.collections.ObservableArray {
+        let itemPriceObservableArray = new wijmo.collections.ObservableArray();
+        let url = "http://localhost:2558/api/itemPrice/get/" + itemPriceId;
+        this.http.get(url, this.options).subscribe(
+            response => {
+                var results = response.json();
+                if (results.length > 0) {
+                    for (var i = 0; i <= results.length - 1; i++) {
+                        itemPriceObservableArray.push({
+                            Id: results[i].Id,
+                            ItemId: results[i].ItemId,
+                            PriceDescription: results[i].PriceDescription,
+                            Price: results[i].Price,
+                            TriggerQuantity: results[i].TriggerQuantity,
+                        });
+                        // (<HTMLButtonElement>document.getElementById("set-value-fields")).click();
+                        // for (var j = 0; j < results[i].listUnit.length; j++) {
+                        //     console.log(results[i].listUnit[j].Unit + " - " + (j + 1));
+                        // }
+                    }
+                }
+            }
+        );
+        return itemPriceObservableArray;
+    }
+
+    public postItemPrice(itemPriceObject: Object, toastr: ToastsManager) {
+        let url = "http://localhost:2558/api/itemPrice/post";
+        this.http.post(url, JSON.stringify(itemPriceObject), this.options).subscribe(
+            response => {
+                this.toastr.success('', 'Success');
+                (<HTMLButtonElement>document.getElementById('refreshGrid')).click();
+                (<HTMLButtonElement>document.getElementById('clear-fields')).click();
+            },
+            error => {
+                this.toastr.error('', 'Bad Request');
+            },
+        )
+    }
+
+    public deleteItemPrice(id: number, toastr: ToastsManager) {
+        let url = "http://localhost:2558/api/itemPrice/delete/" + id;
+        this.http.delete(url, this.options).subscribe(
+            response => {
+                this.toastr.info('', 'Successfully Deleted');
+                setTimeout(() => {
+                    (<HTMLButtonElement>document.getElementById("refreshGrid")).click();
+                }, 1000)
+            },
+            error => {
+                this.toastr.error(' ', 'Bad Request');
+            }
+        )
+    }
 }

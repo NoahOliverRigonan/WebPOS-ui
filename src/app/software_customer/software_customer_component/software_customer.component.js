@@ -11,13 +11,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var software_customer_service_1 = require("../software_customer_service/software_customer.service");
 var router_1 = require("@angular/router");
+var ng2_toastr_1 = require("ng2-toastr/ng2-toastr");
 var Software_Customer_Component = (function () {
-    function Software_Customer_Component(router, softwareCustomerService) {
+    function Software_Customer_Component(router, softwareCustomerService, toastr, vcRef) {
         this.router = router;
         this.softwareCustomerService = softwareCustomerService;
+        this.toastr = toastr;
+        this.vcRef = vcRef;
+        this.toastr.setRootViewContainerRef(vcRef);
     }
     Software_Customer_Component.prototype.getCustomer = function () {
         this.listMstCustomer = new wijmo.collections.CollectionView(this.softwareCustomerService.getCustomerList());
+    };
+    Software_Customer_Component.prototype.btnAddCustomer = function () {
+        this.softwareCustomerService.postCustomerData(null);
+    };
+    Software_Customer_Component.prototype.btnDeleteCustomerModal = function () {
+        document.getElementById("deleteItemModal").click();
+    };
+    Software_Customer_Component.prototype.btnDeleteCustomer = function () {
+        var toastr;
+        var currentSelectedItem = this.listMstCustomer.currentItem;
+        if (currentSelectedItem.IsLocked == true) {
+            this.toastr.error('', 'You cant delete Lock Item');
+        }
+        else {
+            this.softwareCustomerService.deleteCustomer(currentSelectedItem.Id, toastr);
+        }
     };
     Software_Customer_Component.prototype.ngOnInit = function () {
         if (!localStorage.getItem('access_token')) {
@@ -33,7 +53,9 @@ Software_Customer_Component = __decorate([
         templateUrl: 'app/software_customer/software_customer_template/software_customer.html'
     }),
     __metadata("design:paramtypes", [router_1.Router,
-        software_customer_service_1.Software_Customer_Service])
+        software_customer_service_1.Software_Customer_Service,
+        ng2_toastr_1.ToastsManager,
+        core_1.ViewContainerRef])
 ], Software_Customer_Component);
 exports.Software_Customer_Component = Software_Customer_Component;
 //# sourceMappingURL=software_customer.component.js.map

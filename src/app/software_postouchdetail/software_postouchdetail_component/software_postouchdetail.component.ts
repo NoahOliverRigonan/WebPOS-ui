@@ -31,32 +31,6 @@ export class Software_PostouchDetail_Component implements OnInit {
         this.toastr.setRootViewContainerRef(vcRef);
     }
 
-    private num1 = "1";
-    private num2 = "2";
-    private num3 = "3";
-    private num4 = "4";
-    private num5 = "5";
-    private num6 = "6";
-    private num7 = "7";
-    private num8 = "8";
-    private num9 = "9";
-    private num0 = "0";
-    private log: string = '';
-
-    private logText(value: string): void {
-        this.log += `${value}`
-    }
-
-
-    // removeNumbers(removeNumberByOne: any) {
-    //     let index = this.keypadNumber.indexOf(removeNumberByOne);
-    //     this.keypadNumber.splice(index, 1);
-    // }
-
-    // removeAllNumbers(removeNumber: any) {
-    //     let index = this.keypadNumber.indexOf(removeNumber);
-    //     this.keypadNumber.splice(index);
-    // }
 
 
     public getIdUrlParameter() {
@@ -66,13 +40,6 @@ export class Software_PostouchDetail_Component implements OnInit {
         return this.postouchDetailId;
     }
 
-    public ngOnInit(): any {
-        if (!localStorage.getItem('access_token')) {
-            this.router.navigate(['security_login']);
-        }
-        this.postouchDetailCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchDetailService.getListItem(this.getIdUrlParameter()));
-        this.getItemGroup();
-    }
 
     public loadItemGroupData() {
         this.isLoading = false;
@@ -156,7 +123,13 @@ export class Software_PostouchDetail_Component implements OnInit {
         (<HTMLButtonElement>document.getElementById("keypadModal")).click();
     }
 
-
+    public ngOnInit(): any {
+        if (!localStorage.getItem('access_token')) {
+            this.router.navigate(['security_login']);
+        }
+        this.postouchDetailCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchDetailService.getListItem(this.getIdUrlParameter()));
+        this.getItemGroup();
+    }
 
 }
 

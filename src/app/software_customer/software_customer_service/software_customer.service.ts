@@ -65,39 +65,38 @@ export class Software_Customer_Service {
     //     this.slimLoadingBarService.start();
     // }
 
-    // delete ITEM
-    // public deleteItem(id: number, toastr: ToastsManager) {
-    //     let url = "http://localhost:2558/api/item/delete/" + id;
-    //     this.http.delete(url, this.options).subscribe(
-    //         response => {
-    //             this.startLoading();
-    //             this.toastr.info('', 'Successfully Deleted');
-    //             setTimeout(() => {
-    //                 (<HTMLButtonElement>document.getElementById("refreshGrid")).click();
-    //             }, 1000)
-    //         },
-    //         error => {
-    //             this.toastr.error(' ', 'Bad Request');
-    //         }
-    //     )
-    // }
+    //delete CUSTOMER
+    public deleteCustomer(id: number, toastr: ToastsManager) {
+        let url = "http://localhost:2558/api/customer/delete/" + id;
+        this.http.delete(url, this.options).subscribe(
+            response => {
+                this.toastr.info('', 'Successfully Deleted');
+                setTimeout(() => {
+                    (<HTMLButtonElement>document.getElementById("refreshGrid")).click();
+                }, 1000)
+            },
+            error => {
+                this.toastr.error(' ', 'Bad Request');
+            }
+        )
+    }
 
-    // public postItemData(itemObject: Object, toastr: ToastsManager) {
-    //     let url = "http://localhost:2558/api/item/post";
-    //     this.http.post(url, JSON.stringify(itemObject), this.options).subscribe(
-    //         response => {
-    //             var results = response.json();
-    //             if (results > 0) {
-    //                 this.router.navigate(['/itemdetail', results]);
-    //             } else {
-    //                 this.toastr.error('', 'Bad Request');
-    //             }
-    //         },
-    //         error => {
-    //             this.toastr.error('', 'Bad Request');
-    //         },
-    //     )
-    // }
+    public postCustomerData(customerObject: Object) {
+        let url = "http://localhost:2558/api/customer/post";
+        this.http.post(url, JSON.stringify(customerObject), this.options).subscribe(
+            response => {
+                var results = response.json();
+                if (results > 0) {
+                    this.router.navigate(['/customerdetail', results]);
+                } else {
+                    this.toastr.error('', 'Bad Request');
+                }
+            },
+            error => {
+                this.toastr.error('', 'Bad Request');
+            },
+        )
+    }
 
 
 }

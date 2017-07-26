@@ -1,7 +1,8 @@
-import { Component, OnInit, Attribute } from '@angular/core';
+import { Component, OnInit, Attribute, ViewContainerRef } from '@angular/core';
 import { Software_Postouch_Service } from '../software_postouch_service/software_postouch.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DateFormatPipe } from 'angular2-moment';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'software_postouch',
@@ -24,11 +25,18 @@ export class Software_Postouch_Component implements OnInit {
     private postouchDetailId: number;
     private itemFormatter: any;
 
+
+    //OTHER METHOD
+    private date: String;
     constructor(
         private router: Router,
         private softwarePostouchService: Software_Postouch_Service,
-        private activatedRoute: ActivatedRoute
-    ) { }
+        private activatedRoute: ActivatedRoute,
+        private vcRef: ViewContainerRef,
+        private toastr: ToastsManager,
+    ) {
+        this.toastr.setRootViewContainerRef(vcRef);
+    }
 
     public filterTableGroupSelectedIndexChanged(): void {
         if (this.isTableGroupSelected) {
@@ -82,16 +90,15 @@ export class Software_Postouch_Component implements OnInit {
         this.isLoading = false;
         this.isFinishLoading = true;
     }
-    
+
     //Table Postouch For Sale Collection View
-    public getTableSale(): void {
-        this.tablePostouchSaleCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTableSale(this.filterTableSaleNoGroupSelectedValue, this.filterTableUserGroupSelectedValue, this.filterTableCodeSelectedValue));
-        this.tablePostouchSaleCollectionView.pageSize = 5;
+    public getTableSale() {
+        this.tablePostouchSaleCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTableSaleOpen());
+        this.tablePostouchSaleCollectionView.pageSize = 15;
         this.tablePostouchSaleCollectionView.trackChanges = true;
-        // setTimeout(() => {
-        //     this.tableIndex = (this.tableGroupCollectionView.pageIndex + 1) + " / " + this.tableGroupCollectionView.pageCount;
-        // }, 200);
     }
+
+
     //Table Group Collection View
     public getTable(tableGroupId: number): void {
         this.tableGroupCollectionView = new wijmo.collections.CollectionView(this.softwarePostouchService.getListTable(tableGroupId));
@@ -100,43 +107,49 @@ export class Software_Postouch_Component implements OnInit {
         setTimeout(() => {
             this.tableIndex = (this.tableGroupCollectionView.pageIndex + 1) + " / " + this.tableGroupCollectionView.pageCount;
         }, 200);
-
     }
 
     //NAVIGATE TO POSTOUCH DETAIL ROW : 1
     public btnTableList1() {
         let currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo1Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
+
     }
 
     //NAVIGATE TO POSTOUCH DETAIL ROW : 2
     public btnTableList2() {
         let currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo2Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     }
 
     //NAVIGATE TO POSTOUCH DETAIL ROW : 3
     public btnTableList3() {
         let currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo3Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     }
 
     //NAVIGATE TO POSTOUCH DETAIL ROW : 4
     public btnTableLis4() {
         let currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo4Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     }
 
     //NAVIGATE TO POSTOUCH DETAIL ROW : 5
     public btnTableLis5() {
         let currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo5Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     }
 
     //NAVIGATE TO POSTOUCH DETAIL ROW : 6
     public btnTableLis6() {
         let currentSelectedItem = this.tableGroupCollectionView.currentItem;
         this.router.navigate(['/postouchdetail', currentSelectedItem.tableNo6Id]);
+        this.softwarePostouchService.postSalesData(null, this.toastr);
     }
 
 
@@ -164,22 +177,13 @@ export class Software_Postouch_Component implements OnInit {
         return new Date();
     }
 
-    public ngOnInit(): any {
-        if (!localStorage.getItem('access_token')) {
-            this.router.navigate(['security_login']);
-        }
-        // this.getTableSale();
-        // this.gridItemFormatter();
-        this.getTableGroup();
-        this.setTime();
-    }   
 
-    //TIME 
-    public setTime(): void {
-        // setInterval(() => {
-        //    (<HTMLButtonElement>document.getElementById("currentDateTime")).innerHTML = this.setCurrentDate().toDateString() + " || " + this.setCurrentDate().toLocaleTimeString();
-        // }, 1000)
-    }
+    //DATETIME 
+    // public setDate() {
+    //     setInterval(() => {
+    //         this.date = (<HTMLButtonElement>document.getElementById("currentDateTime")).innerHTML = this.setCurrentDate().toLocaleDateString() + "  " + this.setCurrentDate().toLocaleTimeString();
+    //     }, 1000)
+    // }
 
     public refreshTableGroup() {
         setTimeout(() => {
@@ -191,36 +195,42 @@ export class Software_Postouch_Component implements OnInit {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup1Id);
+
     }
 
     public btnTableGroup2Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup2Id);
+
     }
 
     public btnTableGroup3Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup3Id);
+
     }
 
     public btnTableGroup4Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup4Id);
+
     }
 
     public btnTableGroup5Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup5Id);
+
     }
 
     public btnTableGroup6Click() {
         var currentId = this.tableGroupList.currentItem;
         this.loadTableGroupData();
         this.getTable(currentId.tableGroup6Id);
+
     }
 
     public btnModalForDelivery() {
@@ -244,4 +254,14 @@ export class Software_Postouch_Component implements OnInit {
     //         // }
     //     }
     // }
+
+    public ngOnInit(): any {
+        if (!localStorage.getItem('access_token')) {
+            this.router.navigate(['security_login']);
+        }
+        // this.gridItemFormatter();
+        this.getTableSale();
+        this.getTableGroup();
+        // this.setDate();
+    }
 }   

@@ -1,4 +1,4 @@
-import { Injectable  } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Headers, Http, RequestOptions } from '@angular/http';
@@ -81,7 +81,7 @@ export class Software_User_Service {
                 if (results > 0) {
                     this.router.navigate(['/userdetail', results]);
                 } else {
-                    this.toastr.error('', 'Bad Request');
+                    this.toastr.error('', 'Error');
                 }
             },
             error => {
@@ -91,26 +91,21 @@ export class Software_User_Service {
     }
 
 
-    //http://localhost:2558/api/item/post
-    //ADD ITEM
-    // toastr: ToastsManager
+ 
 
-
-
-    // update ITEM
-    // public putItemData(id: number, itemObject: Object, toastr: ToastsManager) {
-    //     let url = "http://localhost:2558/api/item/put/" + id;
-    //     this.http.put(url, JSON.stringify(itemObject), this.options).subscribe(
-    //         response => {
-    //             this.toastr.success('', 'Edit Successful');
-    //             setTimeout(() => {
-    //                 this.router.navigate(['/item'])
-    //             }, 1000)
-    //         },
-    //         error => {
-    //             alert("Error");
-    //         }
-    //     )
-    // }
-
+    public deleteUserData(id: number, toastr: ToastsManager) {
+        let url = "http://localhost:2558/api/user/delete/" + id;
+        this.http.delete(url, this.options).subscribe(
+            response => {
+                this.toastr.info('', 'Successfully Deleted');
+                setTimeout(() => {
+                    (<HTMLButtonElement>document.getElementById("refreshGrid")).click();
+                }, 1000)
+            },
+            error => {
+                this.toastr.error(' ', 'Bad Request');
+            }
+        )
+    }
 }
+
